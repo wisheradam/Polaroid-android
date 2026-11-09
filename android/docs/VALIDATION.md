@@ -21,8 +21,8 @@ Date: 9 November 2026. Working name: **Instant Room**, package `com.instantroom`
 
 - 30 JVM core tests passed, zero failures/skips.
 - 11 Room/Robolectric Android JVM tests passed, zero failures/skips (simulated API 35).
-- App and instrumentation APK compilation succeeded with Gradle 9.5.0, AGP 9.3.1, Kotlin 2.4.21, Compose BOM 2026.09.00, CameraX 1.6.2 and Room 2.8.5. Final build/lint and AWS execution results are recorded below when complete.
-- Debug APK's APK Signature Scheme v2 verification passed.
+- App and instrumentation APK compilation succeeded with Gradle 9.5.0, AGP 9.3.1, Kotlin 2.4.21, Compose BOM 2026.09.00, CameraX 1.6.2 and Room 2.8.5. Local final verification exited 0; lint reported no issues. AWS execution results are recorded below.
+- Debug APK's APK Signature Scheme v2 verification passed. All four original PCM audio assets passed format/duration checks.
 - Manifest inspection verified minimum API 26, compile/target API 37, Camera/Vibrate permissions, legacy write permission limited to API 28, and no INTERNET permission.
 - CloudFormation local schema check: zero errors/warnings. Two custom cfn-guard rules passed. AWS ValidateTemplate and change-set validation passed. Infrastructure reached CREATE_COMPLETE in eu-central-1.
 
@@ -32,7 +32,7 @@ Core tests cover shake threshold/reversal/refractory/gap/reset rules, no accepte
 
 ## Emulator and hardware distinction
 
-`androidTest` includes the repository tests, two Compose checks, and two fake-camera workflow tests. The workflow tests verify single-flight capture and the sequence/timing of calls to fake feedback ports; they do not claim to hear or feel physical effects. Emulator execution status is recorded below. Robolectric tests are JVM simulation, not emulator or real-device verification.
+`androidTest` includes the repository tests, two Compose checks, and two fake-camera workflow tests. The workflow tests verify single-flight capture and the sequence/timing of calls to fake feedback ports; they do not claim to hear or feel physical effects. An API 35 software-emulated device installed both APKs successfully, but its first instrumentation run was killed during application startup before executing tests. Logs show system-wide startup ANRs/timeouts, including phone and media-provider processes, without KVM acceleration. No passing emulator test count is claimed for that attempt. Robolectric tests are JVM simulation, not emulator or real-device verification.
 
 **No physical Android phone has been tested.** Real camera quality/flash latency, physical shake calibration, vibrator intensity, acoustic synchronization, battery use and device-specific frame pacing remain unverified. Follow `HARDWARE_CHECKLIST.md` before treating this as a production release.
 
@@ -48,3 +48,30 @@ Core tests cover shake threshold/reversal/refractory/gap/reset rules, no accepte
 - The debug APK is installable development software, not a signed production release or Play Store submission.
 - The Gradle project currently uses AGP's supported external-Kotlin/legacy-DSL compatibility switches; migration to built-in Kotlin should happen before AGP 10.
 - Archive data is device-private and is removed on uninstall. Gallery exports are separate copies. There is no cloud photo backup.
+
+## Final packaging results
+
+Local command (exit **0**):
+
+```bash
+./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
+```
+
+Results: **30/30** core tests and **11/11** Room/Robolectric tests passed, zero failures/errors/skips; lint **0 errors, 0 warnings**. Application and instrumentation APKs assembled successfully. Official wrapper distribution SHA-256 is pinned. Four original audio format/duration checks passed. The debug signature verifier exited **0**.
+
+AWS CodeBuild execution **SUCCEEDED**, including the same test, lint and assembly tasks. Build ID: `instant-room-build-android:956d909f-ff1b-4776-82c5-8f5a619988fa`. Immutable app source revision: `9ca488a1f36e38d6d36d771f233ae2d452d6a2fa`. Subsequent report/ignore-file cleanup does not alter the application source used for this APK.
+
+The private artifact ZIP was downloaded and independently checked: it contains both APKs, two JUnit XML reports showing 30 + 11 passing tests, the lint HTML report, the exact `SOURCE_COMMIT`, and `APK-SHA256.txt`. The stored artifact uses `aws:kms` encryption. No connected device/emulator tests ran in CodeBuild.
+
+| Artifact | Bytes | SHA-256 |
+|---|---:|---|
+| Delivered AWS-built `InstantRoom-0.1.0-debug.apk` | 16,896,742 | `0e6a564cf7d141e04f64d9c4e478af990376c840ffe8f734d7121f82d24515ad` |
+| AWS `instant-room.zip` | 17,244,441 | `f8e978772bb32847ce4d978afb6056d5a9f75561193bfb14e0eeecdc9d2c884e` |
+
+Artifact location: the stack's private ArtifactsBucket under `builds/956d909f-ff1b-4776-82c5-8f5a619988fa/instant-room.zip`. The independently generated local debug APK uses a different build environment/signing key; the delivered file is the verified AWS-built APK. If switching between differently signed development APKs, Android may require uninstalling the earlier version, which deletes its private archive. Export photographs first.
+
+### Emulator execution outcome
+
+Two instrumentation attempts on an API 35 x86_64 software-emulated device ended with `Process crashed` during startup and **did not produce a passing test suite**. The emulator has no `/dev/kvm` support in this environment. Its logs show startup timeouts/ANRs in the application, phone and media-provider processes, and a captured screen shows **“Process system isn't responding”**. App UI rendering was observed behind that system dialog; working CameraX capture was not verified. Both APK install commands returned Success. These results are an environment-limited check, not a physical-device acceptance pass.
+
+**Release readiness:** installable initial debug implementation with passing JVM/integration simulation checks and a verified AWS build. Real-device acceptance and UX/performance calibration remain open. The pull request remains a draft.
