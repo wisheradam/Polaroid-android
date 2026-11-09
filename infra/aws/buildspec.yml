@@ -1,0 +1,31 @@
+version: 0.2
+phases:
+  install:
+    runtime-versions:
+      java: corretto21
+    commands:
+      - bash infra/aws/install-sdk.sh
+  pre_build:
+    commands:
+      - test -n "$EXPECTED_COMMIT"
+      - test "$(cat SOURCE_COMMIT)" = "$EXPECTED_COMMIT"
+      - chmod +x android/gradlew
+  build:
+    commands:
+      - cd "$CODEBUILD_SRC_DIR/android"
+      - ./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
+  post_build:
+    commands:
+      - test "$CODEBUILD_BUILD_SUCCEEDING" = "1"
+      - cd "$CODEBUILD_SRC_DIR"
+      - sha256sum android/app/build/outputs/apk/debug/app-debug.apk > APK-SHA256.txt
+artifacts:
+  files:
+    - android/app/build/outputs/apk/debug/app-debug.apk
+    - android/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk
+    - android/app/build/reports/lint-results-debug.html
+    - android/core/build/test-results/test/*.xml
+    - android/app/build/test-results/testDebugUnitTest/*.xml
+    - SOURCE_COMMIT
+    - APK-SHA256.txt
+  discard-paths: no
