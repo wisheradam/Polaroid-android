@@ -52,9 +52,28 @@ Android/JVM total: **120** (54 core + 66 app). The original 89 tests remain pres
 
 The migration test constructs a real version-1 SQLite database from the committed Room schema, populates legacy photo paths/progress, a seven-exposure cartridge and pinned placement, then opens it through Room's 1→2 migration and checks data preservation and reopening. Renderer tests check actual ink pixels remain inside the writing margin. Sharing and MediaStore tests compare delivered bytes to the captioned JPEG for every film format. Regeneration produces identical JPEG bytes after processing preferences change.
 
-Local Gradle validation covers app assembly, instrumentation APK compilation, Android/JVM tests and lint. Final results include the vibration-ownership regression check. Python safety checks passed (6/6, exit 0). Native raster proofs and both logo themes were inspected. Legacy AGP/Kotlin and Compose test-helper deprecation warnings remain from the existing toolchain; no dependency upgrade was introduced.
+Local Gradle validation completed successfully (exit 0), including app assembly, instrumentation APK compilation, all **120 Android/JVM tests** and lint. Lint reports **no issues**. Final results include the vibration-ownership regression check: development cleanup cancels its own pulse while preserving shutter and ejection waveforms. Python safety checks passed (6/6, exit 0). Native raster proofs and both logo themes were inspected. Legacy AGP/Kotlin and Compose test-helper deprecation warnings remain from the existing toolchain; no dependency upgrade was introduced. Final diff whitespace validation passed.
 
-Canonical AWS build, immutable source revision and delivered APK details are appended after packaging verification.
+## Verified delivered APK
+
+The supplied APK is the locally built and validated debug artifact from application source **`62f2fff08621bc174333123eb2766baf64526034`**. A follow-up commit records packaging evidence only. The downloadable APK is not substituted with a differently hashed cloud artifact.
+
+| Property | Verified value |
+|---|---|
+| File | `deliverables/InstantRoom-0.3.0-debug.apk` |
+| Size | 17,482,251 bytes |
+| SHA-256 | `4887d3b303908c908541ce31cf1ab43d69b0ccc67de84d3b45a179e205ff1da7` |
+| Certificate SHA-256 | `57e0508a35dcb3f3ae4f648fcff78bf71d006fa370c821aa69bfb44245c234ab` |
+| Package / version | `com.instantroom` / 0.3.0 / code 3 |
+| Android API range | Minimum 26; target/compile 37 |
+| Signature validation | `apksigner verify --print-certs`, exit 0; same retained certificate as canonical 0.2.0 |
+| Bundled resources | Check2GO logo, all three TTF files and Sol Kol OFL license confirmed inside APK |
+
+AWS CodeBuild **`instant-room-build-android:4d8616e7-0936-4219-bea0-0de743cde7ce` SUCCEEDED** on the same source revision. The private bundle was downloaded and checked independently: `SOURCE_COMMIT` matches `62f2fff08621bc174333123eb2766baf64526034`; packaged JUnit XML reports **120 passed, 0 failures, 0 errors, 0 skipped**; the cloud APK hash matches `APK-SHA256.txt`; `apksigner` verification succeeds with the same retained certificate as the delivered local APK and canonical 0.2.0.
+
+Cloud verification artifact (separate from the supplied local APK): 17,261,468 bytes; SHA-256 `871d9395d7b84a4c5ef507774fbb21aaae540ffe1081ca50b2be5653a79849ea`. Bundle SHA-256: `c14d78265ee32d1133f792992526f27a657d31543440e223b14fe9c9735d366f`; private object `builds/4d8616e7-0936-4219-bea0-0de743cde7ce/instant-room.zip`. Both builds assemble the app/instrumentation APKs and run tests/lint; neither performs connected-device tests. Local and cloud binaries have distinct hashes; the delivered file remains the explicitly identified local artifact above.
+
+[Draft PR #3](https://github.com/wisheradam/Polaroid-android/pull/3) remains unmerged and targets the working 0.2.0 feature branch. All tracked source changes are committed and published; supplied attachment files remain outside the source snapshot.
 
 ## Upgrade and remaining validation
 
