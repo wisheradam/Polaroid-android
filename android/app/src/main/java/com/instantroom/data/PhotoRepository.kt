@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.withTransaction
 import com.instantroom.core.*
 import com.instantroom.imaging.FilmProcessor
+import com.instantroom.imaging.CaptionRenderer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -73,11 +74,26 @@ class PhotoRepository(private val context: Context, private val db: InstantDatab
   }
  }
  suspend fun active() = dao.active()
- suspend fun develop(id: String, strength: Float, accessible: Boolean = false): Unit = mutationLock.withLock {
-  val p = dao.photo(id) ?: return@withLock
-  if (p.processing || p.progress >= 1f) return@withLock
-  dao.progress(id, if(accessible) Development.accessiblePress(p.progress, true) else Development.acceptedShake(p.progress, strength))
+ suspend fun develop(id: String, strength: Float, accessible: Boolean = false, allowed: ()->Boolean = {true}): Boolean = mutationLock.withLock {
+  val p = dao.photo(id) ?: return@withLock false
+  if (p.processing || p.progress >= 1f || !allowed()) return@withLock false
+  val next=if(accessible) Development.accessiblePress(p.progress, true) else Development.acceptedShake(p.progress, strength)
+  if(next<=p.progress)return@withLock false
+  dao.progress(id,next)
+  true
  }
+ suspend fun setCaption(id: String, text: String, font: CaptionFont): Unit = mutationLock.withLock {
+  val normalized=CaptionRules.normalize(text)
+  val p=checkNotNull(dao.photo(id)){"Photograph is unavailable"}
+  check(!p.processing && p.progress>=1f){"Develop this photograph first"}
+  val base=p.baseProcessed.ifEmpty{p.processed}
+  check(File(base).isFile){"The uncaptioned print is unavailable"}
+  val rendered=withContext(Dispatchers.Default){CaptionRenderer(context).render(File(base),FilmFormat.valueOf(p.format),normalized,font)}
+  // A crash before this transaction leaves the previously committed print intact.
+  // Unique output paths also invalidate image caches without mutating a shared URI.
+  check(dao.caption(id,normalized,font.name,base,rendered)==1)
+ }
+ suspend fun photo(id: String): PhotoEntity = mutationLock.withLock {checkNotNull(dao.photo(id))}
  suspend fun attach(id: String) = mutationLock.withLock {
   val p=dao.photo(id) ?: return@withLock
   check(p.progress >= 1f && !p.processing)

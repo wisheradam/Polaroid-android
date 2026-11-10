@@ -12,8 +12,8 @@ android {
   applicationId = "com.instantroom"
   minSdk = 26
   targetSdk = 37
-  versionCode = 2
-  versionName = "0.2.0"
+  versionCode = 3
+  versionName = "0.3.0"
   testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
  }
  signingConfigs.getByName("debug") {
@@ -21,6 +21,7 @@ android {
  }
  buildFeatures { compose = true }
  testOptions { unitTests.isIncludeAndroidResources = true }
+ sourceSets.getByName("test").resources.srcDir("schemas")
  compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }
  kotlin { jvmToolchain(21); compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17) } }
  packaging { resources.excludes += "/META-INF/{AL2.0,LGPL2.1}" }

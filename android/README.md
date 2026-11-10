@@ -1,4 +1,4 @@
-# Instant Room 0.2.0 for Android
+# Instant Room 0.3.0 for Android
 
 Native Kotlin/Jetpack Compose instant-film camera. The Android project is self-contained in this directory; no iOS files are involved. Android 8.0 (API 26) or later. All camera, film, development, archive, and corkboard features work locally without an account or internet permission.
 
@@ -22,6 +22,10 @@ For connected emulator/device tests:
 The debug APK is locally signed for development. It is not a production/Play Store release. Build an unsigned release with `./gradlew :app:assembleRelease` and supply your own secure signing setup for distribution.
 
 ## Update notes
+
+Version **0.3.0 (code 3)** adds the supplied Check2GO header logo, soft haptics on accepted shake-development events, and a **Write on photo** / **Edit caption** entry in completed-photo detail. Enter up to 80 characters on two short lines, choose Sol Kol, Denistina or Historic, preview, and save. **Remove caption** restores the retained uncaptioned print. Caption editing consumes no film and changes neither originals nor development progress. The archive, corkboard, save and share flows use the captioned JPEG.
+
+Room schema **1 → 2** adds caption metadata and a retained base-print reference without resetting any tables. Canonical 0.2.0 → 0.3.0 debug builds use the same retained signing key and support normal `adb install -r` upgrades. The original 0.1.0 certificate constraint described below still applies. Read [0.3.0 validation](docs/UPDATE_0_3_VALIDATION.md) for tests and device checks.
 
 Version 0.2.0 (code 2) adds a main-screen lens switch, screen/edge selfie lighting, Light/Dark/Follow System appearance and Instagram/Facebook image-sharing shortcuts. The database remains schema 1. Read [upgrade instructions](docs/UPGRADE_0_2.md) before replacing a populated 0.1.0 debug installation: the first build's temporary signing certificate differs from the retained 0.2.x debug certificate. Never manually uninstall it without a backup.
 

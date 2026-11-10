@@ -27,6 +27,9 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
  val message=MutableStateFlow<String?>(null)
  val initialized=MutableStateFlow(false)
  var foreground=false
+ private var developmentPhoto: String?=null
+ private var developmentGeneration=0
+ private val developmentHaptics=DevelopmentHaptics()
  private var recoveryJob: Job?=null
  init { recover() }
  fun recover() {
@@ -78,7 +81,19 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
   updateSettings(settings.value.copy(front=target));return true
  }
  fun updateSettings(s: Settings) { graph.preferences.set(s);graph.detector.threshold=s.threshold;if(!s.sound || !s.haptics)feedbackPort.stop() }
- fun develop(id: String, strength: Float) { viewModelScope.launch { try { repo.develop(id,strength) }catch(e: Exception){message.value=e.message} } }
+ fun startDevelopment(id: String) { stopDevelopment();developmentPhoto=id }
+ fun stopDevelopment() {developmentPhoto=null;developmentGeneration++;developmentHaptics.reset();feedbackPort.stopDevelopment()}
+ fun develop(id: String, strength: Float) {
+  val generation=developmentGeneration
+  fun active()=foreground && developmentPhoto==id && generation==developmentGeneration
+  if(!active())return
+  viewModelScope.launch {
+   try {
+    val progressed=repo.develop(id,strength,allowed={active()})
+    if(developmentHaptics.shouldPulse(SystemClock.elapsedRealtime(),progressed,active(),settings.value.haptics))feedbackPort.develop()
+   }catch(e: Exception){message.value=e.message}
+  }
+ }
  fun accessibleDevelop(id: String) { if(settings.value.accessible)viewModelScope.launch {repo.develop(id,0f,true)} }
  fun replace(format: FilmFormat, appearance: Appearance, done: ()->Unit) = viewModelScope.launch {
   try { repo.replace(format,appearance);feedbackPort.pin();done() } catch(e: Exception){message.value=e.message}
@@ -88,7 +103,10 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
  fun pin(id: String,color: Long,x: Float,y: Float) {viewModelScope.launch{repo.pin(id,color,x,y);feedbackPort.pin()} }
  fun unpin(id: String) {viewModelScope.launch{repo.unpin(id)}}
  fun detach(id: String) {viewModelScope.launch{repo.detach(id)}}
- fun save(p: PhotoEntity) {viewModelScope.launch{try{graph.export.save(p);message.value="Saved to Pictures / Instant Room"}catch(e:Exception){message.value="Save failed: ${e.message}"}}}
- fun share(p: PhotoEntity, target: ShareTarget = ShareTarget.SYSTEM) {try{graph.export.share(p,target)}catch(e:Exception){message.value=e.message}}
- override fun onCleared() { graph.motion.stop();feedbackPort.stop() }
+ fun caption(id: String,text: String,font: CaptionFont,done: (Boolean)->Unit) {viewModelScope.launch {
+  try{repo.setCaption(id,text,font);done(true)}catch(e:Exception){message.value="Caption not saved: ${e.message}";done(false)}
+ }}
+ fun save(p: PhotoEntity) {viewModelScope.launch{try{graph.export.save(repo.photo(p.id));message.value="Saved to Pictures / Instant Room"}catch(e:Exception){message.value="Save failed: ${e.message}"}}}
+ fun share(p: PhotoEntity, target: ShareTarget = ShareTarget.SYSTEM) {viewModelScope.launch{try{graph.export.share(repo.photo(p.id),target)}catch(e:Exception){message.value=e.message}}}
+ override fun onCleared() { graph.motion.stop();stopDevelopment();feedbackPort.stop() }
 }

@@ -60,7 +60,7 @@ import com.instantroom.data.*
  Box(Modifier.fillMaxSize()) {
   Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(22.dp),verticalArrangement=Arrangement.spacedBy(18.dp),horizontalAlignment=Alignment.CenterHorizontally) {
    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
-    Column(Modifier.weight(1f)) {SmallLabel("CHECK2GO / ANALOG SERIES");Text("Instant Room",style=MaterialTheme.typography.headlineMedium)}
+    BrandLogo(Modifier.weight(1f).padding(end=12.dp))
     CameraSwitchControl(settings.front,ready && !busy && if(settings.front)availability.rear else availability.front) {
      if(vm.switchCamera(availability.front,availability.rear))ready=false
     }
