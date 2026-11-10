@@ -1,11 +1,12 @@
 # Original assets
 
-All four PCM WAV files under `app/src/main/res/raw` were synthesized for this project using the deterministic source in `scripts/generate_audio.py`:
+All five PCM WAV files under `app/src/main/res/raw` were synthesized for this project using the deterministic source in `scripts/generate_audio.py`:
 
 - `charge.wav`: 650 ms rising capacitor chirp; playback rate tracks the selected charging duration.
 - `shutter.wav`: 140 ms percussive shutter mechanism.
 - `eject.wav`: 1880 ms motor/roller sound, including a final click beginning at 1800 ms.
 - `pin.wav`: 80 ms pin insertion transient.
+- `countdown.wav`: 70 ms restrained 660 Hz tick; the last three seconds use a higher playback pitch. Charging/shutter/countdown sounds share exclusive playback to prevent overlap.
 
 To the extent copyright applies, these generated sounds and the synthesis script are dedicated to the public domain under CC0 1.0: https://creativecommons.org/publicdomain/zero/1.0/
 

@@ -10,7 +10,8 @@ data class Settings(
  val threshold: Float = 6.5f, val chargeMs: Long = 650, val lowMemory: Boolean = false,
  val front: Boolean = false, val imperfections: Boolean = true,
  val theme: ThemeMode = ThemeMode.SYSTEM, val selfieLight: SelfieLightMode = SelfieLightMode.OFF,
- val edgeWidth: Float = 16f, val edgeBrightness: Float = .85f, val lightTone: LightTone = LightTone.WARM
+ val edgeWidth: Float = 16f, val edgeBrightness: Float = .85f, val lightTone: LightTone = LightTone.WARM,
+ val timer: SelfTimer = SelfTimer.OFF, val boothLayout: BoothLayout = BoothLayout.GRID
 )
 class Preferences(context: Context) {
  private val p=context.getSharedPreferences("settings",Context.MODE_PRIVATE)
@@ -23,7 +24,7 @@ class Preferences(context: Context) {
   p.getFloat("threshold",6.5f),p.getLong("charge",650),p.getBoolean("low",false),
   p.getBoolean("front",false),p.getBoolean("imperfections",true),initialTheme,
   enum("selfieLight",SelfieLightMode.OFF),p.getFloat("edgeWidth",16f).coerceIn(8f,32f),
-  p.getFloat("edgeBrightness",.85f).coerceIn(.35f,1f),enum("lightTone",LightTone.WARM)
+  p.getFloat("edgeBrightness",.85f).coerceIn(.35f,1f),enum("lightTone",LightTone.WARM),enum("timer",SelfTimer.OFF),enum("boothLayout",BoothLayout.GRID)
  ))
  fun set(s: Settings) {
   val normalized=s.copy(edgeWidth=s.edgeWidth.coerceIn(8f,32f),edgeBrightness=s.edgeBrightness.coerceIn(.35f,1f))
@@ -34,6 +35,7 @@ class Preferences(context: Context) {
    putBoolean("front",s.front);putBoolean("imperfections",s.imperfections);putString("theme",s.theme.name)
    putString("selfieLight",s.selfieLight.name);putFloat("edgeWidth",normalized.edgeWidth)
    putFloat("edgeBrightness",normalized.edgeBrightness);putString("lightTone",s.lightTone.name)
+   putString("timer",s.timer.name);putString("boothLayout",s.boothLayout.name)
   }
  }
 }

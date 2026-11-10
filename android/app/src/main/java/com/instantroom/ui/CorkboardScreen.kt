@@ -72,7 +72,7 @@ import kotlin.random.Random
    LazyRow(contentPadding=PaddingValues(16.dp),horizontalArrangement=Arrangement.spacedBy(14.dp)) {
     items(available,key={it.id}){p->
      var drag by remember{mutableStateOf(Offset.Zero)}
-     Box(Modifier.width(72.dp).offset {IntOffset(drag.x.toInt(),drag.y.toInt())}.pointerInput(p.id){detectDragGestures(onDragEnd={
+     Box(Modifier.width(minOf(72.dp,170.dp*p.geometry.aspect)).offset {IntOffset(drag.x.toInt(),drag.y.toInt())}.pointerInput(p.id){detectDragGestures(onDragEnd={
       if(drag.y< -25f){vm.attach(p.id){vm.move(p.id,((-panX+140*density)/(zoom*density)).coerceIn(0f,1800f),((-panY+100*density)/(zoom*density)).coerceIn(0f,1400f),-4f);selected=p.id}}
       drag=Offset.Zero
      },onDragCancel={drag=Offset.Zero},onDrag={change,amount->change.consume();drag+=amount})}.clickable{vm.attach(p.id){vm.move(p.id,(-panX/(zoom*density)+90).coerceIn(0f,1800f),(-panY/(zoom*density)+80).coerceIn(0f,1400f),-4f);selected=p.id}}) { FilmPrint(p,Modifier.fillMaxWidth().shadow(3.dp),maxSide=200) }
@@ -89,7 +89,7 @@ import kotlin.random.Random
  LaunchedEffect(p.x,p.y,p.rotation){x=p.x;y=p.y;rotation=p.rotation}
  val latestPin by rememberUpdatedState(pinMode)
  val latestSelect by rememberUpdatedState(select)
- val width=180f*com.instantroom.core.FilmFormat.valueOf(photo.format).width/88.47f
+ val width=180f*photo.geometry.width/88.47f
  Box(Modifier.offset {IntOffset((x*density).toInt(),(y*density).toInt())}.width(width.dp).zIndex(p.z.toFloat()).graphicsLayer{rotationZ=rotation}.shadow(8.dp)
   .pointerInput(p.pinned,p.photoId,pinMode) {
    if(!p.pinned && !pinMode) {
@@ -111,7 +111,7 @@ import kotlin.random.Random
   }.semantics {contentDescription=if(p.pinned)"Pinned photograph. Remove pin to move."else "Movable photograph"}) {
   FilmPrint(photo,Modifier.fillMaxWidth().then(if(selected)Modifier.border(2.dp,Amber) else Modifier),maxSide=600)
   if(p.pinned) {
-   val height=width/com.instantroom.core.FilmFormat.valueOf(photo.format).aspect
+   val height=width/photo.geometry.aspect
    Box(Modifier.offset((width*p.pinX-7).dp,(height*p.pinY-7).dp).size(14.dp).shadow(5.dp,CircleShape).background(Brush.radialGradient(listOf(Color.White,Color(p.pinColor),Color.Black)),CircleShape))
   }
  }

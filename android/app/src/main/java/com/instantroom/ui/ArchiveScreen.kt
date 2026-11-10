@@ -13,6 +13,7 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.unit.dp
 import com.instantroom.core.*
 import com.instantroom.data.PhotoEntity
+import com.instantroom.data.geometry
 
 @Composable fun ArchiveScreen(photos: List<PhotoEntity>, open: (String)->Unit, retry: ()->Unit, share: (PhotoEntity,ShareTarget)->Unit = {_,_->}) {
  val locale=LocalConfiguration.current.locales[0]
@@ -25,7 +26,8 @@ import com.instantroom.data.PhotoEntity
     Column(Modifier.clickable{open(p.id)}) {
      FilmPrint(p,Modifier.fillMaxWidth().shadow(5.dp),maxSide=420)
      Text(SimpleDateFormat("MMM d · HH:mm",locale).format(Date(p.capturedAt)),style=MaterialTheme.typography.labelMedium,modifier=Modifier.padding(top=8.dp))
-     Text(if(p.processing)"Processing interrupted" else if(p.progress>=1f)FilmFormat.valueOf(p.format).label else "Shake to develop",style=MaterialTheme.typography.bodySmall,color=Amber)
+     Text(if(p.processing)"Processing interrupted" else if(p.progress>=1f)p.geometry.label else "Shake to develop",style=MaterialTheme.typography.bodySmall,color=Amber)
+     if(p.boothSessionId.isNotEmpty())Text(if(p.boothIndex>=0)"Photo Booth · source ${p.boothIndex+1}/4" else "Photo Booth · ${p.geometry.label}",style=MaterialTheme.typography.labelSmall)
      if(p.processing)TextButton(onClick=retry){Text("Retry processing")}
      else if(p.progress>=1f)ShareActions{share(p,it)}
     }

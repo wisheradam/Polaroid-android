@@ -37,7 +37,7 @@ import com.instantroom.core.SelfieLightMode
  DisposableEffect(owner) {
   val observer=LifecycleEventObserver { _,event ->
    if(event==Lifecycle.Event.ON_RESUME)resumed=true
-   if(event==Lifecycle.Event.ON_PAUSE)resumed=false
+   if(event==Lifecycle.Event.ON_PAUSE){resumed=false;vm.cancelCapture()}
    if(event==Lifecycle.Event.ON_START)vm.foreground=true
    if(event==Lifecycle.Event.ON_STOP) { vm.foreground=false;vm.graph.motion.stop();vm.graph.feedback.stop() }
   }
@@ -50,6 +50,7 @@ import com.instantroom.core.SelfieLightMode
  var pendingSave by remember {mutableStateOf<com.instantroom.data.PhotoEntity?>(null)}
  val storage=rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok -> if(ok)pendingSave?.let(vm::save) else vm.message.value="Storage permission is needed on Android 8 and 9 to save to the gallery";pendingSave=null }
  fun navigate(s: String) { if(cap.phase==CapturePhase.IDLE)screen=s }
+ BackHandler(cap.phase!=CapturePhase.IDLE){vm.cancelCapture()}
  BackHandler(screen!="Camera" && cap.phase==CapturePhase.IDLE) {screen="Camera"}
  val lightingActive=screen=="Camera" && resumed && settings.front && cameraState.selectedFront && cameraState.ready
  Box(Modifier.fillMaxSize()) {

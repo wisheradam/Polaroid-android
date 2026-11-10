@@ -30,6 +30,8 @@ class CameraController(private val context: Context) : CapturePort {
  private var camera: Camera?=null
  private var previewView: PreviewView?=null
  private var screenFlash: ImageCapture.ScreenFlash?=null
+ private var cameraState: androidx.lifecycle.LiveData<CameraState>?=null
+ private var stateObserver: androidx.lifecycle.Observer<CameraState>?=null
  private val mutableState=MutableStateFlow(CameraAvailability())
  val state=mutableState.asStateFlow()
  override val hasFlash get()=camera?.cameraInfo?.hasFlashUnit()==true
@@ -38,7 +40,7 @@ class CameraController(private val context: Context) : CapturePort {
   imageCapture?.let { it.flashMode=ImageCapture.FLASH_MODE_OFF;it.screenFlash=value }
   screenFlash=value
  }
- suspend fun bind(owner: LifecycleOwner, view: PreviewView, front: Boolean) {
+ suspend fun bind(owner: LifecycleOwner, view: PreviewView, front: Boolean, fullResolution: Boolean=false) {
   mutableState.value=mutableState.value.copy(ready=false)
   val p=suspendCancellableCoroutine<ProcessCameraProvider>{c->
    val future=ProcessCameraProvider.getInstance(context)
@@ -51,15 +53,19 @@ class CameraController(private val context: Context) : CapturePort {
   mutableState.value=CameraAvailability(hasFront,hasRear,actualFront)
   check(hasFront || hasRear){"No camera is available on this device"}
   provider=p;previewView=view
+  stateObserver?.let{cameraState?.removeObserver(it)}
   screenFlash?.clear();p.unbindAll()
   val preview=Preview.Builder().build().apply{setSurfaceProvider(view.surfaceProvider)}
   val capture=ImageCapture.Builder().setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-   .setResolutionSelector(ResolutionSelector.Builder().setResolutionStrategy(ResolutionStrategy(android.util.Size(1600,1600),ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER)).build()).build()
+   .setResolutionSelector(ResolutionSelector.Builder().setResolutionStrategy(if(fullResolution)ResolutionStrategy.HIGHEST_AVAILABLE_STRATEGY else ResolutionStrategy(android.util.Size(1600,1600),ResolutionStrategy.FALLBACK_RULE_CLOSEST_LOWER_THEN_HIGHER)).build()).build()
   capture.screenFlash=screenFlash
   val selector=if(actualFront)CameraSelector.DEFAULT_FRONT_CAMERA else CameraSelector.DEFAULT_BACK_CAMERA
   camera=p.bindToLifecycle(owner,selector,preview,capture)
   imageCapture=capture
   mutableState.value=mutableState.value.copy(ready=true)
+  cameraState=camera?.cameraInfo?.cameraState
+  stateObserver=androidx.lifecycle.Observer {state->mutableState.value=mutableState.value.copy(ready=state.error==null && state.type==CameraState.Type.OPEN)}
+  cameraState?.observe(owner,checkNotNull(stateObserver))
  }
  override suspend fun capture(file: File,flash: Boolean,onShutter: ()->Unit) = captureWithLighting(file,flash,false,onShutter)
  override suspend fun captureWithLighting(file: File,flash: Boolean,screenFlash: Boolean,onShutter: ()->Unit) {
@@ -81,6 +87,7 @@ class CameraController(private val context: Context) : CapturePort {
   } finally {light?.clear()}
  }
  fun unbind(){
+  stateObserver?.let{cameraState?.removeObserver(it)};stateObserver=null;cameraState=null
   screenFlash?.clear()
   imageCapture?.let{it.flashMode=ImageCapture.FLASH_MODE_OFF;it.screenFlash=null}
   provider?.unbindAll();imageCapture=null;camera=null

@@ -16,7 +16,7 @@ data class Cartridge(val id: String, val format: FilmFormat, val appearance: App
  init { require(remaining in 0..10) }
  fun expose() = copy(remaining = (remaining - 1).also { check(remaining > 0) { "FILM EMPTY" } })
 }
-enum class CapturePhase { IDLE, CHARGING, CAPTURING, PROCESSING, EJECTING }
+enum class CapturePhase { IDLE, COUNTDOWN, CHARGING, CAPTURING, PROCESSING, EJECTING }
 enum class LoadingPhase { CLOSED, OPEN, REMOVED, INSERTED }
 class LoadingMachine(initial: LoadingPhase = LoadingPhase.CLOSED) {
  var phase = initial; private set
@@ -61,5 +61,5 @@ object Development {
  fun acceptedShake(progress: Float, strength: Float): Float = if (!strength.isFinite() || strength <= 0f) progress else (progress + strength.coerceAtMost(1.4f)*.018f).coerceIn(0f, 1f)
  fun accessiblePress(progress: Float, enabled: Boolean) = if (enabled) acceptedShake(progress, .6f) else progress
 }
-interface FeedbackPort { fun charge(durationMs: Long); fun shutter(); fun eject(); fun pin(); fun stop(); fun develop() = Unit; fun stopDevelopment() = Unit }
+interface FeedbackPort { fun charge(durationMs: Long); fun shutter(); fun eject(); fun pin(); fun stop(); fun develop() = Unit; fun stopDevelopment() = Unit; fun countdown(finalSeconds: Boolean) = Unit; fun exposed() = Unit }
 interface MotionPort { val available: Boolean; fun start(onShake: (Float) -> Unit); fun stop() }

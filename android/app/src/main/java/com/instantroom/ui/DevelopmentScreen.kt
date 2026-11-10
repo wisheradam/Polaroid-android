@@ -26,7 +26,9 @@ import com.instantroom.data.*
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(20.dp)) {
   Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){TextButton(onClick=back){Text("Archive")};SmallLabel(if(photo.progress>=1f)"A MOMENT, KEPT." else "LET IT COME TO LIFE")}
   Spacer(Modifier.height(4.dp))
-  FilmPrint(photo,Modifier.widthIn(max=360.dp).fillMaxWidth(.88f).shadow(18.dp).rotate(-2f))
+  BoxWithConstraints(Modifier.fillMaxWidth(),contentAlignment=Alignment.Center) {
+   FilmPrint(photo,Modifier.width(minOf(maxWidth*.88f,420.dp*photo.geometry.aspect)).shadow(18.dp).rotate(-2f))
+  }
   Text(when{photo.processing->"This exposure is safely archived. Retry processing to continue.";photo.progress>=1f->"Yours to keep.";else->"Shake gently. Watch it appear."},style=MaterialTheme.typography.titleLarge)
   if(photo.processing)Button(onClick={vm.recover()}){Text("Retry processing")}
   else if(photo.progress<1f) {
@@ -38,6 +40,10 @@ import com.instantroom.data.*
    PhotoCaptionAction(photo) {text,font,done->vm.caption(photo.id,text,font,done)}
    Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){Button(onClick=save){Text("Save to gallery")};ShareActions{vm.share(photo,it)}}
    TextButton(onClick=attach){Text("Place on corkboard →")}
+   if(photo.boothLayout.isNotEmpty()) {
+    Text("Make another undeveloped print from the same four sources. No film is used.",style=MaterialTheme.typography.bodySmall)
+    BoothLayout.entries.forEach {layout->TextButton(onClick={vm.recompose(photo,layout)}){Text("Reprint · ${layout.label}")}}
+   }
   }
  }
 }

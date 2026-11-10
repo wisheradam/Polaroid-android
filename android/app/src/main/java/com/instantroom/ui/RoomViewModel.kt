@@ -12,11 +12,13 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.util.UUID
 
-data class CaptureUi(val phase: CapturePhase = CapturePhase.IDLE, val photoId: String? = null, val ejection: Float = 0f)
+data class CaptureUi(val phase: CapturePhase = CapturePhase.IDLE, val photoId: String? = null, val ejection: Float = 0f, val countdown: Int=0, val shot: Int=1, val booth: Boolean=false, val sourceIds: List<String> = emptyList())
+object AndroidCaptureClock: CaptureClock {override fun nowMs()=SystemClock.elapsedRealtime();override suspend fun sleep(ms: Long){delay(ms)}}
 class RoomViewModel @JvmOverloads constructor(application: Application,
  val repo: PhotoRepository=(application as InstantRoomApp).repository,
  private val cameraPort: CapturePort=(application as InstantRoomApp).camera,
- private val feedbackPort: FeedbackPort=(application as InstantRoomApp).feedback
+ private val feedbackPort: FeedbackPort=(application as InstantRoomApp).feedback,
+ private val captureClock: CaptureClock=AndroidCaptureClock
 ) : AndroidViewModel(application) {
  val graph=application as InstantRoomApp
  val photos=repo.photos.stateIn(viewModelScope,SharingStarted.Eagerly,emptyList())
@@ -31,48 +33,99 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
  private var developmentGeneration=0
  private val developmentHaptics=DevelopmentHaptics()
  private var recoveryJob: Job?=null
+ private var captureJob: Job?=null
  init { recover() }
  fun recover() {
-  if(recoveryJob?.isActive==true)return
+  if(recoveryJob?.isActive==true || repo.captureLock.isLocked)return
   recoveryJob=viewModelScope.launch {
    try { repo.recover(); initialized.value=true } catch(e: Exception) { message.value="Recovery needs retry: ${e.message}" }
   }
  }
  fun clearMessage() { message.value=null }
- fun takePicture(flash: Boolean) {
+ fun takePicture(flash: Boolean) = beginCapture(flash,false)
+ fun startBooth(flash: Boolean) = beginCapture(flash,true)
+ fun cancelCapture() {captureJob?.cancel()}
+ private fun beginCapture(flash: Boolean, booth: Boolean) {
   if(!initialized.value || !repo.captureLock.tryLock())return
-  viewModelScope.launch {
+  val config=settings.value
+  capture.value=CaptureUi(CapturePhase.COUNTDOWN,booth=booth)
+  captureJob=viewModelScope.launch {
    var saved: PhotoEntity?=null
+   var session: BoothSessionEntity?=null
+   var cancelled=false
    try {
     val cart=repo.active() ?: error("Load a film cartridge first")
-    check(cart.remaining>0) { "FILM EMPTY · replace the cartridge" }
-    capture.value=CaptureUi(CapturePhase.CHARGING)
-    val duration=settings.value.chargeMs
-    feedbackPort.charge(duration);delay(duration)
-    capture.value=CaptureUi(CapturePhase.CAPTURING)
-    // Once a camera request starts, finishing its durable archive takes precedence over UI cancellation.
-    withContext(NonCancellable) {
-     val id=UUID.randomUUID().toString()
-     repo.prepareCapture(id,cart)
-     try { cameraPort.captureWithLighting(repo.originalFile(id),flash,settings.value.front && settings.value.selfieLight.screenFlash) {if(foreground)feedbackPort.shutter()} }
-     catch(e:Exception) { repo.abandonCapture(id);throw e }
-     saved=repo.commitCapture(id,cart)
-     capture.value=CaptureUi(CapturePhase.PROCESSING,id)
-     repo.process(saved!!)
+    check(cart.remaining >= if(booth)4 else 1) {if(booth)"Photo Booth needs four exposures. Manually load a fresh cartridge." else "FILM EMPTY · replace the cartridge"}
+    if(booth)session=repo.startBooth(config.boothLayout,cart)
+    CaptureSequence(captureClock).run(if(booth)4 else 1,if(booth)5 else config.timer.seconds,config.chargeMs,
+     countdown={index,left->
+      val charging=capture.value.shot==index+1 && capture.value.phase==CapturePhase.CHARGING
+      capture.value=capture.value.copy(phase=if(charging)CapturePhase.CHARGING else CapturePhase.COUNTDOWN,countdown=left,shot=index+1)
+      if(left>0 && foreground && !charging)feedbackPort.countdown(left<=3)
+     },charge={capture.value=capture.value.copy(phase=CapturePhase.CHARGING);if(foreground)feedbackPort.charge(config.chargeMs)}
+    ) { index->
+     currentCoroutineContext().ensureActive()
+     capture.value=capture.value.copy(phase=CapturePhase.CAPTURING,countdown=0)
+     // Never discard a successful camera result because Cancel/Pause arrived mid-capture.
+     withContext(NonCancellable) {
+      val id=session?.let{"${it.id}-$index"} ?: UUID.randomUUID().toString()
+      repo.prepareCapture(id,cart,session?.id.orEmpty(),if(booth)index else -1)
+      try {cameraPort.captureWithLighting(repo.originalFile(id),flash,config.front && config.selfieLight.screenFlash){if(foreground)feedbackPort.shutter()}}
+      catch(e:Exception){repo.abandonCapture(id);throw e}
+      saved=repo.commitCapture(id,cart)
+      if(booth) {
+       if(foreground)feedbackPort.exposed()
+       capture.value=capture.value.copy(sourceIds=capture.value.sourceIds+id)
+      } else {
+       capture.value=capture.value.copy(phase=CapturePhase.PROCESSING)
+       repo.process(checkNotNull(saved));saved=repo.photo(checkNotNull(saved).id)
+      }
+     }
+     currentCoroutineContext().ensureActive()
     }
-    if(foreground) {
-     capture.value=CaptureUi(CapturePhase.EJECTING,saved!!.id)
-     feedbackPort.eject()
-     val start=SystemClock.elapsedRealtime()
-     while(foreground && SystemClock.elapsedRealtime()-start<EjectionTimeline.durationMs) {
-      capture.value=capture.value.copy(ejection=EjectionTimeline.position(SystemClock.elapsedRealtime()-start));delay(16)
+    if(booth) {
+     capture.value=capture.value.copy(phase=CapturePhase.PROCESSING)
+     withContext(NonCancellable) {
+      saved=repo.finishBooth(checkNotNull(session).id)
+      // Individual sources remain accessible too; process after the timed sequence.
+      repo.boothSources(checkNotNull(session).id).filter{it.processing}.forEach{repo.process(it)}
      }
     }
-    capture.value=CaptureUi(photoId=saved!!.id,ejection=1f)
-   } catch(e: Exception) {
-    message.value=if(saved!=null) "Photograph archived. Processing can be retried: ${e.message}" else "Capture failed: ${e.message}"
-    capture.value=CaptureUi()
-   } finally { repo.captureLock.unlock() }
+    if(foreground) {
+     capture.value=capture.value.copy(phase=CapturePhase.EJECTING,photoId=checkNotNull(saved).id)
+     feedbackPort.eject()
+     val start=captureClock.nowMs()
+     while(foreground && captureClock.nowMs()-start<EjectionTimeline.durationMs) {
+      capture.value=capture.value.copy(ejection=EjectionTimeline.position(captureClock.nowMs()-start));captureClock.sleep(16)
+     }
+    }
+   } catch(e:CancellationException) {
+    cancelled=true
+   } catch(e:Exception) {
+    message.value="${if(booth)"Photo Booth stopped" else "Capture stopped"}: ${e.message}. Successful photographs remain in Archive."
+   } finally {
+    withContext(NonCancellable) {
+     session?.let {current->
+      try {
+       val sources=repo.boothSources(current.id)
+       if(sources.size==4)saved=repo.finishBooth(current.id) else {repo.interruptBooth(current.id);saved=null}
+       sources.filter{it.processing}.forEach{repo.process(it)}
+       if(cancelled)message.value="Photo Booth cancelled. ${sources.size} successful photographs kept in Archive; their exposures remain used."
+      }catch(e:Exception){message.value="Photographs retained. Use Archive → Retry processing: ${e.message}";saved=null}
+     }
+    }
+    if(cancelled || saved==null)feedbackPort.stop()
+    if(cancelled && session==null)message.value=if(saved!=null)"Photograph kept in Archive." else "Timer cancelled."
+    capture.value=CaptureUi(photoId=if(cancelled)null else saved?.takeIf{!it.processing}?.id,ejection=1f)
+    repo.captureLock.unlock()
+   }
+  }
+ }
+ fun recompose(photo: PhotoEntity, layout: BoothLayout) {
+  if(!repo.captureLock.tryLock())return
+  viewModelScope.launch {
+   try {val p=repo.recompose(photo.boothSessionId,layout);capture.value=CaptureUi(photoId=p.id)}
+   catch(e:Exception){message.value=e.message}finally{repo.captureLock.unlock()}
   }
  }
  fun switchCamera(frontAvailable: Boolean, rearAvailable: Boolean): Boolean {
