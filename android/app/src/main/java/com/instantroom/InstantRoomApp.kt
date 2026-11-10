@@ -10,7 +10,7 @@ import com.instantroom.imaging.*
 class InstantRoomApp : Application() {
  override fun onCreate() { super.onCreate(); feedback }
  val preferences by lazy { Preferences(this) }
- val database by lazy { Room.databaseBuilder(this,InstantDatabase::class.java,"instant-room.db").addMigrations(InstantDatabase.MIGRATION_1_2).build() }
+ val database by lazy { Room.databaseBuilder(this,InstantDatabase::class.java,"instant-room.db").addMigrations(InstantDatabase.MIGRATION_1_2,InstantDatabase.MIGRATION_2_3).build() }
  val repository by lazy { PhotoRepository(this,database,FilmProcessor(preferences)) }
  val feedback by lazy { Feedback(this,preferences) }
  val camera by lazy { CameraController(this) }

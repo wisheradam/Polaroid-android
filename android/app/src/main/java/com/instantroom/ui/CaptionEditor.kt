@@ -14,6 +14,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.instantroom.core.*
 import com.instantroom.data.PhotoEntity
+import com.instantroom.data.geometry
 import com.instantroom.imaging.CaptionRenderer
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -39,14 +40,14 @@ typealias CaptionSave = (String,CaptionFont,(Boolean)->Unit)->Unit
  val bitmap by produceState<android.graphics.Bitmap?>(null,base,text,style) {
   value=if(normalized==null)null else withContext(Dispatchers.Default) {
    BitmapFactory.decodeFile(base,BitmapFactory.Options().apply{inSampleSize=2;inMutable=true})?.also {
-    CaptionRenderer(context).draw(Canvas(it),it.width,it.height,FilmFormat.valueOf(photo.format),normalized,font)
+    CaptionRenderer(context).draw(Canvas(it),it.width,it.height,photo.geometry,normalized,font)
    }
   }
  }
  fun submit(value: String) {saving=true;failure=false;save(value,font){ok->saving=false;if(ok)dismiss() else failure=true}}
  AlertDialog(onDismissRequest={if(!saving)dismiss()},title={Text("Write on your print")},text={
   Column(Modifier.verticalScroll(rememberScrollState()),verticalArrangement=Arrangement.spacedBy(10.dp),horizontalAlignment=Alignment.CenterHorizontally) {
-   bitmap?.let{Image(it.asImageBitmap(),"Caption preview",Modifier.widthIn(max=180.dp).fillMaxWidth().aspectRatio(FilmFormat.valueOf(photo.format).aspect))}
+   bitmap?.let{Image(it.asImageBitmap(),"Caption preview",Modifier.widthIn(max=180.dp).heightIn(max=220.dp).aspectRatio(photo.geometry.aspect,matchHeightConstraintsFirst=true))}
    OutlinedTextField(value=text,onValueChange={text=it},enabled=!saving,label={Text("Your handwritten note")},
     supportingText={Text(validation.exceptionOrNull()?.message ?: "Up to 80 characters · two short lines")},isError=validation.isFailure,maxLines=2,modifier=Modifier.fillMaxWidth())
    Text("Handwriting",style=MaterialTheme.typography.labelLarge)

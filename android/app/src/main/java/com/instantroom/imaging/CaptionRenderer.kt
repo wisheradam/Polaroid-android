@@ -22,7 +22,8 @@ class CaptionRenderer(private val context: Context) {
   CaptionFont.DENISTINA->R.font.denistina
   CaptionFont.HISTORIC->R.font.historic
  }))
- fun writingArea(width: Int, height: Int, format: FilmFormat): RectF {
+ fun writingArea(width: Int, height: Int, format: FilmFormat): RectF = writingArea(width,height,format.geometry)
+ fun writingArea(width: Int, height: Int, format: PrintGeometry): RectF {
   val scale=width/format.width
   return RectF(width*.075f,(format.top+format.imageHeight+1.5f)*scale,width*.925f,height-2.0f*scale)
  }
@@ -50,7 +51,8 @@ class CaptionRenderer(private val context: Context) {
    size*=.92f
   }
  }
- fun draw(canvas: Canvas, width: Int, height: Int, format: FilmFormat, text: String, font: CaptionFont) {
+ fun draw(canvas: Canvas, width: Int, height: Int, format: FilmFormat, text: String, font: CaptionFont) = draw(canvas,width,height,format.geometry,text,font)
+ fun draw(canvas: Canvas, width: Int, height: Int, format: PrintGeometry, text: String, font: CaptionFont) {
   if(text.isEmpty())return
   val area=writingArea(width,height,format)
   val layout=layout(text,font,area)
@@ -61,7 +63,8 @@ class CaptionRenderer(private val context: Context) {
    layout.draw(canvas)
   } finally {canvas.restoreToCount(save)}
  }
- fun render(base: File, format: FilmFormat, text: String, font: CaptionFont): String {
+ fun render(base: File, format: FilmFormat, text: String, font: CaptionFont): String = render(base,format.geometry,text,font)
+ fun render(base: File, format: PrintGeometry, text: String, font: CaptionFont): String {
   val normalized=CaptionRules.normalize(text)
   if(normalized.isEmpty())return base.absolutePath.also{check(base.isFile)}
   val bitmap=BitmapFactory.decodeFile(base.path,BitmapFactory.Options().apply{inMutable=true;inPreferredConfig=Bitmap.Config.ARGB_8888}) ?: error("The uncaptioned print is unavailable")

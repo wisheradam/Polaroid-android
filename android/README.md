@@ -1,4 +1,4 @@
-# Instant Room 0.3.0 for Android
+# Instant Room 0.4.0 for Android
 
 Native Kotlin/Jetpack Compose instant-film camera. The Android project is self-contained in this directory; no iOS files are involved. Android 8.0 (API 26) or later. All camera, film, development, archive, and corkboard features work locally without an account or internet permission.
 
@@ -22,6 +22,15 @@ For connected emulator/device tests:
 The debug APK is locally signed for development. It is not a production/Play Store release. Build an unsigned release with `./gradlew :app:assembleRelease` and supply your own secure signing setup for distribution.
 
 ## Update notes
+
+Version **0.4.0 (code 4)** adds the camera self-timer and Photo Booth:
+
+- In **Single**, tap the timer icon and choose Off, 5, 15 or 30 seconds. Off preserves the existing charging/capture sequence without an extra countdown. The other delays include charging in the final part of the countdown. Countdown uses larger amber digits and a higher-pitch tick for its last three seconds. **Cancel** stays on the preview. The selection persists.
+- Select **Photo Booth**, choose **Collage 2×2** or **Vertical Strip 1×4**, choose the lens/light settings and press **Start**. At least four exposures are required. The coordinator targets requests at 5, 10, 15 and 20 seconds, with no processing/ejection between shots. Camera/AE latency can delay actual shutters. Slow hardware is never asked to overlap captures.
+- Each successful shot consumes one exposure; the final print consumes none. Cancellation, app pause or camera loss stops subsequent shots. Completed shots remain in Archive with their used exposures. Interrupted sessions do not resume capture automatically.
+- After all four shots, one composite is assembled and ejected, then must be developed by shaking. Add a caption after development, pin it, save it or share it normally. **Reprint** in completed booth detail generates another undeveloped layout from the same originals without consuming film; captions on an earlier print remain on that print.
+
+Room schema **2 → 3** adds booth metadata/session storage. The app registers both 1→2 and 2→3 migrations. Canonical builds use the retained 0.2.x/0.3.x debug key, so normal same-certificate updates preserve existing data. See [0.4.0 validation](docs/UPDATE_0_4_VALIDATION.md).
 
 Version **0.3.0 (code 3)** adds the supplied Check2GO header logo, soft haptics on accepted shake-development events, and a **Write on photo** / **Edit caption** entry in completed-photo detail. Enter up to 80 characters on two short lines, choose Sol Kol, Denistina or Historic, preview, and save. **Remove caption** restores the retained uncaptioned print. Caption editing consumes no film and changes neither originals nor development progress. The archive, corkboard, save and share flows use the captioned JPEG.
 

@@ -16,8 +16,10 @@ import androidx.compose.ui.semantics.*
 import com.instantroom.core.*
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.ui.platform.LocalView
+import androidx.compose.ui.platform.testTag
 import androidx.core.view.WindowCompat
 import com.instantroom.data.PhotoEntity
+import com.instantroom.data.geometry
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.math.*
@@ -65,7 +67,7 @@ val LocalInstantDark=staticCompositionLocalOf{true}
 @Composable fun SmallLabel(text: String, modifier: Modifier=Modifier) { Text(text,modifier,style=MaterialTheme.typography.labelSmall,letterSpacing=2.sp,color=Amber) }
 @Composable fun Panel(modifier: Modifier=Modifier, content: @Composable ColumnScope.()->Unit) { Column(modifier.background(Ink,RoundedCornerShape(20.dp)).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp),content=content) }
 private val imageCache=object: android.util.LruCache<String,android.graphics.Bitmap>(20*1024*1024) { override fun sizeOf(key:String,value:android.graphics.Bitmap)=value.byteCount }
-@Composable fun FilmPrint(photo: PhotoEntity?, modifier: Modifier=Modifier, format: FilmFormat=photo?.let{FilmFormat.valueOf(it.format)} ?: FilmFormat.CLASSIC, maxSide: Int=1000) {
+@Composable fun FilmPrint(photo: PhotoEntity?, modifier: Modifier=Modifier, format: PrintGeometry=photo?.geometry ?: FilmFormat.CLASSIC.geometry, maxSide: Int=1000) {
  val path=photo?.processed.orEmpty()
  val bitmap by produceState<android.graphics.Bitmap?>(null,path,maxSide) {
   value=withContext(Dispatchers.IO) {
@@ -81,15 +83,16 @@ private val imageCache=object: android.util.LruCache<String,android.graphics.Bit
   }
  }
  val progress=photo?.progress ?: 0f
- Canvas(modifier.aspectRatio(format.aspect).semantics { contentDescription=if(progress>=1f) "Developed ${format.label} photograph" else "Undeveloped ${format.label} photograph; shake to reveal" }) {
+ Canvas(modifier.aspectRatio(format.aspect).testTag(if(bitmap==null)"film-print-loading" else "film-print-ready").semantics { contentDescription=if(progress>=1f) "Developed ${format.label} photograph" else "Undeveloped ${format.label} photograph; shake to reveal" }) {
   drawRect(Color(0xFFF7F2E2))
   bitmap?.let { drawImage(it.asImageBitmap(),dstSize=IntSize(size.width.toInt(),size.height.toInt()),filterQuality=FilterQuality.Medium) }
   if(progress<1f || bitmap==null) {
    val s=size.width/format.width
-   val left=(size.width-format.imageWidth*s)/2
-   val top=format.top*s
-   val rect=Rect(left,top,left+format.imageWidth*s,top+format.imageHeight*s)
-   val pathClip=Path().apply {if(format==FilmFormat.ROUND)addOval(rect) else addRect(rect)}
+   format.imageRegions.forEach {cell->
+   val left=cell.left*s
+   val top=cell.top*s
+   val rect=Rect(left,top,left+cell.width*s,top+cell.height*s)
+   val pathClip=Path().apply {if(format.round)addOval(rect) else addRect(rect)}
    clipPath(pathClip) {
     val cover=if(bitmap==null)1f else (1-progress).pow(1.35f)
     drawRect(Color(0xFFBDBDA2),topLeft=rect.topLeft,size=rect.size,alpha=cover)
@@ -100,6 +103,7 @@ private val imageCache=object: android.util.LruCache<String,android.graphics.Bit
      drawCircle(Brush.radialGradient(listOf(Color(0xFF6B7E58).copy(alpha=(cover*(1-cover)*.65f)),Color.Transparent),center,radius),radius,center)
     }
     if(progress>0f)drawRect(Color(0xFFCF9552),topLeft=rect.topLeft,size=rect.size,alpha=cover*(1-cover)*.28f)
+   }
    }
   }
  }

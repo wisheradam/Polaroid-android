@@ -37,14 +37,14 @@ class CaptionMigrationTest {
    old.execSQL("INSERT INTO placements VALUES ('main','p',140,180,12,4,1,4280000000,0.5,0.07)")
    old.version=1
   }
-  var db=Room.databaseBuilder(context,InstantDatabase::class.java,name).addMigrations(InstantDatabase.MIGRATION_1_2).build()
+  var db=Room.databaseBuilder(context,InstantDatabase::class.java,name).addMigrations(InstantDatabase.MIGRATION_1_2,InstantDatabase.MIGRATION_2_3).build()
   try {
    val p=db.dao().photo("p")!!
    assertEquals("",p.caption);assertEquals("SOL_KOL",p.captionFont);assertEquals("",p.baseProcessed)
    assertEquals(.43f,p.progress,0f);assertEquals(print.path,p.processed);assertEquals(7,db.dao().active()!!.remaining)
    val pin=db.dao().placement("main","p")!!;assertTrue(pin.pinned);assertEquals(140f,pin.x,0f);assertEquals(12f,pin.rotation,0f)
    assertArrayEquals(byteArrayOf(1,2,3),original.readBytes());assertArrayEquals(byteArrayOf(4,5,6),print.readBytes())
-   db.close();db=Room.databaseBuilder(context,InstantDatabase::class.java,name).addMigrations(InstantDatabase.MIGRATION_1_2).build()
+   db.close();db=Room.databaseBuilder(context,InstantDatabase::class.java,name).addMigrations(InstantDatabase.MIGRATION_1_2,InstantDatabase.MIGRATION_2_3).build()
    assertEquals(p,db.dao().photo("p"))
   }finally{db.close();context.deleteDatabase(name)}
  }
