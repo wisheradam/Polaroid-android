@@ -64,4 +64,20 @@ Canonical builds retain the same signing certificate as 0.2.0/0.3.0 and support 
 
 ## Source and APK evidence
 
-Exact committed revision, artifact size/hash, certificate verification and independent AWS build evidence are appended after packaging.
+Built application source: **`8b6d17b8a298e5be91fc34bee3fea9094b6cf3f0`**. The follow-up commit records this evidence only; application source remains identical to the tested build.
+
+| Delivered local debug APK | Verified value |
+|---|---|
+| File | `deliverables/InstantRoom-0.4.0-debug.apk` |
+| Size | 17,581,754 bytes |
+| SHA-256 | `cc27ffe92a4f73d0328e1811e9ce5179a3039ab6a9caca685704d3958609f745` |
+| Package/version | `com.instantroom`, 0.4.0, code 4; minimum API 26, target/compile 37 |
+| Certificate SHA-256 | `57e0508a35dcb3f3ae4f648fcff78bf71d006fa370c821aa69bfb44245c234ab` |
+| Signature check | `apksigner verify --print-certs` succeeded, exit 0; matches canonical 0.2.0/0.3.0 |
+| Resources | Three supplied fonts, Check2GO logo and countdown sound confirmed inside APK |
+
+Independent AWS CodeBuild **`instant-room-build-android:569ffb5e-8a06-44f6-8f89-738ab0d1b6f0` SUCCEEDED**. Its downloaded private artifact bundle was independently verified: `SOURCE_COMMIT` matches the revision above; packaged JUnit XML totals **159 passed, 0 failures, 0 errors, 0 skipped**; the cloud APK hash matches `APK-SHA256.txt`; and `apksigner` verifies the same retained certificate. The six Python backup-safety tests also passed locally and run as a required AWS build step. Neither build performs connected-device tests.
+
+Separate cloud verification APK: 17,330,958 bytes; SHA-256 `c177e6f8858cb45f17d979d91e3d917d31cab82b8b1cbe794e7e35ee07a2b741`. Bundle SHA-256: `32b1208107bbe825a35dfc695f033d206a72b3c43f3863cfc611ec157c54bf98`. Private artifact object: `builds/569ffb5e-8a06-44f6-8f89-738ab0d1b6f0/instant-room.zip`. Local/cloud APK hashes differ; the downloadable artifact remains the verified local APK identified in the table above.
+
+[Draft PR #4](https://github.com/wisheradam/Polaroid-android/pull/4) remains unmerged and targets the working 0.3.0 branch. All tracked changes are committed and published; supplied attachments are excluded from source snapshots.
