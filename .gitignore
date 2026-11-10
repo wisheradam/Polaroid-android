@@ -9,3 +9,9 @@ local.properties
 .codex/
 
 .kotlin/
+
+*.keystore
+*.jks
+
+__pycache__/
+*.pyc

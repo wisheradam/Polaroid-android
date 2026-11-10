@@ -35,7 +35,7 @@ import com.instantroom.data.*
    if(settings.accessible)OutlinedButton(onClick={vm.accessibleDevelop(photo.id)}){Text("Develop one step · accessibility")}
    Text("Physical shaking is a playful simulation. Real instant film should not be shaken.",style=MaterialTheme.typography.labelSmall,color=Cream.copy(alpha=.45f))
   } else {
-   Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){Button(onClick=save){Text("Save to gallery")};OutlinedButton(onClick={vm.share(photo)}){Text("Share")}}
+   Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){Button(onClick=save){Text("Save to gallery")};ShareActions{vm.share(photo,it)}}
    TextButton(onClick=attach){Text("Place on corkboard →")}
   }
  }

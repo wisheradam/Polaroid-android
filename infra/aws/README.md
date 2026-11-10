@@ -40,3 +40,9 @@ Build objects expire after 30 days; noncurrent build/source versions expire afte
 ## Validation
 
 Local cfn-lint completed with zero findings. The two project-specific cfn-guard rules passed (private encrypted retained artifacts; bounded unprivileged builds). CloudFormation template validation and change-set validation passed before provisioning. See the Android validation report for the actual build execution outcome.
+
+## Retained debug signing (0.2.0 onward)
+
+CodeBuild resolves `/instant-room-build/debug-keystore` as an encrypted SSM Parameter Store value into a masked runtime environment variable. The value is a base64-encoded JKS file. The service role can read only that parameter. The build decodes it under `/tmp`, exposes only its file path to Gradle, and excludes signing files from artifacts. Do not print, commit, overwrite or delete this parameter while installed APKs use its certificate. Do not run untrusted source with this signing role. CloudFormation references the parameter path; it never embeds its value. The existing parameter must be securely provisioned for a fresh stack deployment.
+
+The generated private key for the originally delivered 0.1.0 build was not retained; retaining a new key cannot make its signing certificate match. See the Android upgrade guide for that one-time debug-signature transition. Future canonical builds reuse the retained key and can update in place. A local developer build needs `INSTANT_ROOM_DEBUG_KEYSTORE` pointing to that same key to share its certificate.

@@ -45,7 +45,7 @@ import com.instantroom.data.CartridgeEntity
     Text("10 EXPOSURES",color=Amber)
     Text(Appearance.valueOf(appearanceName).label)
    }
-   Box(Modifier.fillMaxWidth().height(60.dp).align(Alignment.BottomCenter).graphicsLayer{rotationX=door;transformOrigin=androidx.compose.ui.graphics.TransformOrigin(.5f,1f)}.background(Rust,RoundedCornerShape(10.dp)),contentAlignment=Alignment.Center){SmallLabel("FILM COMPARTMENT")}
+   Box(Modifier.fillMaxWidth().height(60.dp).align(Alignment.BottomCenter).graphicsLayer{rotationX=door;transformOrigin=androidx.compose.ui.graphics.TransformOrigin(.5f,1f)}.background(Rust,RoundedCornerShape(10.dp)),contentAlignment=Alignment.Center){Text("FILM COMPARTMENT",style=MaterialTheme.typography.labelSmall,color=MaterialTheme.colorScheme.onSecondary)}
   }
   Text(when(phase){LoadingPhase.CLOSED->"Open the hinged film door.";LoadingPhase.OPEN->"Pull the old cartridge out of the bay.";LoadingPhase.REMOVED->"Choose your film, then slide the new cartridge into the bay.";LoadingPhase.INSERTED->"The new cartridge is seated. Close the door to load it."})
   if(phase==LoadingPhase.REMOVED) {

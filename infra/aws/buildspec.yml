@@ -9,10 +9,16 @@ phases:
     commands:
       - test -n "$EXPECTED_COMMIT"
       - test "$(cat SOURCE_COMMIT)" = "$EXPECTED_COMMIT"
+      - test -n "$INSTANT_ROOM_DEBUG_KEYSTORE_BASE64"
+      - mkdir -p /tmp/instant-room-signing
+      - umask 077
+      - printf %s "$INSTANT_ROOM_DEBUG_KEYSTORE_BASE64" | base64 --decode > /tmp/instant-room-signing/debug.keystore
+      - export INSTANT_ROOM_DEBUG_KEYSTORE=/tmp/instant-room-signing/debug.keystore
       - chmod +x android/gradlew
   build:
     commands:
       - cd "$CODEBUILD_SRC_DIR/android"
+      - python3 "$CODEBUILD_SRC_DIR/scripts/test_upgrade_helper.py"
       - ./gradlew --no-daemon :core:test :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
   post_build:
     commands:

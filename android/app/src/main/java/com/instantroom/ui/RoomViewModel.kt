@@ -51,7 +51,7 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
     withContext(NonCancellable) {
      val id=UUID.randomUUID().toString()
      repo.prepareCapture(id,cart)
-     try { cameraPort.capture(repo.originalFile(id),flash) {if(foreground)feedbackPort.shutter()} }
+     try { cameraPort.captureWithLighting(repo.originalFile(id),flash,settings.value.front && settings.value.selfieLight.screenFlash) {if(foreground)feedbackPort.shutter()} }
      catch(e:Exception) { repo.abandonCapture(id);throw e }
      saved=repo.commitCapture(id,cart)
      capture.value=CaptureUi(CapturePhase.PROCESSING,id)
@@ -72,6 +72,11 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
    } finally { repo.captureLock.unlock() }
   }
  }
+ fun switchCamera(frontAvailable: Boolean, rearAvailable: Boolean): Boolean {
+  val target=CameraSwitchPolicy.target(settings.value.front,capture.value.phase!=CapturePhase.IDLE || repo.captureLock.isLocked,frontAvailable,rearAvailable)
+  if(target==null){if(capture.value.phase==CapturePhase.IDLE)message.value="The other camera is unavailable";return false}
+  updateSettings(settings.value.copy(front=target));return true
+ }
  fun updateSettings(s: Settings) { graph.preferences.set(s);graph.detector.threshold=s.threshold;if(!s.sound || !s.haptics)feedbackPort.stop() }
  fun develop(id: String, strength: Float) { viewModelScope.launch { try { repo.develop(id,strength) }catch(e: Exception){message.value=e.message} } }
  fun accessibleDevelop(id: String) { if(settings.value.accessible)viewModelScope.launch {repo.develop(id,0f,true)} }
@@ -84,6 +89,6 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
  fun unpin(id: String) {viewModelScope.launch{repo.unpin(id)}}
  fun detach(id: String) {viewModelScope.launch{repo.detach(id)}}
  fun save(p: PhotoEntity) {viewModelScope.launch{try{graph.export.save(p);message.value="Saved to Pictures / Instant Room"}catch(e:Exception){message.value="Save failed: ${e.message}"}}}
- fun share(p: PhotoEntity) {try{graph.export.share(p)}catch(e:Exception){message.value=e.message}}
+ fun share(p: PhotoEntity, target: ShareTarget = ShareTarget.SYSTEM) {try{graph.export.share(p,target)}catch(e:Exception){message.value=e.message}}
  override fun onCleared() { graph.motion.stop();feedbackPort.stop() }
 }
