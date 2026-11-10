@@ -7,10 +7,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
 import androidx.compose.ui.unit.*
 import com.instantroom.data.Settings
+import com.instantroom.core.*
+import androidx.compose.ui.semantics.*
 
 @Composable fun SettingsScreen(s: Settings, set: (Settings)->Unit) {
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.spacedBy(20.dp)) {
   SmallLabel("MAKE IT YOURS");Text("The quiet details.",style=MaterialTheme.typography.headlineLarge)
+  Panel {
+   SmallLabel("APPEARANCE")
+   ThemeMode.entries.forEach {mode->
+    Row(Modifier.fillMaxWidth().clickable{set(s.copy(theme=mode))},verticalAlignment=Alignment.CenterVertically) {
+     RadioButton(selected=s.theme==mode,onClick={set(s.copy(theme=mode))});Text(mode.label)
+    }
+   }
+  }
+  Panel {
+   SmallLabel("SELFIE LIGHTING")
+   SelfieLightControl(s.selfieLight,true){set(s.copy(selfieLight=it))}
+   Text("Edge width · ${s.edgeWidth.toInt()} dp")
+   Slider(value=s.edgeWidth,onValueChange={set(s.copy(edgeWidth=it))},valueRange=8f..32f,modifier=Modifier.semantics{contentDescription="Edge light thickness"})
+   Text("Edge brightness")
+   Slider(value=s.edgeBrightness,onValueChange={set(s.copy(edgeBrightness=it))},valueRange=.35f..1f,modifier=Modifier.semantics{contentDescription="Edge light brightness"})
+   Row(horizontalArrangement=Arrangement.spacedBy(12.dp)) {
+    LightTone.entries.forEach{tone->FilterChip(selected=s.lightTone==tone,onClick={set(s.copy(lightTone=tone))},label={Text(tone.label)})}
+   }
+   Text("Screen flash lights the full display only during capture. Edge light stays on while framing with the front camera. Output depends on the display and ambient light.",style=MaterialTheme.typography.bodySmall)
+  }
   Panel {
    SmallLabel("SOUND & TOUCH")
    SettingToggle("Camera sounds",s.sound,{set(s.copy(sound=it))})
@@ -33,7 +55,7 @@ import com.instantroom.data.Settings
    SettingToggle("Chemical imperfections",s.imperfections,{set(s.copy(imperfections=it))})
    Text("These preferences apply to newly processed photographs.",style=MaterialTheme.typography.bodySmall)
   }
-  Text("Instant Room · 0.1.0\nOriginal camera design. Private by default. All photographs stay on this device until you save or share them.",style=MaterialTheme.typography.bodySmall)
+  Text("Instant Room · 0.2.0\nOriginal camera design. Private by default. All photographs stay on this device until you save or share them.",style=MaterialTheme.typography.bodySmall)
  }
 }
 @Composable private fun SettingToggle(label: String, checked: Boolean, change: (Boolean)->Unit) {Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){Text(label,Modifier.weight(1f));Switch(checked=checked,onCheckedChange=change)}}

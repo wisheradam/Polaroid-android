@@ -225,6 +225,15 @@
                   "Resource": {
                     "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/codebuild/${AWS::StackName}:*"
                   }
+                },
+                {
+                  "Effect": "Allow",
+                  "Action": [
+                    "ssm:GetParameters"
+                  ],
+                  "Resource": {
+                    "Fn::Sub": "arn:${AWS::Partition}:ssm:${AWS::Region}:${AWS::AccountId}:parameter/${AWS::StackName}/debug-keystore"
+                  }
                 }
               ]
             }
@@ -270,7 +279,16 @@
           "Type": "LINUX_CONTAINER",
           "ComputeType": "BUILD_GENERAL1_MEDIUM",
           "Image": "aws/codebuild/standard:7.0",
-          "PrivilegedMode": false
+          "PrivilegedMode": false,
+          "EnvironmentVariables": [
+            {
+              "Name": "INSTANT_ROOM_DEBUG_KEYSTORE_BASE64",
+              "Type": "PARAMETER_STORE",
+              "Value": {
+                "Fn::Sub": "/${AWS::StackName}/debug-keystore"
+              }
+            }
+          ]
         },
         "LogsConfig": {
           "CloudWatchLogs": {

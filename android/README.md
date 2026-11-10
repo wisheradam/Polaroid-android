@@ -1,4 +1,4 @@
-# Instant Room for Android
+# Instant Room 0.2.0 for Android
 
 Native Kotlin/Jetpack Compose instant-film camera. The Android project is self-contained in this directory; no iOS files are involved. Android 8.0 (API 26) or later. All camera, film, development, archive, and corkboard features work locally without an account or internet permission.
 
@@ -20,6 +20,14 @@ For connected emulator/device tests:
 ```
 
 The debug APK is locally signed for development. It is not a production/Play Store release. Build an unsigned release with `./gradlew :app:assembleRelease` and supply your own secure signing setup for distribution.
+
+## Update notes
+
+Version 0.2.0 (code 2) adds a main-screen lens switch, screen/edge selfie lighting, Light/Dark/Follow System appearance and Instagram/Facebook image-sharing shortcuts. The database remains schema 1. Read [upgrade instructions](docs/UPGRADE_0_2.md) before replacing a populated 0.1.0 debug installation: the first build's temporary signing certificate differs from the retained 0.2.x debug certificate. Never manually uninstall it without a backup.
+
+Canonical AWS builds reuse an encrypted retained signing key. For a local same-certificate debug build, point `INSTANT_ROOM_DEBUG_KEYSTORE` to the matching keystore before invoking Gradle. If that variable is absent, Android Studio/Gradle uses the developer machine's own debug key.
+
+See the [vNext implementation report](docs/VNEXT_VALIDATION.md) and [physical-device checklist](docs/VNEXT_HARDWARE_CHECKLIST.md). A Stories-only Instagram integration is not configured; supported image-sharing flows and the Sharesheet are available without Meta SDK/OAuth.
 
 ## First photograph
 

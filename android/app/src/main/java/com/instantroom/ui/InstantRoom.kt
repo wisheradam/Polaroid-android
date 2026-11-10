@@ -17,8 +17,12 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import androidx.lifecycle.compose.*
 import com.instantroom.core.CapturePhase
+import com.instantroom.core.SelfieLightMode
 
 @Composable fun InstantRoom(vm: RoomViewModel) {
+ val lighting=rememberSelfieLightingHost(vm.graph.camera)
+ val cameraState by vm.graph.camera.state.collectAsStateWithLifecycle()
+ var resumed by remember {mutableStateOf(false)}
  var screen by rememberSaveable { mutableStateOf("Camera") }
  var selected by rememberSaveable { mutableStateOf<String?>(null) }
  var handled by rememberSaveable { mutableStateOf<String?>(null) }
@@ -32,10 +36,12 @@ import com.instantroom.core.CapturePhase
  val owner=LocalLifecycleOwner.current
  DisposableEffect(owner) {
   val observer=LifecycleEventObserver { _,event ->
+   if(event==Lifecycle.Event.ON_RESUME)resumed=true
+   if(event==Lifecycle.Event.ON_PAUSE)resumed=false
    if(event==Lifecycle.Event.ON_START)vm.foreground=true
    if(event==Lifecycle.Event.ON_STOP) { vm.foreground=false;vm.graph.motion.stop();vm.graph.feedback.stop() }
   }
-  owner.lifecycle.addObserver(observer);vm.foreground=owner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
+  owner.lifecycle.addObserver(observer);resumed=owner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED);vm.foreground=owner.lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
   onDispose {owner.lifecycle.removeObserver(observer);vm.graph.motion.stop();vm.graph.feedback.stop()}
  }
  LaunchedEffect(message) { message?.let{host.showSnackbar(it);vm.clearMessage()} }
@@ -45,7 +51,9 @@ import com.instantroom.core.CapturePhase
  val storage=rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok -> if(ok)pendingSave?.let(vm::save) else vm.message.value="Storage permission is needed on Android 8 and 9 to save to the gallery";pendingSave=null }
  fun navigate(s: String) { if(cap.phase==CapturePhase.IDLE)screen=s }
  BackHandler(screen!="Camera" && cap.phase==CapturePhase.IDLE) {screen="Camera"}
- Scaffold(snackbarHost={SnackbarHost(host)},bottomBar={
+ val lightingActive=screen=="Camera" && resumed && settings.front && cameraState.selectedFront && cameraState.ready
+ Box(Modifier.fillMaxSize()) {
+ Scaffold(modifier=Modifier.padding(if(lightingActive && settings.selfieLight.edge)settings.edgeWidth.dp else 0.dp),snackbarHost={SnackbarHost(host)},bottomBar={
   if(screen in listOf("Camera","Archive","Corkboard","Settings"))NavigationBar(containerColor=Ink) {
    listOf("Camera" to "◉","Archive" to "▧","Corkboard" to "⌗","Settings" to "⚙").forEach { (name,symbol)->NavigationBarItem(selected=screen==name,onClick={navigate(name)},enabled=cap.phase==CapturePhase.IDLE,icon={Text(symbol)},label={Text(name)}) }
   }
@@ -54,7 +62,7 @@ import com.instantroom.core.CapturePhase
    when(screen) {
     "Camera"->CameraScreen(vm,cartridge,cap,settings,initialized,{screen="Film Loading"})
     "Film Loading"->FilmLoadingScreen(vm,cartridge,{screen="Camera"})
-    "Archive"->ArchiveScreen(photos,{selected=it;screen="Development"},{vm.recover()})
+    "Archive"->ArchiveScreen(photos,{selected=it;screen="Development"},{vm.recover()}){p,target->vm.share(p,target)}
     "Development"-> {
      val p=photos.find{it.id==selected}
      if(p!=null)DevelopmentScreen(vm,p,settings,{screen="Archive"},{
@@ -65,5 +73,7 @@ import com.instantroom.core.CapturePhase
     "Settings"->SettingsScreen(settings,vm::updateSettings)
    }
   }
+ }
+ SelfieLightingOverlay(lighting,lightingActive,settings,LocalInstantDark.current)
  }
 }

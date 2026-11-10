@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.instantroom.core.*
 import com.instantroom.data.PhotoEntity
 
-@Composable fun ArchiveScreen(photos: List<PhotoEntity>, open: (String)->Unit, retry: ()->Unit) {
+@Composable fun ArchiveScreen(photos: List<PhotoEntity>, open: (String)->Unit, retry: ()->Unit, share: (PhotoEntity,ShareTarget)->Unit = {_,_->}) {
  val locale=LocalConfiguration.current.locales[0]
  Column(Modifier.fillMaxSize().padding(horizontal=20.dp)) {
   Spacer(Modifier.height(20.dp));SmallLabel("YOUR PERMANENT COLLECTION")
@@ -27,6 +27,7 @@ import com.instantroom.data.PhotoEntity
      Text(SimpleDateFormat("MMM d · HH:mm",locale).format(Date(p.capturedAt)),style=MaterialTheme.typography.labelMedium,modifier=Modifier.padding(top=8.dp))
      Text(if(p.processing)"Processing interrupted" else if(p.progress>=1f)FilmFormat.valueOf(p.format).label else "Shake to develop",style=MaterialTheme.typography.bodySmall,color=Amber)
      if(p.processing)TextButton(onClick=retry){Text("Retry processing")}
+     else if(p.progress>=1f)ShareActions{share(p,it)}
     }
    }
   }

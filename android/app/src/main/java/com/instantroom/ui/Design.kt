@@ -14,18 +14,53 @@ import androidx.compose.ui.geometry.*
 import androidx.compose.ui.unit.*
 import androidx.compose.ui.semantics.*
 import com.instantroom.core.*
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 import com.instantroom.data.PhotoEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.math.*
 import kotlin.random.Random
 
-val Ink=Color(0xFF202823)
-val Cream=Color(0xFFF3EBD9)
-val Amber=Color(0xFFE6B578)
-val Rust=Color(0xFFB9583F)
-@Composable fun InstantTheme(content: @Composable ()->Unit) {
- MaterialTheme(colorScheme=darkColorScheme(primary=Amber,onPrimary=Ink,background=Color(0xFF151C18),surface=Ink,onSurface=Cream,secondary=Color(0xFF9FB7A6)),typography=Typography(),content=content)
+private val DarkPalette=darkColorScheme(
+ primary=Color(0xFFE6B578),onPrimary=Color(0xFF202823),background=Color(0xFF151C18),
+ surface=Color(0xFF202823),onSurface=Color(0xFFF3EBD9),onBackground=Color(0xFFF3EBD9),
+ secondary=Color(0xFFAF4C36),onSecondary=Color(0xFFFFF3DF),
+ primaryContainer=Color(0xFF4B3B26),onPrimaryContainer=Color(0xFFF3EBD9),
+ secondaryContainer=Color(0xFF3C4A41),onSecondaryContainer=Color(0xFFE4EBD8),
+ surfaceVariant=Color(0xFF344038),onSurfaceVariant=Color(0xFFBFCABB),outline=Color(0xFF859181),
+ surfaceContainerHighest=Color(0xFF344038),surfaceContainerHigh=Color(0xFF2C372F),
+ surfaceContainer=Color(0xFF273028),surfaceContainerLow=Color(0xFF1C251F),surfaceContainerLowest=Color(0xFF101713),
+ surfaceTint=Color(0xFFE6B578)
+)
+private val LightPalette=lightColorScheme(
+ primary=Color(0xFF76501F),onPrimary=Color(0xFFFFF8ED),background=Color(0xFFECE3D2),
+ surface=Color(0xFFFAF3E6),onSurface=Color(0xFF243029),onBackground=Color(0xFF243029),
+ secondary=Color(0xFF9F452F),onSecondary=Color(0xFFFFF5E8),outline=Color(0xFF786B58),
+ primaryContainer=Color(0xFFF0DDBB),onPrimaryContainer=Color(0xFF352915),
+ secondaryContainer=Color(0xFFE1E8D8),onSecondaryContainer=Color(0xFF26362B),
+ surfaceVariant=Color(0xFFE2D7C5),onSurfaceVariant=Color(0xFF524B3E),outlineVariant=Color(0xFFCDBFA7),
+ surfaceContainerHighest=Color(0xFFE3D8C5),surfaceContainerHigh=Color(0xFFECE2D1),
+ surfaceContainer=Color(0xFFF0E7D7),surfaceContainerLow=Color(0xFFF6EEDF),surfaceContainerLowest=Color(0xFFFFFAF1),
+ surfaceTint=Color(0xFF76501F)
+)
+val Ink: Color @Composable get()=MaterialTheme.colorScheme.surface
+val Cream: Color @Composable get()=MaterialTheme.colorScheme.onSurface
+val Amber: Color @Composable get()=MaterialTheme.colorScheme.primary
+val Rust: Color @Composable get()=MaterialTheme.colorScheme.secondary
+val LocalInstantDark=staticCompositionLocalOf{true}
+@Composable fun InstantTheme(mode: ThemeMode=ThemeMode.SYSTEM, content: @Composable ()->Unit) {
+ val dark=mode.isDark(isSystemInDarkTheme())
+ val view=LocalView.current
+ SideEffect {
+  if(!view.isInEditMode) runCatching {
+   WindowCompat.getInsetsController(view.context.activity().window,view).apply {isAppearanceLightStatusBars=!dark;isAppearanceLightNavigationBars=!dark}
+  }
+ }
+ CompositionLocalProvider(LocalInstantDark provides dark) {
+  MaterialTheme(colorScheme=if(dark)DarkPalette else LightPalette,typography=Typography(),content=content)
+ }
 }
 @Composable fun SmallLabel(text: String, modifier: Modifier=Modifier) { Text(text,modifier,style=MaterialTheme.typography.labelSmall,letterSpacing=2.sp,color=Amber) }
 @Composable fun Panel(modifier: Modifier=Modifier, content: @Composable ColumnScope.()->Unit) { Column(modifier.background(Ink,RoundedCornerShape(20.dp)).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp),content=content) }
