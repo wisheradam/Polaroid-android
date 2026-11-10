@@ -73,3 +73,11 @@ Canonical debug builds retain the 0.2.0/0.3.0/0.4.0 signing certificate for norm
 | Resources | Three supplied fonts, Check2GO logo and countdown sound verified inside APK |
 
 [Download delivered APK](https://chatgpt.com/library?file_id=libfile_b0e9bf74a69881918e6678a7a3f313e5&account_id=personal).
+
+## Source and delivery status
+
+Built application source: **`7aa97026a7503692c0d271e8d5ac43f08ba82131`**. The follow-up report commit changes documentation only. The committed source snapshot was verified to contain this revision and to exclude supplied attachment/reference directories. All 26 changed files were reviewed; tracked implementation changes match the published feature branch.
+
+[Draft PR #5](https://github.com/wisheradam/Polaroid-android/pull/5) targets the working 0.4.0 branch and remains unmerged. No production release was published.
+
+The additional independent AWS build was **not started/verified**. Automatic approval review rejected the source-archive upload to `instant-room-build-artifacts-ig3j4gz8ktsl` because the current request authorized builds and GitHub delivery but did not explicitly authorize sending the source payload to that AWS destination. No cloud result is claimed for 0.5.0; the delivered artifact and all results above are from the verified local build. Explicit approval is needed before retrying that upload/build. This does not block using the delivered APK.
