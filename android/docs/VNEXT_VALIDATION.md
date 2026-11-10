@@ -86,4 +86,18 @@ No connected emulator/device tests or physical-device validation are claimed for
 
 ## APK and AWS build
 
-Final source revision, AWS execution, APK signature, size and checksums are appended after packaging verification. The detailed initial-build report remains in `VALIDATION.md` as historical evidence for version 0.1.0.
+AWS CodeBuild `instant-room-build-android:c2e93d02-5da8-4cb9-b13e-2a24a6cad07f` **SUCCEEDED** on 10 November 2026. Built source revision: `e85d3b383203187b8d5d4a7dc5a215d163c3dd8a`. The final follow-up commit changes this report only; application source is identical to the built revision.
+
+The private artifact bundle was downloaded and independently checked: its `SOURCE_COMMIT` matches the built revision, all packaged JUnit XML totals **89 passed, 0 failures, 0 errors, 0 skipped**, and the APK checksum matches `APK-SHA256.txt`. The six Python safety tests also passed locally and ran as a required AWS build step. The local Gradle build was rechecked successfully after resuming the task (exit 0); Python safety tests returned exit 0. Instrumentation APK compilation passed; no connected test execution is claimed.
+
+| Artifact | Verified value |
+|---|---|
+| Delivered APK | `deliverables/InstantRoom-0.2.0-debug.apk` |
+| APK size | 16,930,377 bytes |
+| APK SHA-256 | `9bba8129e9b2fa5d3ce6eb6048a7cf8b84efcf8aa5bfc2babc6ebfe2baf954f3` |
+| APK certificate SHA-256 | `57e0508a35dcb3f3ae4f648fcff78bf71d006fa370c821aa69bfb44245c234ab` |
+| Package metadata | `com.instantroom`, version 0.2.0, code 2, min SDK 26, target SDK 37 |
+| AWS artifact bundle SHA-256 | `01e905bb00e33e2c8205ba74dfac189e77fff9ce866aaad4ae77e9fbf45b1f9c` |
+| AWS artifact object | `builds/c2e93d02-5da8-4cb9-b13e-2a24a6cad07f/instant-room.zip` |
+
+`apksigner verify --print-certs` completed successfully (exit 0). Final diff whitespace validation passed. [Draft PR #2](https://github.com/wisheradam/Polaroid-android/pull/2) targets the working v1 feature branch, remains a draft, and has not been merged. The detailed initial-build report remains in `VALIDATION.md` as historical evidence for version 0.1.0.
