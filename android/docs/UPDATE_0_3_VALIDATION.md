@@ -44,14 +44,15 @@ python3 scripts/test_upgrade_helper.py
 | Caption add/edit/remove, persistence, export/share, concurrency and regeneration | 7 | 0 | 0 |
 | Logo and caption Compose interactions | 4 | 0 | 0 |
 | Development/haptic session integration | 4 | 0 | 0 |
+| Development vibration ownership preserves shutter/ejection feedback | 1 | 0 | 0 |
 | Existing Python backup-safety tests | 6 | 0 | 0 |
-| **Total** | **125** | **0** | **0** |
+| **Total** | **126** | **0** | **0** |
 
-Android/JVM total: **119** (54 core + 65 app). The original 89 tests remain present. Robolectric API 35 runs Android/Compose tests; caption raster and logo screenshot tests use native graphics with the actual bundled fonts and logo. They are not connected emulator or physical-device tests. Visual proofs for all twelve format/font combinations and both logo themes were inspected during development; they are build intermediates, not user photo uploads.
+Android/JVM total: **120** (54 core + 66 app). The original 89 tests remain present. Robolectric API 35 runs Android/Compose tests; caption raster and logo screenshot tests use native graphics with the actual bundled fonts and logo. They are not connected emulator or physical-device tests. Visual proofs for all twelve format/font combinations and both logo themes were inspected during development; they are build intermediates, not user photo uploads.
 
 The migration test constructs a real version-1 SQLite database from the committed Room schema, populates legacy photo paths/progress, a seven-exposure cartridge and pinned placement, then opens it through Room's 1→2 migration and checks data preservation and reopening. Renderer tests check actual ink pixels remain inside the writing margin. Sharing and MediaStore tests compare delivered bytes to the captioned JPEG for every film format. Regeneration produces identical JPEG bytes after processing preferences change.
 
-Local Gradle validation completed successfully (exit 0): app assembly, instrumentation APK compilation, all 119 Android/JVM tests and lint. Lint reports **no issues**. Python safety checks passed (6/6, exit 0). Native raster proofs and both logo themes were inspected. Legacy AGP/Kotlin and Compose test-helper deprecation warnings remain from the existing toolchain; no dependency upgrade was introduced. Final diff whitespace validation passed.
+Local Gradle validation covers app assembly, instrumentation APK compilation, Android/JVM tests and lint. Final results include the vibration-ownership regression check. Python safety checks passed (6/6, exit 0). Native raster proofs and both logo themes were inspected. Legacy AGP/Kotlin and Compose test-helper deprecation warnings remain from the existing toolchain; no dependency upgrade was introduced.
 
 Canonical AWS build, immutable source revision and delivered APK details are appended after packaging verification.
 
