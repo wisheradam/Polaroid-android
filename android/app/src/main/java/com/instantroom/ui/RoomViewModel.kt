@@ -134,6 +134,12 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
   updateSettings(settings.value.copy(front=target));return true
  }
  fun updateSettings(s: Settings) { graph.preferences.set(s);graph.detector.threshold=s.threshold;if(!s.sound || !s.haptics)feedbackPort.stop() }
+ fun setRearFlash(on: Boolean,available: Boolean): Boolean {
+  if(!FlashMotion.toggleAllowed(available,capture.value.phase!=CapturePhase.IDLE || repo.captureLock.isLocked) || settings.value.rearFlash==on)return false
+  updateSettings(settings.value.copy(rearFlash=on))
+  if(settings.value.haptics)feedbackPort.controlClick()
+  return true
+ }
  fun startDevelopment(id: String) { stopDevelopment();developmentPhoto=id }
  fun stopDevelopment() {developmentPhoto=null;developmentGeneration++;developmentHaptics.reset();feedbackPort.stopDevelopment()}
  fun develop(id: String, strength: Float) {

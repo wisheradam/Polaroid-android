@@ -15,8 +15,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.unit.*
 import com.instantroom.core.*
 import com.instantroom.data.CartridgeEntity
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
 @Composable fun FilmLoadingScreen(vm: RoomViewModel, cartridge: CartridgeEntity?, close: ()->Unit) {
+ val settings by vm.settings.collectAsStateWithLifecycle()
  var phaseName by rememberSaveable{mutableStateOf(LoadingPhase.CLOSED.name)}
  val phase=LoadingPhase.valueOf(phaseName)
  var formatName by rememberSaveable{mutableStateOf(cartridge?.format ?: FilmFormat.CLASSIC.name)}
@@ -39,7 +41,7 @@ import com.instantroom.data.CartridgeEntity
   Text("A fresh beginning.",style=MaterialTheme.typography.headlineLarge)
   Text("Every cartridge holds exactly ten photographs. The film you load sets the shape and character of every exposure.",color=Cream.copy(alpha=.7f))
   Box(Modifier.fillMaxWidth().height(210.dp).background(androidx.compose.ui.graphics.Color.Black,RoundedCornerShape(20.dp)).clipToBounds(),contentAlignment=Alignment.Center) {
-   Panel(Modifier.width(220.dp).offset{IntOffset(0,cartOffset.roundToPx())}.pointerInput(phase){var drag=0f;detectDragGestures(onDragStart={drag=0f},onDragEnd={if(kotlin.math.abs(drag)>50 && phase in listOf(LoadingPhase.OPEN,LoadingPhase.REMOVED))advance()},onDrag={change,amount->change.consume();drag+=amount.y})}) {
+   CameraShell(settings.cameraStyle,settings.cameraColor,Modifier.width(220.dp).offset{IntOffset(0,cartOffset.roundToPx())}.pointerInput(phase){var drag=0f;detectDragGestures(onDragStart={drag=0f},onDragEnd={if(kotlin.math.abs(drag)>50 && phase in listOf(LoadingPhase.OPEN,LoadingPhase.REMOVED))advance()},onDrag={change,amount->change.consume();drag+=amount.y})}) {
     SmallLabel(if(phase==LoadingPhase.REMOVED)"EMPTY BAY" else "INSTANT ROOM / FILM")
     Text(FilmFormat.valueOf(formatName).label,style=MaterialTheme.typography.titleLarge)
     Text("10 EXPOSURES",color=Amber)

@@ -21,15 +21,15 @@ import kotlinx.coroutines.withContext
 
 typealias CaptionSave = (String,CaptionFont,(Boolean)->Unit)->Unit
 
-@Composable fun PhotoCaptionAction(photo: PhotoEntity, save: CaptionSave) {
+@Composable fun PhotoCaptionAction(photo: PhotoEntity, defaultFont: CaptionFont=CaptionFont.SOL_KOL, save: CaptionSave) {
  var open by rememberSaveable(photo.id){mutableStateOf(false)}
  TextButton(onClick={open=true}){Text(if(photo.caption.isEmpty())"Write on photo" else "Edit caption")}
- if(open)CaptionEditor(photo,{open=false},save)
+ if(open)CaptionEditor(photo,{open=false},save,defaultFont)
 }
 
-@Composable fun CaptionEditor(photo: PhotoEntity, dismiss: ()->Unit, save: CaptionSave) {
+@Composable fun CaptionEditor(photo: PhotoEntity, dismiss: ()->Unit, save: CaptionSave, defaultFont: CaptionFont=CaptionFont.SOL_KOL) {
  var text by rememberSaveable(photo.id){mutableStateOf(photo.caption)}
- var style by rememberSaveable(photo.id){mutableStateOf(photo.captionFont)}
+ var style by rememberSaveable(photo.id){mutableStateOf(if(photo.caption.isEmpty())defaultFont.name else photo.captionFont)}
  var saving by remember{mutableStateOf(false)}
  var failure by remember{mutableStateOf(false)}
  val font=runCatching{CaptionFont.valueOf(style)}.getOrDefault(CaptionFont.SOL_KOL)

@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
 import androidx.compose.ui.unit.*
 import com.instantroom.data.Settings
+import com.instantroom.BuildConfig
 import com.instantroom.core.*
 import androidx.compose.ui.semantics.*
 
@@ -20,6 +21,12 @@ import androidx.compose.ui.semantics.*
      RadioButton(selected=s.theme==mode,onClick={set(s.copy(theme=mode))});Text(mode.label)
     }
    }
+  }
+  CameraStyleSettings(s,set)
+  Panel {
+   SmallLabel("DEFAULT HANDWRITING")
+   FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp)) {CaptionFont.entries.forEach {font->FilterChip(selected=s.captionFont==font,onClick={set(s.copy(captionFont=font))},label={Text(font.label)})}}
+   Text("Used for new notes. Existing captions keep their selected font.",style=MaterialTheme.typography.bodySmall)
   }
   Panel {
    SmallLabel("SELFIE LIGHTING")
@@ -55,7 +62,7 @@ import androidx.compose.ui.semantics.*
    SettingToggle("Chemical imperfections",s.imperfections,{set(s.copy(imperfections=it))})
    Text("These preferences apply to newly processed photographs.",style=MaterialTheme.typography.bodySmall)
   }
-  Text("Instant Room · 0.2.0\nOriginal camera design. Private by default. All photographs stay on this device until you save or share them.",style=MaterialTheme.typography.bodySmall)
+  Text("Instant Room · ${BuildConfig.VERSION_NAME}\nOriginal camera design. Private by default. All photographs stay on this device until you save or share them.",style=MaterialTheme.typography.bodySmall)
  }
 }
 @Composable private fun SettingToggle(label: String, checked: Boolean, change: (Boolean)->Unit) {Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){Text(label,Modifier.weight(1f));Switch(checked=checked,onCheckedChange=change)}}

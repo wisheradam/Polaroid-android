@@ -52,7 +52,7 @@ val Cream: Color @Composable get()=MaterialTheme.colorScheme.onSurface
 val Amber: Color @Composable get()=MaterialTheme.colorScheme.primary
 val Rust: Color @Composable get()=MaterialTheme.colorScheme.secondary
 val LocalInstantDark=staticCompositionLocalOf{true}
-@Composable fun InstantTheme(mode: ThemeMode=ThemeMode.SYSTEM, content: @Composable ()->Unit) {
+@Composable fun InstantTheme(mode: ThemeMode=ThemeMode.SYSTEM, cameraStyle: CameraStyle=CameraStyle.ONE_AND_ONLY, cameraColor: CameraColor=CameraColor.WHITE, content: @Composable ()->Unit) {
  val dark=mode.isDark(isSystemInDarkTheme())
  val view=LocalView.current
  SideEffect {
@@ -61,11 +61,15 @@ val LocalInstantDark=staticCompositionLocalOf{true}
   }
  }
  CompositionLocalProvider(LocalInstantDark provides dark) {
-  MaterialTheme(colorScheme=if(dark)DarkPalette else LightPalette,typography=Typography(),content=content)
+  val base=if(dark)DarkPalette else LightPalette
+  val finish=cameraFinish(cameraStyle,cameraColor)
+  val primary=readableAccent(finish.accent,base.surface)
+  MaterialTheme(colorScheme=base.copy(primary=primary,onPrimary=inkOn(primary),secondary=finish.shutter,onSecondary=inkOn(finish.shutter)),
+   shapes=Shapes(small=RoundedCornerShape(cameraCorner(cameraStyle)/2),medium=RoundedCornerShape(cameraCorner(cameraStyle)),large=RoundedCornerShape(cameraCorner(cameraStyle))),typography=Typography(),content=content)
  }
 }
 @Composable fun SmallLabel(text: String, modifier: Modifier=Modifier) { Text(text,modifier,style=MaterialTheme.typography.labelSmall,letterSpacing=2.sp,color=Amber) }
-@Composable fun Panel(modifier: Modifier=Modifier, content: @Composable ColumnScope.()->Unit) { Column(modifier.background(Ink,RoundedCornerShape(20.dp)).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp),content=content) }
+@Composable fun Panel(modifier: Modifier=Modifier, content: @Composable ColumnScope.()->Unit) { Column(modifier.background(Ink,MaterialTheme.shapes.large).padding(20.dp),verticalArrangement=Arrangement.spacedBy(12.dp),content=content) }
 private val imageCache=object: android.util.LruCache<String,android.graphics.Bitmap>(20*1024*1024) { override fun sizeOf(key:String,value:android.graphics.Bitmap)=value.byteCount }
 @Composable fun FilmPrint(photo: PhotoEntity?, modifier: Modifier=Modifier, format: PrintGeometry=photo?.geometry ?: FilmFormat.CLASSIC.geometry, maxSide: Int=1000) {
  val path=photo?.processed.orEmpty()

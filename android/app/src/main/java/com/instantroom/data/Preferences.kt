@@ -11,7 +11,9 @@ data class Settings(
  val front: Boolean = false, val imperfections: Boolean = true,
  val theme: ThemeMode = ThemeMode.SYSTEM, val selfieLight: SelfieLightMode = SelfieLightMode.OFF,
  val edgeWidth: Float = 16f, val edgeBrightness: Float = .85f, val lightTone: LightTone = LightTone.WARM,
- val timer: SelfTimer = SelfTimer.OFF, val boothLayout: BoothLayout = BoothLayout.GRID
+ val timer: SelfTimer = SelfTimer.OFF, val boothLayout: BoothLayout = BoothLayout.GRID,
+ val cameraStyle: CameraStyle = CameraStyle.ONE_AND_ONLY, val cameraColor: CameraColor = CameraColor.WHITE,
+ val rearFlash: Boolean = false, val captionFont: CaptionFont = CaptionFont.SOL_KOL
 )
 class Preferences(context: Context) {
  private val p=context.getSharedPreferences("settings",Context.MODE_PRIVATE)
@@ -19,15 +21,17 @@ class Preferences(context: Context) {
  // v1 was always dark. Preserve that appearance on upgrade; fresh installs follow the OS.
  private val initialTheme=enum("theme",if(p.all.isNotEmpty() || context.getDatabasePath("instant-room.db").exists())ThemeMode.DARK else ThemeMode.SYSTEM)
  init { if(!p.contains("theme"))p.edit(commit=true){putString("theme",initialTheme.name)} }
+ private val initialStyle=enum("cameraStyle",CameraStyle.ONE_AND_ONLY)
  val state=MutableStateFlow(Settings(
   p.getBoolean("sound",true),p.getBoolean("haptics",true),p.getBoolean("accessible",false),
   p.getFloat("threshold",6.5f),p.getLong("charge",650),p.getBoolean("low",false),
   p.getBoolean("front",false),p.getBoolean("imperfections",true),initialTheme,
   enum("selfieLight",SelfieLightMode.OFF),p.getFloat("edgeWidth",16f).coerceIn(8f,32f),
-  p.getFloat("edgeBrightness",.85f).coerceIn(.35f,1f),enum("lightTone",LightTone.WARM),enum("timer",SelfTimer.OFF),enum("boothLayout",BoothLayout.GRID)
+  p.getFloat("edgeBrightness",.85f).coerceIn(.35f,1f),enum("lightTone",LightTone.WARM),enum("timer",SelfTimer.OFF),enum("boothLayout",BoothLayout.GRID),
+  initialStyle,initialStyle.colorOrDefault(enum("cameraColor",initialStyle.defaultColor)),p.getBoolean("rearFlash",false),enum("captionFont",CaptionFont.SOL_KOL)
  ))
  fun set(s: Settings) {
-  val normalized=s.copy(edgeWidth=s.edgeWidth.coerceIn(8f,32f),edgeBrightness=s.edgeBrightness.coerceIn(.35f,1f))
+  val normalized=s.copy(edgeWidth=s.edgeWidth.coerceIn(8f,32f),edgeBrightness=s.edgeBrightness.coerceIn(.35f,1f),cameraColor=s.cameraStyle.colorOrDefault(s.cameraColor))
   state.value=normalized
   p.edit {
    putBoolean("sound",s.sound);putBoolean("haptics",s.haptics);putBoolean("accessible",s.accessible)
@@ -36,6 +40,8 @@ class Preferences(context: Context) {
    putString("selfieLight",s.selfieLight.name);putFloat("edgeWidth",normalized.edgeWidth)
    putFloat("edgeBrightness",normalized.edgeBrightness);putString("lightTone",s.lightTone.name)
    putString("timer",s.timer.name);putString("boothLayout",s.boothLayout.name)
+   putString("cameraStyle",normalized.cameraStyle.name);putString("cameraColor",normalized.cameraColor.name)
+   putBoolean("rearFlash",s.rearFlash);putString("captionFont",s.captionFont.name)
   }
  }
 }

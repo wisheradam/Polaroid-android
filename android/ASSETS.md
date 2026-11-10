@@ -17,3 +17,7 @@ Camera styling, icon, paper, cork noise, film grain, pin shapes, and chemical-de
 The Check2GO logo was supplied for this application. `check2go_logo.png` preserves its colors and proportions; transparent outer padding is trimmed and the bitmap is resized for the header. It is displayed on a small warm paper plate in both themes. The logo is not covered by the CC0 audio dedication above.
 
 All three caption fonts are supplied by the user and embedded unmodified: **Sol Kol**, **Denistina**, and **HISTORIC**. Sol Kol includes the SIL Open Font License 1.1, retained in `app/src/main/assets/licenses/Sol-Kol-OFL.txt`. HISTORIC's embedded copyright reads “Copyright (c) 2024, JGG ARTS”; its attachment and the Denistina attachment contain no separate license. They are used as requested in this project; redistribution rights beyond that instruction have not been independently verified. These fonts are not original project assets or CC0.
+
+## Original camera styles (0.5.0)
+
+Old Fasion, Insta Style and One and Only use original Compose geometry, textures, housing details and color palettes. The three user-supplied product reference photographs were inspected for broad material/shape/color inspiration only. They are not bundled, traced or used as UI assets. The Cream / Spectrum variant uses an original four-color detail.

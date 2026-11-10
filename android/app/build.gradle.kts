@@ -12,14 +12,14 @@ android {
   applicationId = "com.instantroom"
   minSdk = 26
   targetSdk = 37
-  versionCode = 4
-  versionName = "0.4.0"
+  versionCode = 5
+  versionName = "0.5.0"
   testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
  }
  signingConfigs.getByName("debug") {
   System.getenv("INSTANT_ROOM_DEBUG_KEYSTORE")?.let {storeFile=file(it)}
  }
- buildFeatures { compose = true }
+ buildFeatures { compose = true; buildConfig = true }
  testOptions { unitTests.isIncludeAndroidResources = true }
  sourceSets.getByName("test").resources.srcDir("schemas")
  compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }

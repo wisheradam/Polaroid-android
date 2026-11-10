@@ -40,7 +40,7 @@ import com.instantroom.data.*
  val preview=remember{PreviewView(context).apply {implementationMode=PreviewView.ImplementationMode.COMPATIBLE;scaleType=PreviewView.ScaleType.FILL_CENTER}}
  var ready by remember{mutableStateOf(false)}
  var hasFlash by remember{mutableStateOf(false)}
- var flash by remember{mutableStateOf(false)}
+ val flash=settings.rearFlash
  var error by remember{mutableStateOf<String?>(null)}
  var active by remember{mutableStateOf(owner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED))}
  DisposableEffect(owner) {
@@ -81,14 +81,15 @@ import com.instantroom.data.*
     Text("Four photographs · 5 seconds apart · 4 exposures",style=MaterialTheme.typography.bodySmall)
     if((cartridge?.remaining ?: 0)<4)Text("Photo Booth needs four exposures. Manually load a fresh cartridge.",color=Amber)
    }
-   Panel(Modifier.fillMaxWidth()) {
+   CameraShell(settings.cameraStyle,settings.cameraColor,Modifier.fillMaxWidth()) {
+    CameraHousingHeader(settings.cameraStyle,ready && availability.ready)
     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){SmallLabel("OPTICAL VIEWFINDER");Text(if(ready)"● LIVE" else "○ STANDBY",color=if(ready)Amber else Cream,style=MaterialTheme.typography.labelSmall)}
     BoxWithConstraints(Modifier.fillMaxWidth()) {
     val h=minOf(previewHeight,maxWidth/previewAspect)
-    Box(Modifier.align(Alignment.Center).width(h*previewAspect).height(h).clip(if(!booth && format==FilmFormat.ROUND)CircleShape else RoundedCornerShape(12.dp)).background(Color.Black),contentAlignment=Alignment.Center) {
+    Box(Modifier.align(Alignment.Center).width(h*previewAspect).height(h).border(if(settings.cameraStyle==CameraStyle.INSTA_STYLE)5.dp else 2.dp,MaterialTheme.colorScheme.primary.copy(alpha=.6f),if(!booth && format==FilmFormat.ROUND)CircleShape else RoundedCornerShape(if(settings.cameraStyle==CameraStyle.OLD_FASION)4.dp else if(settings.cameraStyle==CameraStyle.INSTA_STYLE)25.dp else 8.dp)).clip(if(!booth && format==FilmFormat.ROUND)CircleShape else RoundedCornerShape(if(settings.cameraStyle==CameraStyle.OLD_FASION)4.dp else if(settings.cameraStyle==CameraStyle.INSTA_STYLE)25.dp else 8.dp)).background(Color.Black),contentAlignment=Alignment.Center) {
      if(permitted)AndroidView(factory={preview},modifier=Modifier.fillMaxSize())
-     else Column(horizontalAlignment=Alignment.CenterHorizontally) {Text("Let the light in.");Button(onClick={request.launch(Manifest.permission.CAMERA)}){Text("Enable camera")};if(denied)TextButton(onClick={context.startActivity(android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,"package:${context.packageName}".toUri()))}){Text("Open Android settings")} }
-     if(permitted && !ready)Text(error ?: "Opening the lens…",Modifier.padding(16.dp))
+     else Column(horizontalAlignment=Alignment.CenterHorizontally) {Text("Let the light in.",color=Color.White);Button(onClick={request.launch(Manifest.permission.CAMERA)}){Text("Enable camera")};if(denied)TextButton(onClick={context.startActivity(android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,"package:${context.packageName}".toUri()))}){Text("Open Android settings")} }
+     if(permitted && !ready)Text(error ?: "Opening the lens…",Modifier.padding(16.dp),color=Color.White)
      CountdownOverlay(cap.countdown,cap.shot,cap.booth)
      Box(Modifier.fillMaxSize().padding(18.dp).border(1.dp,Cream.copy(alpha=.3f),RoundedCornerShape(4.dp)))
      if(busy)TextButton(onClick={vm.cancelCapture()},modifier=Modifier.align(Alignment.BottomCenter).padding(bottom=12.dp).background(Color.Black.copy(alpha=.7f),RoundedCornerShape(12.dp)).semantics{contentDescription=if(cap.booth)"Cancel session" else "Cancel countdown"}){Text("Cancel",color=Color.White)}
@@ -96,7 +97,7 @@ import com.instantroom.data.*
     }
     Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
      Column {SmallLabel(format.label.uppercase());Text(cartridge?.let{Appearance.valueOf(it.appearance).label} ?: "No cartridge installed")}
-     if(!settings.front)TextButton(onClick={flash=!flash},enabled=hasFlash && !busy){Text(if(!hasFlash)"No flash" else if(flash)"Flash on" else "Flash off")}
+     if(!settings.front)FlashToggle(flash,hasFlash,ready && availability.ready && !busy){vm.setRearFlash(it,hasFlash)}
     }
     if(settings.front) {
      SelfieLightControl(settings.selfieLight,!busy){vm.updateSettings(settings.copy(selfieLight=it))}
@@ -104,10 +105,12 @@ import com.instantroom.data.*
     }
    }
    if(cap.booth && cap.sourceIds.isNotEmpty()) {val photos by vm.photos.collectAsState();BoothThumbnails(cap.sourceIds.mapNotNull{id->photos.find{it.id==id}})}
-   Row(Modifier.fillMaxWidth().padding(horizontal=10.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
+   CameraMaterial(settings.cameraStyle,settings.cameraColor) {
+   Row(Modifier.fillMaxWidth().background(cameraFinish(settings.cameraStyle,settings.cameraColor).body,RoundedCornerShape(cameraCorner(settings.cameraStyle))).padding(12.dp),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
     Column {SmallLabel("EXPOSURES");Text(cartridge?.remaining?.toString()?.padStart(2,'0') ?: "—",style=MaterialTheme.typography.displayMedium)}
-    Button(onClick={if(booth)vm.startBooth(flash) else vm.takePicture(flash)},enabled=ready && availability.ready && initialized && !busy && (cartridge?.remaining ?: 0)>=(if(booth)4 else 1),shape=CircleShape,colors=ButtonDefaults.buttonColors(containerColor=Rust),contentPadding=PaddingValues(0.dp),modifier=Modifier.size(88.dp).border(5.dp,Cream.copy(alpha=.7f),CircleShape).semantics{contentDescription=if(booth)"Start Photo Booth" else "Take photograph"}){Text(if(booth)"Start" else "●",fontSize=if(booth)18.sp else 34.sp,color=MaterialTheme.colorScheme.onSecondary)}
+    CameraShutter(settings.cameraStyle,settings.cameraColor,booth,ready && availability.ready && initialized && !busy && (cartridge?.remaining ?: 0)>=(if(booth)4 else 1)){if(booth)vm.startBooth(flash)else vm.takePicture(flash)}
     Column(horizontalAlignment=Alignment.End){SmallLabel("FILM BAY");TextButton(onClick=load,enabled=!busy && initialized){Text(if(cartridge==null)"Load film" else "Replace")}}
+   }
    }
    Box(Modifier.fillMaxWidth().height(8.dp).background(Color.Black,RoundedCornerShape(4.dp)))
    Text(when{!initialized->"Restoring the archive…";busy->when(cap.phase){CapturePhase.COUNTDOWN->if(cap.booth)"PHOTO ${cap.shot} OF 4" else "Get ready…";CapturePhase.CHARGING->"Charging the flash…";CapturePhase.CAPTURING->"Hold still. Catching the light.";CapturePhase.PROCESSING->"Preparing your instant photograph…";else->"The rollers are turning…"};cartridge==null->"Open the film bay to begin.";cartridge.remaining==0->"FILM EMPTY · manually replace cartridge";else->"Ten moments. Make each one yours."},color=Amber,style=MaterialTheme.typography.bodySmall)
