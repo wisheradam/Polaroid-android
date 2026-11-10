@@ -32,6 +32,12 @@ class Feedback(context: Context, private val prefs: Preferences) : FeedbackPort 
   }
  }
  override fun pin() { play(pin); pulse(16,38) }
+ override fun develop() {
+  if(!prefs.state.value.haptics || !vibrator.hasVibrator())return
+  // Short isolated pulses also remain restrained on motors without amplitude control.
+  vibrator.vibrate(VibrationEffect.createOneShot(if(vibrator.hasAmplitudeControl())12 else 8,24))
+ }
+ override fun stopDevelopment() { vibrator.cancel() }
  override fun stop() { streams.forEach { pool.stop(it) }; streams.clear(); vibrator.cancel() }
  fun release() { stop(); pool.release() }
 }
