@@ -1,0 +1,112 @@
+{
+  "01 — Color & Typography": [
+    [
+      "Shared typography",
+      "Inter: Display32/40 Bold; Title24/30 Bold; Body16/24 Regular; Label12/16 Bold; Counter26/32 Bold; Micro10/14; Button14/20 Bold. Semantic text scales; fixed engravings are supplemented by accessible labels."
+    ],
+    [
+      "Caption fonts",
+      "Preserve SOL_KOL, DENISTINA and HISTORIC. No font binaries imported. Denistina/Historic redistribution rights remain unverified; outlined font proofs are not a substitute for licensed native fonts."
+    ]
+  ],
+  "02 — Materials": [
+    [
+      "Smooth molded plastic",
+      "Source shell color; white highlight at14%, black shade12%; radii28–38; edge1dp; shadow y3 blur8 alpha24%. Fixed upper-left lighting."
+    ],
+    [
+      "Satin / glossy details",
+      "Satin controls use ivory raised surfaces. Gloss confined to narrow rim highlights; no animated shimmer. Optical recess #281B23; reflections opacity8–14% cannot obscure live view."
+    ],
+    [
+      "Fresnel / rollers / paper",
+      "Flash glass uses native1dp lines on5dp pitch, warm #FFE6B1 illumination. Rollers remain dark with a1dp highlight. Paper #FFF9EF, 1dp radius, accurate format geometry and image-region clipping."
+    ]
+  ],
+  "03 — Design Tokens": [
+    [
+      "Independent domains",
+      "Application semantics, physical finish, camera family and photographic processing remain independent. Five one-mode finish collections avoid professional-plan mode limits; every finish retains source body/accent/shutter mappings."
+    ],
+    [
+      "Geometry",
+      "4dp grid; spacing4/8/12/16/24/32/48. All controls≥48dp. Main shutter100×100. Lens310diameter/aperture262, ratio84.5%. Counter64×64; flash44×76 decorative; nav≥58high."
+    ],
+    [
+      "Layer order",
+      "Shell0 → bevel10 → optical20 → live preview30 → focus40 → controls50 → slot recess60 → paper70 → front lip80 → countdown/sheets90 → platform system chrome100."
+    ]
+  ],
+  "08 — Motion & Interactions": [
+    [
+      "Shutter",
+      "Pointer down allowed: inward2dp/70ms ease-out; release110ms ease-out, shadow3→1→3. Existing accepted-capture audio/haptic only once. Disabled rejects tap. Reduced motion: instant shadow state."
+    ],
+    [
+      "Flash",
+      "Selection toggles300ms cubic(.4,0,.2,1), icon stays visible. Capture charging follows settings default650ms,400–1200 range. Ready/firing follow hardware callbacks, not a second UI timer. Existing sound/haptics only; reduce motion removes bloom, preserves requested flash."
+    ],
+    [
+      "Ejection",
+      "Existing1800ms linear position, motor starts0; existing haptic pulses0/300/620/960/1300/1600/1800ms. Paper translates downward behind front lip and clips at mouth. Scale all film geometry uniformly. Reduced motion: static emerging/result, same domain duration."
+    ],
+    [
+      "Shake development",
+      "Only accepted input advances p: clamp(p+strength×.018), strength.35–1.4. Veil opacity=(1−p)^1.35; no future-value interpolation after input. Pause immediately. Completion120ms border emphasis only. Existing shake haptic; reduced motion immediate image plus numeric progress."
+    ],
+    [
+      "Timer / Booth",
+      "Off/5/15/30 presets. Discrete monotonic1s digits; cancel spends nothing. Booth4accepted captures,5s deadlines; slow hardware delays, never overlaps. GRID124×142mm; STRIP64×262mm. Cues from existing coordinator only; reduced motion static digits/count."
+    ],
+    [
+      "Cartridge",
+      "User advances closed→open→removed→inserted→successful close. Door260ms ease-out, removal240ms linear, insertion360ms ease-out, close260ms ease-in-out are proposed visual values; runtime domain owns completion. Counter resets10 only after success. Click/light haptic when enabled; reduced motion state swap."
+    ],
+    [
+      "Other interactions",
+      "Camera switch180ms cover until camera-ready callback; no fake live frame. Style/finish immediate persistence;220ms optional color crossfade, one enabled selection haptic. Navigation200ms/8dp ease-out; pins insert160ms remove120ms. Reduced motion instantaneous states; sound silent except enabled pin click."
+    ]
+  ],
+  "11 — Three-Skin Switching": [
+    [
+      "Existing immediate contract",
+      "Settings → Camera design → Camera appearance. OLD_FASION / INSTA_STYLE / ONE_AND_ONLY remain unchanged. Selecting immediately persists. No Apply button. Compatible current finish retained; otherwise family default Black/White/White. No separate per-family finish memory is claimed."
+    ],
+    [
+      "Compatible finishes",
+      "Old Fashion: BLACK IVORY OLIVE BRASS. Insta Style: WHITE PINK BLUE MINT LAVENDER. One and Only: WHITE BLACK RED SPECTRUM.13valid pairs,11distinct enum colors. Selection does not reload film, spend exposures or modify saved photos."
+    ],
+    [
+      "Busy-state safety",
+      "Shared coordinator remains sole capture owner. Defer changes while capture/ejection/incomplete loading is active or route through explicit cancel/finish. This is a native integration acceptance requirement, not a claimed change to current production code."
+    ]
+  ],
+  "12 — Developer Handoff": [
+    [
+      "Android / Compose / CameraX",
+      "Use native Box/Canvas shapes and cached optical paths; dp geometry/sp text. Inject current preview/callbacks. CameraX FILL_CENTER, circular clip, uniform center crop after rotation. Front preview mirrors once; saved output follows existing policy. WindowInsets/IME applied once."
+    ],
+    [
+      "iOS / SwiftUI / AVFoundation",
+      "Use dynamic layout and actual safeAreaInsets. Preview resizeAspectFill plus circular mask. Match rotation/mirroring once and convert focus coordinates through preview layer. CoreAnimation cubic curves/linear ejection; CoreHaptics uses enabled domain cues, skips unavailable hardware."
+    ],
+    [
+      "Camera framing",
+      "Circular aperture is a crop, not a guarantee that the final rectangular photograph matches every visible edge. Never stretch X/Y independently. Lens geometry grows only where space permits; touch targets never shrink. Decorative flash/sensors have no accessibility actions."
+    ],
+    [
+      "Accessibility / validation",
+      "48dp/pt minimum. Screen-reader order: film status, preview, shutter, timer, flash, switch, destinations. Announce remaining count and states. Keyboard lifts caption/Save. 200% text uses scrolling and full-width controls. Test TalkBack/VoiceOver, reduce motion, flash preference, real camera and GPU performance after implementation."
+    ]
+  ],
+  "13 — Visual QA": [
+    [
+      "Pending Product Design Approval",
+      "This is a review design. Inspect Pink directly beside the concept and every finish/layout. Source mappings retained; authentic blue/teal logo differs deliberately from concept. Sample selfie is generated illustration, excluded from production assets."
+    ],
+    [
+      "Known adaptations and remaining work",
+      "Unsupported zoom/4:3 controls omitted. Inter matches shared systems. Native materials are less photographic than the reference. Device camera, safe-area extremes, font licenses and interaction implementation require validation. Do not label this package production-approved."
+    ]
+  ]
+}

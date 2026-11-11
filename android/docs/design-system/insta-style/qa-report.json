@@ -1,0 +1,52 @@
+{
+  "status": "Insta Style Design System 1.0 \u2014 Pending Product Design Approval",
+  "nativeComponents": 75,
+  "variantSets": 12,
+  "mainLayouts": 4,
+  "textScaleStates": [
+    "100%",
+    "200% scrollable"
+  ],
+  "measuredTouchTargets": 32,
+  "minimum48AndInsideAll": true,
+  "basePaintContrastPairs": 15,
+  "contrastPass": true,
+  "visualReview": [
+    "Pink main against concept",
+    "five finishes",
+    "states",
+    "compact phone",
+    "200% text",
+    "eight principal application screens",
+    "Dark settings",
+    "ejection start/mid/end"
+  ],
+  "corrected": [
+    "logo import",
+    "stock vector icons",
+    "compact shutter spacing",
+    "unified navigation tray",
+    "state label collisions",
+    "Dark back and gesture contrast"
+  ],
+  "deliberateDifferences": [
+    "authentic blue/teal logo",
+    "Inter with dark readable wordmark",
+    "source-authoritative colors",
+    "unsupported zoom/aspect decorations omitted",
+    "less photographic native materials"
+  ],
+  "openAcceptance": [
+    "Product approval",
+    "CameraX and AVFoundation hardware/crop/mirroring",
+    "real shake and lifecycle acceptance",
+    "native TalkBack/VoiceOver and keyboard",
+    "GPU/rendering performance",
+    "Denistina/Historic redistribution rights"
+  ],
+  "prototypeLimits": [
+    "no real camera/sensors/persistence/sharing",
+    "countdown frames are review states",
+    "explicit accepted-input simulation only"
+  ]
+}

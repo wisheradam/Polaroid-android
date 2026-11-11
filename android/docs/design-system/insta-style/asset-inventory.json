@@ -1,0 +1,48 @@
+{
+  "assets": [
+    {
+      "path": "assets/booth.svg",
+      "sha256": "c59881b2bbbf7bcdeed80316a25dca0a83af18f20c8999d4a9af85330c66e7ad",
+      "bytes": 1067
+    },
+    {
+      "path": "assets/flash.svg",
+      "sha256": "71b24c956a5ddbfd910bbfb1a029f5d3dd680095f55af99f73e7cef6ed2df36d",
+      "bytes": 234
+    },
+    {
+      "path": "assets/gallery.svg",
+      "sha256": "7703e13f67645a452fe5d7ccf56a28130151fc50df081fc4397f3ee745348ab1",
+      "bytes": 669
+    },
+    {
+      "path": "assets/switch.svg",
+      "sha256": "bbd6e048f695cc5501dfb31f3d4ade54d29b0969756d8e1dbc1e47318c393989",
+      "bytes": 805
+    },
+    {
+      "path": "assets/check2go-logo.png",
+      "sha256": "69ac4fe350f7c4b44ae2f8af2beb402df0f6f9f29a2e2623e495a600ccf69f04",
+      "bytes": 142619
+    },
+    {
+      "path": "assets/settings.svg",
+      "sha256": "a10d44d371533dd7c9284f828830407ddc3e314b25481929ae1a379ef9a57637",
+      "bytes": 530
+    },
+    {
+      "path": "assets/timer.svg",
+      "sha256": "e0f638b98970beba0671d03cdc6b36c78603eb8ad6247a197fcd8922e2630eef",
+      "bytes": 441
+    },
+    {
+      "path": "assets/camera.svg",
+      "bytes": 188,
+      "sha256": "2a6d78def964289a4b3cc68f6b4607d642b561c9d1044e0706eccede613f7b43",
+      "origin": "Original editable shutter glyph"
+    }
+  ],
+  "photography": "Generated illustrative selfie in Figma only; not a runtime asset. Review PNGs contain the sample.",
+  "fonts": "No font binaries added. Preserve original app licenses. Denistina/Historic rights remain unverified.",
+  "geometry": "Editable native Figma shapes, vector icons, gradients; no flattened full-screen background asset."
+}
