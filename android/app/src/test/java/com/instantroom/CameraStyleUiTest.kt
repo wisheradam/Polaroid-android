@@ -42,7 +42,7 @@ class CameraStyleUiTest {
  @Test fun settingsPickerChangesStyleAndOnlyOffersItsValidColors(){
   var s by mutableStateOf(Settings());compose.setContent{InstantTheme{SettingsScreen(s){s=it}}}
   compose.onNodeWithContentDescription("Camera style Insta Style").performScrollTo().performClick();compose.onNodeWithContentDescription("Camera color Pink").performScrollTo().performClick();compose.runOnIdle{assertEquals(CameraColor.PINK,s.cameraColor)}
-  compose.onNodeWithContentDescription("Camera style Old Fasion").performScrollTo().performClick();compose.onNodeWithContentDescription("Camera color Pink").assertDoesNotExist();compose.runOnIdle{assertEquals(CameraStyle.OLD_FASION,s.cameraStyle);assertEquals(CameraColor.BLACK,s.cameraColor)}
+  compose.onNodeWithContentDescription("Camera style Old Fashion").performScrollTo().performClick();compose.onNodeWithContentDescription("Camera color Pink").assertDoesNotExist();compose.runOnIdle{assertEquals(CameraStyle.OLD_FASION,s.cameraStyle);assertEquals(CameraColor.BLACK,s.cameraColor)}
   compose.onNodeWithContentDescription("Camera style One and Only").performScrollTo().performClick();compose.onNodeWithContentDescription("Camera color Cream / Spectrum").performScrollTo().performClick();compose.runOnIdle{assertEquals(CameraColor.SPECTRUM,s.cameraColor)}
  }
  @Test fun appAppearanceAndPhysicalCameraColorAreIndependent(){
