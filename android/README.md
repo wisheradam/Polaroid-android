@@ -76,3 +76,9 @@ The repository root's `infra/aws/` contains a deployed on-demand CodeBuild/S3/Cl
 All sounds are originally synthesized and dedicated to the public domain under CC0; see `ASSETS.md`. The cork texture, pushpins, film frames, camera body, and chemical masks are drawn procedurally. No Polaroid logos, third-party recordings, or borrowed product photographs are bundled. Product names identify format references only.
 
 Room metadata and JPEG files are private internal app data. Gallery saves and shares require a fully developed photo. Uninstalling the app deletes its private archive; export keeps a separate gallery copy. Android backup is disabled to avoid silently sending photographs to device backup services. There are no analytics, subscriptions, ads, or cloud SDK credentials in the APK.
+
+## Design System 1.0 integration
+
+The One and Only camera and shared semantic typography/palette are documented in
+[the Android design-system handoff](docs/design-system/README.md). This integration
+is awaiting native-device visual review and does not change the release version.

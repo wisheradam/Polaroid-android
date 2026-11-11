@@ -1,0 +1,109 @@
+{
+  "sourceCommit": "7cc939015071ecf266ad39478d6c1cce8a5f3423",
+  "combinations": [
+    {
+      "family": "Old Fasion",
+      "id": "BLACK",
+      "name": "Black",
+      "body": "#252925",
+      "accent": "#C6A56C",
+      "control": "#B34D36"
+    },
+    {
+      "family": "Old Fasion",
+      "id": "IVORY",
+      "name": "Ivory",
+      "body": "#E9DFCA",
+      "accent": "#735628",
+      "control": "#953F30"
+    },
+    {
+      "family": "Old Fasion",
+      "id": "OLIVE",
+      "name": "Dark Olive",
+      "body": "#3B4638",
+      "accent": "#D7B97B",
+      "control": "#BF5E43"
+    },
+    {
+      "family": "Old Fasion",
+      "id": "BRASS",
+      "name": "Brown / Brass",
+      "body": "#6A4936",
+      "accent": "#E3BF7D",
+      "control": "#A64335"
+    },
+    {
+      "family": "Insta Style",
+      "id": "WHITE",
+      "name": "White",
+      "body": "#F9F4EE",
+      "accent": "#5A4989",
+      "control": "#BB416D"
+    },
+    {
+      "family": "Insta Style",
+      "id": "PINK",
+      "name": "Pink",
+      "body": "#F6D6DE",
+      "accent": "#8F3157",
+      "control": "#BD3D60"
+    },
+    {
+      "family": "Insta Style",
+      "id": "BLUE",
+      "name": "Baby Blue",
+      "body": "#CFE5F4",
+      "accent": "#2B617F",
+      "control": "#B85061"
+    },
+    {
+      "family": "Insta Style",
+      "id": "MINT",
+      "name": "Mint",
+      "body": "#D5EAD9",
+      "accent": "#2F6A5A",
+      "control": "#B14C56"
+    },
+    {
+      "family": "Insta Style",
+      "id": "LAVENDER",
+      "name": "Lavender",
+      "body": "#E1D9F4",
+      "accent": "#6A4A91",
+      "control": "#B84972"
+    },
+    {
+      "family": "One and Only",
+      "id": "WHITE",
+      "name": "White",
+      "body": "#F6F4EF",
+      "accent": "#3B625C",
+      "control": "#CB452F"
+    },
+    {
+      "family": "One and Only",
+      "id": "BLACK",
+      "name": "Black",
+      "body": "#252A2C",
+      "accent": "#F4C477",
+      "control": "#E15A3F"
+    },
+    {
+      "family": "One and Only",
+      "id": "RED",
+      "name": "Red Accent",
+      "body": "#F1E2D9",
+      "accent": "#9E392D",
+      "control": "#B32623"
+    },
+    {
+      "family": "One and Only",
+      "id": "SPECTRUM",
+      "name": "Cream / Spectrum",
+      "body": "#EFE5CF",
+      "accent": "#4B6A57",
+      "control": "#B83F32"
+    }
+  ]
+}

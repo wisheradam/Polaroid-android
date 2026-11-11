@@ -16,7 +16,10 @@ import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.*
 import androidx.lifecycle.compose.*
+import com.instantroom.core.CameraStyle
 import com.instantroom.core.CapturePhase
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 import com.instantroom.core.SelfieLightMode
 
 @Composable fun InstantRoom(vm: RoomViewModel) {
@@ -51,19 +54,23 @@ import com.instantroom.core.SelfieLightMode
  val storage=rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { ok -> if(ok)pendingSave?.let(vm::save) else vm.message.value="Storage permission is needed on Android 8 and 9 to save to the gallery";pendingSave=null }
  fun navigate(s: String) { if(cap.phase==CapturePhase.IDLE)screen=s }
  BackHandler(cap.phase!=CapturePhase.IDLE){vm.cancelCapture()}
- BackHandler(screen!="Camera" && cap.phase==CapturePhase.IDLE) {screen="Camera"}
+ BackHandler(screen!="Camera" && cap.phase==CapturePhase.IDLE) {screen=if(screen=="Camera Design")"Settings" else "Camera"}
  val lightingActive=screen=="Camera" && resumed && settings.front && cameraState.selectedFront && cameraState.ready
+ val analogCamera=screen=="Camera" && settings.cameraStyle==CameraStyle.ONE_AND_ONLY
+ val view=LocalView.current
+ val dark=LocalInstantDark.current
+ SideEffect { if(!view.isInEditMode)runCatching { WindowCompat.getInsetsController(context.activity().window,view).apply { isAppearanceLightStatusBars=if(analogCamera)false else !dark;isAppearanceLightNavigationBars=if(analogCamera)false else !dark } } }
  Box(Modifier.fillMaxSize()) {
- Scaffold(modifier=Modifier.padding(if(lightingActive && settings.selfieLight.edge)settings.edgeWidth.dp else 0.dp),snackbarHost={SnackbarHost(host)},bottomBar={
-  if(screen in listOf("Camera","Archive","Corkboard","Settings"))NavigationBar(containerColor=Ink) {
+ Scaffold(containerColor=if(analogCamera)AnalogTokens.Chrome else MaterialTheme.colorScheme.background,modifier=Modifier.padding(if(lightingActive && settings.selfieLight.edge)settings.edgeWidth.dp else 0.dp),snackbarHost={SnackbarHost(host)},bottomBar={
+  if(!analogCamera && screen in listOf("Camera","Archive","Corkboard","Settings"))NavigationBar(containerColor=Ink) {
    listOf("Camera" to "◉","Archive" to "▧","Corkboard" to "⌗","Settings" to "⚙").forEach { (name,symbol)->NavigationBarItem(selected=screen==name,onClick={navigate(name)},enabled=cap.phase==CapturePhase.IDLE,icon={Text(symbol)},label={Text(name)}) }
   }
  }) { padding ->
   Box(Modifier.fillMaxSize().padding(padding)) {
    when(screen) {
-    "Camera"->CameraScreen(vm,cartridge,cap,settings,initialized,{screen="Film Loading"})
+    "Camera"->CameraScreen(vm,cartridge,cap,settings,initialized,{screen="Film Loading"},{navigate("Archive")},{navigate("Settings")})
     "Film Loading"->FilmLoadingScreen(vm,cartridge,{screen="Camera"})
-    "Archive"->ArchiveScreen(photos,{selected=it;screen="Development"},{vm.recover()}){p,target->vm.share(p,target)}
+    "Archive"->ArchiveScreen(photos,{selected=it;screen="Development"},{vm.recover()},{screen="Corkboard"}){p,target->vm.share(p,target)}
     "Development"-> {
      val p=photos.find{it.id==selected}
      if(p!=null)DevelopmentScreen(vm,p,settings,{screen="Archive"},{
@@ -71,7 +78,8 @@ import com.instantroom.core.SelfieLightMode
      },{vm.attach(p.id){screen="Corkboard"}})
     }
     "Corkboard"->CorkboardScreen(vm,photos)
-    "Settings"->SettingsScreen(settings,vm::updateSettings)
+    "Settings"->SettingsScreen(settings,openCameraStyle={screen="Camera Design"},set=vm::updateSettings)
+    "Camera Design"->CameraAppearanceScreen(settings,{screen="Settings"},vm::updateSettings)
    }
   }
  }

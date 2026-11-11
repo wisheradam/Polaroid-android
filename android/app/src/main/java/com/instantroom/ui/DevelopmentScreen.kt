@@ -29,10 +29,11 @@ import com.instantroom.data.*
   BoxWithConstraints(Modifier.fillMaxWidth(),contentAlignment=Alignment.Center) {
    FilmPrint(photo,Modifier.width(minOf(maxWidth*.88f,420.dp*photo.geometry.aspect)).shadow(18.dp).rotate(-2f))
   }
-  Text(when{photo.processing->"This exposure is safely archived. Retry processing to continue.";photo.progress>=1f->"Yours to keep.";else->"Shake gently. Watch it appear."},style=MaterialTheme.typography.titleLarge)
+  Text(when{photo.processing->"This exposure is safely archived. Retry processing to continue.";photo.progress>=1f->"Developed";else->"${(photo.progress*100).toInt()}% developed"},style=MaterialTheme.typography.titleLarge)
   if(photo.processing)Button(onClick={vm.recover()}){Text("Retry processing")}
   else if(photo.progress<1f) {
-   Text("Stronger shakes bring the colors out faster. When you rest, the photograph rests too. You can return to it anytime.",style=MaterialTheme.typography.bodyMedium,color=Cream.copy(alpha=.7f))
+   LinearProgressIndicator(progress={photo.progress},modifier=Modifier.fillMaxWidth())
+   Text("Shake to continue. Progress pauses when you stop. You can return to this photograph anytime.",style=MaterialTheme.typography.bodyMedium,color=Cream.copy(alpha=.7f))
    if(!vm.graph.motion.available)Text("No motion sensor is available. Enable manual development in Settings → Accessibility.",color=Amber)
    if(settings.accessible)OutlinedButton(onClick={vm.accessibleDevelop(photo.id)}){Text("Develop one step · accessibility")}
    Text("Physical shaking is a playful simulation. Real instant film should not be shaken.",style=MaterialTheme.typography.labelSmall,color=Cream.copy(alpha=.45f))
