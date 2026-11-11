@@ -123,6 +123,7 @@ fun cameraCorner(style: CameraStyle)=when(style){CameraStyle.OLD_FASION->10.dp;C
 }
 
 @Composable fun CameraStylePreview(style: CameraStyle,color: CameraColor,modifier: Modifier=Modifier) {
+ if(style==CameraStyle.ONE_AND_ONLY){OneAndOnlyStylePreview(color,modifier);return}
  val f=cameraFinish(style,color)
  Canvas(modifier.fillMaxWidth().height(138.dp).semantics{contentDescription="${style.label}, ${color.label} camera preview"}) {
   val w=size.width*.82f;val h=size.height*.83f;val x=(size.width-w)/2;val y=(size.height-h)/2

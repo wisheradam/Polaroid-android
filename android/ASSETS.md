@@ -21,3 +21,21 @@ All three caption fonts are supplied by the user and embedded unmodified: **Sol 
 ## Original camera styles (0.5.0)
 
 Old Fasion, Insta Style and One and Only use original Compose geometry, textures, housing details and color palettes. The three user-supplied product reference photographs were inspected for broad material/shape/color inspiration only. They are not bundled, traced or used as UI assets. The Cream / Spectrum variant uses an original four-color detail.
+
+## Design System 1.0 additions
+
+The interface uses the original Inter variable font from the Inter project:
+https://github.com/rsms/inter/blob/master/docs/font-files/InterVariable.ttf
+Copyright (c) 2016 The Inter Project Authors. SIL Open Font License 1.1 is
+retained in `app/src/main/assets/licenses/Inter-OFL.txt`. The font is bundled
+unchanged; interface weights select its original variable weight axis. Caption
+fonts and their existing provenance are unchanged.
+
+The six `ir_*` icon exports and the procedural One and Only
+body/lens/flash/roller drawings are original project assets based on the
+approved InstantRoom design. No reference-camera photos or
+generated park examples from the Figma review are bundled in the application.
+
+The six One and Only icons are exported from the original design-system SVGs at 4× (96 px for a 24 dp slot) into `drawable-xxxhdpi`. Editable SVG masters live in `docs/design-system/icons`. Runtime tint follows semantic camera ink; no network asset URLs are used.
+
+One and Only uses the Check2GO artwork without a plate on light physical finishes, and retains the warm plate on the Black finish for legibility. Its main camera uses the approved five-band spectrum; the original 0.5.0 generic cartridge-shell detail remains unchanged.

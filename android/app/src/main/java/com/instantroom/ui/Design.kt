@@ -26,26 +26,26 @@ import kotlin.math.*
 import kotlin.random.Random
 
 private val DarkPalette=darkColorScheme(
- primary=Color(0xFFE6B578),onPrimary=Color(0xFF202823),background=Color(0xFF151C18),
- surface=Color(0xFF202823),onSurface=Color(0xFFF3EBD9),onBackground=Color(0xFFF3EBD9),
- secondary=Color(0xFFAF4C36),onSecondary=Color(0xFFFFF3DF),
- primaryContainer=Color(0xFF4B3B26),onPrimaryContainer=Color(0xFFF3EBD9),
- secondaryContainer=Color(0xFF3C4A41),onSecondaryContainer=Color(0xFFE4EBD8),
- surfaceVariant=Color(0xFF344038),onSurfaceVariant=Color(0xFFBFCABB),outline=Color(0xFF859181),
- surfaceContainerHighest=Color(0xFF344038),surfaceContainerHigh=Color(0xFF2C372F),
- surfaceContainer=Color(0xFF273028),surfaceContainerLow=Color(0xFF1C251F),surfaceContainerLowest=Color(0xFF101713),
- surfaceTint=Color(0xFFE6B578)
+ primary=Color(0xFF7EDCEA),onPrimary=Color(0xFF17191A),background=Color(0xFF17191A),
+ surface=Color(0xFF242526),onSurface=Color(0xFFFFF9EF),onBackground=Color(0xFFFFF9EF),
+ secondary=Color(0xFFFFB4AB),onSecondary=Color(0xFF242526),
+ primaryContainer=Color(0xFF30474A),onPrimaryContainer=Color(0xFFFFF9EF),
+ secondaryContainer=Color(0xFF4B3431),onSecondaryContainer=Color(0xFFFFF9EF),
+ surfaceVariant=Color(0xFF303133),onSurfaceVariant=Color(0xFFBDB8AF),outline=Color(0xFFBDB8AF),
+ surfaceContainerHighest=Color(0xFF38393A),surfaceContainerHigh=Color(0xFF303133),
+ surfaceContainer=Color(0xFF292A2C),surfaceContainerLow=Color(0xFF202122),surfaceContainerLowest=Color(0xFF101112),
+ error=Color(0xFFFFB4AB)
 )
 private val LightPalette=lightColorScheme(
- primary=Color(0xFF76501F),onPrimary=Color(0xFFFFF8ED),background=Color(0xFFECE3D2),
- surface=Color(0xFFFAF3E6),onSurface=Color(0xFF243029),onBackground=Color(0xFF243029),
- secondary=Color(0xFF9F452F),onSecondary=Color(0xFFFFF5E8),outline=Color(0xFF786B58),
- primaryContainer=Color(0xFFF0DDBB),onPrimaryContainer=Color(0xFF352915),
- secondaryContainer=Color(0xFFE1E8D8),onSecondaryContainer=Color(0xFF26362B),
- surfaceVariant=Color(0xFFE2D7C5),onSurfaceVariant=Color(0xFF524B3E),outlineVariant=Color(0xFFCDBFA7),
- surfaceContainerHighest=Color(0xFFE3D8C5),surfaceContainerHigh=Color(0xFFECE2D1),
- surfaceContainer=Color(0xFFF0E7D7),surfaceContainerLow=Color(0xFFF6EEDF),surfaceContainerLowest=Color(0xFFFFFAF1),
- surfaceTint=Color(0xFF76501F)
+ primary=Color(0xFF007C91),onPrimary=Color.White,background=Color(0xFFFFF9EF),
+ surface=Color(0xFFFFF9EF),onSurface=Color(0xFF242526),onBackground=Color(0xFF242526),
+ secondary=Color(0xFFB3261E),onSecondary=Color.White,outline=Color(0xFF777571),
+ primaryContainer=Color(0xFFD8EFF0),onPrimaryContainer=Color(0xFF242526),
+ secondaryContainer=Color(0xFFF1E2D9),onSecondaryContainer=Color(0xFF242526),
+ surfaceVariant=Color(0xFFEDE5D8),onSurfaceVariant=Color(0xFF5D5A55),outlineVariant=Color(0xFFBDB8AF),
+ surfaceContainerHighest=Color(0xFFE3DACE),surfaceContainerHigh=Color(0xFFEDE5D8),
+ surfaceContainer=Color(0xFFF3EDE3),surfaceContainerLow=Color(0xFFF8F2E8),surfaceContainerLowest=Color.White,
+ error=Color(0xFFB3261E)
 )
 val Ink: Color @Composable get()=MaterialTheme.colorScheme.surface
 val Cream: Color @Composable get()=MaterialTheme.colorScheme.onSurface
@@ -63,9 +63,9 @@ val LocalInstantDark=staticCompositionLocalOf{true}
  CompositionLocalProvider(LocalInstantDark provides dark) {
   val base=if(dark)DarkPalette else LightPalette
   val finish=cameraFinish(cameraStyle,cameraColor)
-  val primary=readableAccent(finish.accent,base.surface)
-  MaterialTheme(colorScheme=base.copy(primary=primary,onPrimary=inkOn(primary),secondary=finish.shutter,onSecondary=inkOn(finish.shutter)),
-   shapes=Shapes(small=RoundedCornerShape(cameraCorner(cameraStyle)/2),medium=RoundedCornerShape(cameraCorner(cameraStyle)),large=RoundedCornerShape(cameraCorner(cameraStyle))),typography=Typography(),content=content)
+  val primary=if(cameraStyle==CameraStyle.ONE_AND_ONLY)base.primary else readableAccent(finish.accent,base.surface)
+  MaterialTheme(colorScheme=base.copy(primary=primary,onPrimary=inkOn(primary),secondary=if(cameraStyle==CameraStyle.ONE_AND_ONLY)base.secondary else finish.shutter,onSecondary=if(cameraStyle==CameraStyle.ONE_AND_ONLY)base.onSecondary else inkOn(finish.shutter)),
+   shapes=Shapes(small=RoundedCornerShape(cameraCorner(cameraStyle)/2),medium=RoundedCornerShape(cameraCorner(cameraStyle)),large=RoundedCornerShape(cameraCorner(cameraStyle))),typography=InstantTypography,content=content)
  }
 }
 @Composable fun SmallLabel(text: String, modifier: Modifier=Modifier) { Text(text,modifier,style=MaterialTheme.typography.labelSmall,letterSpacing=2.sp,color=Amber) }

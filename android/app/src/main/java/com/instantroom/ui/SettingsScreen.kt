@@ -11,9 +11,9 @@ import com.instantroom.BuildConfig
 import com.instantroom.core.*
 import androidx.compose.ui.semantics.*
 
-@Composable fun SettingsScreen(s: Settings, set: (Settings)->Unit) {
+@Composable fun SettingsScreen(s: Settings, openCameraStyle: (() -> Unit)?=null, set: (Settings)->Unit) {
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.spacedBy(20.dp)) {
-  SmallLabel("MAKE IT YOURS");Text("The quiet details.",style=MaterialTheme.typography.headlineLarge)
+  SmallLabel("INSTANTROOM");Text("Settings",style=MaterialTheme.typography.headlineLarge)
   Panel {
    SmallLabel("APPEARANCE")
    ThemeMode.entries.forEach {mode->
@@ -22,7 +22,7 @@ import androidx.compose.ui.semantics.*
     }
    }
   }
-  CameraStyleSettings(s,set)
+  if(openCameraStyle==null)CameraStyleSettings(s,set) else Panel { TextButton(onClick=openCameraStyle,modifier=Modifier.fillMaxWidth()){Text("Camera design · ${s.cameraStyle.label}")};Text("Choose the camera style and physical finish.",style=MaterialTheme.typography.bodySmall) }
   Panel {
    SmallLabel("DEFAULT HANDWRITING")
    FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp)) {CaptionFont.entries.forEach {font->FilterChip(selected=s.captionFont==font,onClick={set(s.copy(captionFont=font))},label={Text(font.label)})}}
