@@ -5,7 +5,7 @@ enum class CameraColor(val label: String) {
  PINK("Pink"), BLUE("Baby Blue"), MINT("Mint"), LAVENDER("Lavender"), RED("Red Accent"), SPECTRUM("Cream / Spectrum")
 }
 enum class CameraStyle(val label: String) {
- OLD_FASION("Old Fasion"), INSTA_STYLE("Insta Style"), ONE_AND_ONLY("One and Only");
+ OLD_FASION("Old Fashion"), INSTA_STYLE("Insta Style"), ONE_AND_ONLY("One and Only");
  val colors get()=when(this) {
   OLD_FASION->listOf(CameraColor.BLACK,CameraColor.IVORY,CameraColor.OLIVE,CameraColor.BRASS)
   INSTA_STYLE->listOf(CameraColor.WHITE,CameraColor.PINK,CameraColor.BLUE,CameraColor.MINT,CameraColor.LAVENDER)

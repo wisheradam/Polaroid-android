@@ -18,14 +18,14 @@ import androidx.compose.ui.unit.dp
 import com.instantroom.core.FlashMotion
 
 /** One persistent bolt. Only its color, halo and strike-through are animated. */
-@Composable fun FlashToggle(on: Boolean,available: Boolean,enabled: Boolean,iconResource: Int?=null,toggle: (Boolean)->Unit) {
+@Composable fun FlashToggle(on: Boolean,available: Boolean,enabled: Boolean,modifier: Modifier=Modifier,iconResource: Int?=null,activeTint: Color?=null,toggle: (Boolean)->Unit) {
  val progress by animateFloatAsState(if(on)1f else 0f,tween(FlashMotion.durationMs,easing=FastOutSlowInEasing),label="Flash illumination")
  val ink=MaterialTheme.colorScheme.onSurface
  val surface=MaterialTheme.colorScheme.surface
- val green=if(surface.luminance()<.3f)Color(0xFF92EAB3)else Color(0xFF155D38)
+ val green=activeTint ?: if(surface.luminance()<.3f)Color(0xFF92EAB3)else Color(0xFF155D38)
  val active=FlashMotion.toggleAllowed(available,!enabled)
  val shape=RoundedCornerShape(14.dp)
- Box(Modifier.size(52.dp).testTag("flash-toggle").background(surface,shape).border(1.dp,lerp(ink.copy(alpha=.3f),green,progress),shape)
+ Box(modifier.size(52.dp).testTag("flash-toggle").background(surface,shape).border(1.dp,lerp(ink.copy(alpha=.3f),green,progress),shape)
   .toggleable(value=on,enabled=active,role=Role.Switch,onValueChange=toggle)
   .semantics{contentDescription="Rear camera flash";stateDescription=if(!available)"Flash unavailable" else if(on)"Flash on" else "Flash off"},contentAlignment=Alignment.Center) {
   Canvas(Modifier.fillMaxSize().testTag("flash-bolt")) {

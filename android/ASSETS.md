@@ -39,3 +39,17 @@ generated park examples from the Figma review are bundled in the application.
 The six One and Only icons are exported from the original design-system SVGs at 4× (96 px for a 24 dp slot) into `drawable-xxxhdpi`. Editable SVG masters live in `docs/design-system/icons`. Runtime tint follows semantic camera ink; no network asset URLs are used.
 
 One and Only uses the Check2GO artwork without a plate on light physical finishes, and retains the warm plate on the Black finish for legibility. Its main camera uses the approved five-band spectrum; the original 0.5.0 generic cartridge-shell detail remains unchanged.
+
+## Old Fashion native implementation
+
+The runtime Check2GO logo is the unchanged supplied artwork. The six `of_*`
+VectorDrawables retain the original handoff SVG paths, round 1.7-unit strokes
+and native tinting. The original 128 px matte-plastic tile is copied unchanged
+to `drawable-nodpi/of_matte_tile.png`; it is loaded once and repeated by a cached
+shader. `python3 android/scripts/generate_old_fashion_icons.py --check` verifies
+all eight runtime assets against their preserved handoff sources.
+
+Camera surfaces, flash Fresnel lines, gold mesh, optical recesses, shutter, roller
+and ejection lip are native Compose drawings. No camera/product photograph or
+preview test double is bundled as a production preview. Physical finish colors
+are separate from the app's Light/Dark/System appearance.

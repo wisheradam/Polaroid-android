@@ -15,6 +15,7 @@ import androidx.compose.ui.*
 import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.platform.LocalDensity
 import androidx.core.net.toUri
@@ -64,6 +65,30 @@ import com.instantroom.data.*
  LaunchedEffect(busy){if(busy)cameraScroll.animateScrollTo(0)}
  val previewAspect=if(booth)4f/3f else (cartridge?.let{FilmFormat.valueOf(it.format).imageAspect} ?: FilmFormat.CLASSIC.imageAspect)
  val format=cartridge?.let {FilmFormat.valueOf(it.format)} ?: FilmFormat.CLASSIC
+ if(settings.cameraStyle==CameraStyle.OLD_FASION) {
+  val photos by vm.photos.collectAsStateWithLifecycle()
+  OldFashionCamera(settings,cartridge,cap,initialized,ready && availability.ready,
+   ready && if(settings.front)availability.rear else availability.front,hasFlash,booth,photos.find{it.id==cap.photoId},
+   onCapture={if(booth)vm.startBooth(flash)else vm.takePicture(flash)},onLoad=load,onGallery=onGallery,onSettings=onSettings,
+   onSwitch={if(vm.switchCamera(availability.front,availability.rear))ready=false},onFlash={vm.setRearFlash(it,hasFlash)},
+   onTimer={vm.updateSettings(settings.copy(timer=it))},onBooth={booth=it},onLayout={vm.updateSettings(settings.copy(boothLayout=it))},
+   onSelfieLight={vm.updateSettings(settings.copy(selfieLight=it))},onCancel=vm::cancelCapture,onRecover=vm::recover,
+   cameraAccess=if(!permitted)({request.launch(Manifest.permission.CAMERA)}) else null,
+   openAndroidSettings=if(denied)({context.startActivity(android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,"package:${context.packageName}".toUri()))})else null) {
+    Box(Modifier.fillMaxSize(),contentAlignment=Alignment.Center) {
+     if(permitted)AndroidView(factory={preview},modifier=Modifier.fillMaxSize())
+     else Column(horizontalAlignment=Alignment.CenterHorizontally,modifier=Modifier.padding(4.dp)) {
+      Text("Camera access",color=Color.White,fontSize=12.sp,lineHeight=14.sp)
+      TextButton(onClick={if(denied)context.startActivity(android.content.Intent(android.provider.Settings.ACTION_APPLICATION_DETAILS_SETTINGS,"package:${context.packageName}".toUri()))else request.launch(Manifest.permission.CAMERA)},modifier=Modifier.heightIn(min=48.dp).semantics{contentDescription=if(denied)"Open application settings for camera access" else "Allow camera access"}){Text(if(denied)"Settings" else "Enable",fontSize=12.sp)}
+     }
+     if(permitted && !ready)Column(horizontalAlignment=Alignment.CenterHorizontally,modifier=Modifier.background(Color.Black.copy(alpha=.7f)).padding(6.dp)) {
+      Text(if(error==null)"Opening camera…" else "Camera unavailable",color=Color.White,style=MaterialTheme.typography.labelSmall)
+      if(error!=null)TextButton(onClick={bindRetry++}){Text("Try again",color=Color.White)}
+     }
+    }
+   }
+  return
+ }
  if(settings.cameraStyle==CameraStyle.ONE_AND_ONLY) {
   val photos by vm.photos.collectAsStateWithLifecycle()
   OneAndOnlyCamera(settings,cartridge,cap,initialized,ready && availability.ready,
@@ -91,7 +116,7 @@ import com.instantroom.data.*
   }
   return
  }
- Box(Modifier.fillMaxSize()) {
+ Box(Modifier.fillMaxSize().testTag("insta-style-camera")) {
   Column(Modifier.fillMaxSize().verticalScroll(cameraScroll).padding(22.dp),verticalArrangement=Arrangement.spacedBy(18.dp),horizontalAlignment=Alignment.CenterHorizontally) {
    Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=Alignment.CenterVertically) {
     BrandLogo(Modifier.weight(1f).padding(end=12.dp))
