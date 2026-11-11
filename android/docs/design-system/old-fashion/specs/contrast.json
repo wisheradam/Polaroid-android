@@ -1,0 +1,79 @@
+[
+  {
+    "role": "Dark text",
+    "foreground": "#F2E8CF",
+    "background": "#252925",
+    "ratio": 12.1,
+    "passText45": true
+  },
+  {
+    "role": "Dark secondary",
+    "foreground": "#B7B9AD",
+    "background": "#252925",
+    "ratio": 7.42,
+    "passText45": true
+  },
+  {
+    "role": "Light text",
+    "foreground": "#242526",
+    "background": "#FFF9EF",
+    "ratio": 14.66,
+    "passText45": true
+  },
+  {
+    "role": "Light secondary",
+    "foreground": "#5D5A55",
+    "background": "#FFF9EF",
+    "ratio": 6.55,
+    "passText45": true
+  },
+  {
+    "role": "Light accent",
+    "foreground": "#735628",
+    "background": "#FFF9EF",
+    "ratio": 6.49,
+    "passText45": true
+  },
+  {
+    "role": "CTA ink",
+    "foreground": "#242526",
+    "background": "#C6A56C",
+    "ratio": 6.58,
+    "passText45": true
+  },
+  {
+    "role": "Nav ink",
+    "foreground": "#242526",
+    "background": "#D8C9A5",
+    "ratio": 9.37,
+    "passText45": true
+  },
+  {
+    "role": "Focus dark",
+    "foreground": "#8ADDEB",
+    "background": "#252925",
+    "ratio": 9.58,
+    "passText45": true
+  },
+  {
+    "role": "Focus light",
+    "foreground": "#006B7D",
+    "background": "#FFF9EF",
+    "ratio": 5.9,
+    "passText45": true
+  },
+  {
+    "role": "Error dark",
+    "foreground": "#FFB4AB",
+    "background": "#252925",
+    "ratio": 8.69,
+    "passText45": true
+  },
+  {
+    "role": "Error light",
+    "foreground": "#B3261E",
+    "background": "#FFF9EF",
+    "ratio": 6.24,
+    "passText45": true
+  }
+]

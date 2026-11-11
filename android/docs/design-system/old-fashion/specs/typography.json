@@ -1,0 +1,65 @@
+{
+  "ui": [
+    {
+      "name": "Display",
+      "family": "Inter",
+      "sizeDp": 36,
+      "lineHeightDp": 42,
+      "weight": "Bold"
+    },
+    {
+      "name": "Title",
+      "family": "Inter",
+      "sizeDp": 24,
+      "lineHeightDp": 30,
+      "weight": "Bold"
+    },
+    {
+      "name": "Body",
+      "family": "Inter",
+      "sizeDp": 14,
+      "lineHeightDp": 20,
+      "weight": "Regular"
+    },
+    {
+      "name": "Label",
+      "family": "Inter",
+      "sizeDp": 12,
+      "lineHeightDp": 16,
+      "weight": "Bold"
+    },
+    {
+      "name": "Micro",
+      "family": "Inter",
+      "sizeDp": 10,
+      "lineHeightDp": 14,
+      "weight": "Medium"
+    },
+    {
+      "name": "Counter",
+      "family": "Inter",
+      "sizeDp": 26,
+      "lineHeightDp": 30,
+      "weight": "Bold"
+    },
+    {
+      "name": "Wordmark",
+      "family": "Inter",
+      "sizeDp": 24,
+      "lineHeightDp": 30,
+      "weight": "Bold Italic"
+    }
+  ],
+  "caption": {
+    "default": "SOL_KOL",
+    "existingChoices": [
+      "SOL_KOL",
+      "DENISTINA",
+      "HISTORIC"
+    ],
+    "SolKol": "Exact outlined proof from supplied font. Embedded font license declares SIL OFL; companion OFL retained. Font binary omitted from the review package.",
+    "DenistinaHistoric": "Licenses unverified; no font assets included."
+  },
+  "InterLicense": "SIL OFL1.1; official https://github.com/rsms/inter/blob/master/LICENSE.txt checked2026-11-11; Inter font binary not bundled.",
+  "accessibility": "Semantic UI scales with platform text settings; fixed camera engravings must be duplicated in accessible labels and the large-text controls tray."
+}

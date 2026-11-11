@@ -6,6 +6,10 @@ Baseline: InstantRoom 0.5.0, `7cc939015071ecf266ad39478d6c1cce8a5f3423`.
 
 The product owner authorized Android integration after reviewing the design. Native visual acceptance and hardware acceptance are pending. This change does not constitute a new release. Version code/name stay at 5/0.5.0.
 
+## Camera families and new design reviews
+
+See the [three-skin switching contract and delivery matrix](camera-skins.md) and the [Old Fashion Design System 1.0 review](old-fashion/README.md). The new Old Fashion surface is Pending Design Approval and is not implemented by that documentation change. Insta Style retains its existing runtime geometry. One and Only's implemented behavior is documented below.
+
 ## Implemented surface
 
 One and Only uses a cream physical shell, circular live preview, concentric lens ribs, red mechanical shutter, upper-right fluted flash window, counter and timer on the left, flash and camera switch on the right, five-band spectrum, dark film compartment, roller slot and three physical navigation controls. The supplied Check2GO logo is reused unchanged. No camera-manufacturer logo or reference photograph is shipped.
