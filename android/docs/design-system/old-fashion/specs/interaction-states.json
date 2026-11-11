@@ -1,0 +1,479 @@
+{
+  "cameraVariants": {
+    "ShutterButton": {
+      "Idle": "6:505",
+      "Pressed": "9:66",
+      "Released": "9:77",
+      "Capturing": "9:88",
+      "Disabled": "9:100",
+      "Timer active": "9:111",
+      "Photo Booth active": "9:123",
+      "Focused": "9:135"
+    },
+    "FilmCounter": {
+      "0": "9:184",
+      "1": "9:180",
+      "2": "9:176",
+      "3": "9:172",
+      "4": "9:168",
+      "5": "9:164",
+      "6": "9:160",
+      "7": "9:156",
+      "8": "9:152",
+      "9": "9:148",
+      "10": "6:501",
+      "Replace required": "9:188"
+    },
+    "TimerButton": {
+      "Off": "6:516",
+      "5 seconds": "9:193",
+      "15 seconds": "9:202",
+      "30 seconds": "9:211",
+      "Pressed": "9:220",
+      "Disabled": "9:224",
+      "Unavailable": "9:228",
+      "Focused": "9:232"
+    },
+    "CameraSwitchButton": {
+      "Rear": "6:523",
+      "Front": "9:238",
+      "Switching": "9:243",
+      "Pressed": "9:248",
+      "Disabled": "9:252",
+      "Unavailable": "9:256",
+      "Focused": "9:260"
+    },
+    "FlashToggleButton": {
+      "Off": "6:530",
+      "On": "9:268",
+      "Charging": "9:278",
+      "Ready": "9:288",
+      "Firing": "9:298",
+      "Pressed": "9:308",
+      "Disabled": "9:317",
+      "Unavailable": "9:326",
+      "Focused": "9:335"
+    },
+    "FlashLens": {
+      "Off": "6:31",
+      "Charging": "9:346",
+      "Ready": "9:385",
+      "Firing": "9:423",
+      "Unavailable": "9:462"
+    },
+    "NavigationButton": {
+      "Default": "6:562",
+      "Pressed": "9:501",
+      "Selected": "9:507",
+      "Disabled": "9:514",
+      "Focused": "9:520"
+    },
+    "PhotoBoothButton": {
+      "Default": "6:572",
+      "Pressed": "9:528",
+      "Selected": "9:534",
+      "Disabled": "9:541",
+      "Focused": "9:547"
+    },
+    "SettingsButton": {
+      "Default": "6:584",
+      "Pressed": "9:555",
+      "Selected": "9:561",
+      "Disabled": "9:568",
+      "Focused": "9:574"
+    },
+    "CameraViewfinder": {
+      "Active": "6:492",
+      "Capturing": "9:582",
+      "Camera access": "9:592",
+      "Unavailable": "9:603"
+    },
+    "FilmEjectionSlot": {
+      "Empty": "6:537",
+      "Motor start": "9:615",
+      "Partially ejected": "9:622",
+      "Fully ejected": "9:629"
+    }
+  },
+  "filmVariants": {
+    "CLASSIC": "6:604",
+    "GO": "10:175",
+    "SPECTRA": "10:180",
+    "ROUND": "10:185",
+    "GRID": "10:190",
+    "STRIP": "10:198"
+  },
+  "extraComponents": {
+    "StatusPanel": "20:197",
+    "ConfirmationDialog": "20:198",
+    "TimerSheet": "20:207"
+  },
+  "sourceStateIds": {
+    "loading-CLOSED": {
+      "id": "12:3149",
+      "name": "Load film"
+    },
+    "loading-OPEN": {
+      "id": "12:3204",
+      "name": "Compartment open"
+    },
+    "loading-REMOVED": {
+      "id": "12:3259",
+      "name": "Choose your film"
+    },
+    "loading-INSERTED": {
+      "id": "12:3314",
+      "name": "Cartridge inserted"
+    },
+    "replace-warning": {
+      "id": "12:3369",
+      "name": "Replace cartridge?"
+    },
+    "development": {
+      "id": "12:3402",
+      "name": "Develop your moment"
+    },
+    "developed": {
+      "id": "12:3427",
+      "name": "A moment, kept."
+    },
+    "booth": {
+      "id": "12:3453",
+      "name": "Photo Booth"
+    },
+    "archive": {
+      "id": "12:3487",
+      "name": "Archive"
+    },
+    "corkboard": {
+      "id": "12:3531",
+      "name": "Corkboard"
+    },
+    "caption": {
+      "id": "12:3689",
+      "name": "Caption"
+    },
+    "settings": {
+      "id": "12:3736",
+      "name": "Settings"
+    },
+    "caption-keyboard": {
+      "id": "12:3787",
+      "name": "Edit caption"
+    },
+    "appearance-BLACK": {
+      "id": "12:3809",
+      "name": "Camera appearance"
+    },
+    "appearance-IVORY": {
+      "id": "12:4376",
+      "name": "Camera appearance"
+    },
+    "appearance-OLIVE": {
+      "id": "12:4943",
+      "name": "Camera appearance"
+    },
+    "appearance-BRASS": {
+      "id": "12:5510",
+      "name": "Camera appearance"
+    },
+    "style-selector": {
+      "id": "12:6077",
+      "name": "Camera styles"
+    }
+  },
+  "prototypeEdges": [
+    {
+      "from": "16:5166",
+      "to": "12:3487"
+    },
+    {
+      "from": "16:5176",
+      "to": "12:3453"
+    },
+    {
+      "from": "16:5188",
+      "to": "12:3736"
+    },
+    {
+      "from": "16:5107",
+      "to": "12:3149"
+    },
+    {
+      "from": "16:5710",
+      "to": "12:3487"
+    },
+    {
+      "from": "16:5720",
+      "to": "12:3453"
+    },
+    {
+      "from": "16:5732",
+      "to": "12:3736"
+    },
+    {
+      "from": "16:5651",
+      "to": "12:3149"
+    },
+    {
+      "from": "16:6254",
+      "to": "12:3487"
+    },
+    {
+      "from": "16:6264",
+      "to": "12:3453"
+    },
+    {
+      "from": "16:6276",
+      "to": "12:3736"
+    },
+    {
+      "from": "16:6195",
+      "to": "12:3149"
+    },
+    {
+      "from": "16:6798",
+      "to": "12:3487"
+    },
+    {
+      "from": "16:6808",
+      "to": "12:3453"
+    },
+    {
+      "from": "16:6820",
+      "to": "12:3736"
+    },
+    {
+      "from": "16:6739",
+      "to": "12:3149"
+    },
+    {
+      "from": "12:3151",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3371",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3404",
+      "to": "12:3487"
+    },
+    {
+      "from": "12:3429",
+      "to": "12:3487"
+    },
+    {
+      "from": "12:3455",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3489",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3533",
+      "to": "12:3487"
+    },
+    {
+      "from": "12:3691",
+      "to": "12:3487"
+    },
+    {
+      "from": "12:3738",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3789",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3811",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:4378",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:4945",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:5512",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:6079",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3200",
+      "to": "12:3369"
+    },
+    {
+      "from": "12:3396",
+      "to": "12:3204"
+    },
+    {
+      "from": "12:3399",
+      "to": "12:3149"
+    },
+    {
+      "from": "12:3255",
+      "to": "12:3259"
+    },
+    {
+      "from": "12:3310",
+      "to": "12:3314"
+    },
+    {
+      "from": "12:3365",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:3424",
+      "to": "12:3487"
+    },
+    {
+      "from": "12:3440",
+      "to": "12:3689"
+    },
+    {
+      "from": "12:3444",
+      "to": "12:3487"
+    },
+    {
+      "from": "12:3450",
+      "to": "12:3531"
+    },
+    {
+      "from": "12:3527",
+      "to": "12:3531"
+    },
+    {
+      "from": "12:3733",
+      "to": "12:3427"
+    },
+    {
+      "from": "12:3751",
+      "to": "12:3809"
+    },
+    {
+      "from": "12:6103",
+      "to": "12:3809"
+    },
+    {
+      "from": "12:4363",
+      "to": "12:4376"
+    },
+    {
+      "from": "12:4366",
+      "to": "12:4943"
+    },
+    {
+      "from": "12:4369",
+      "to": "12:5510"
+    },
+    {
+      "from": "12:4373",
+      "to": "16:4660"
+    },
+    {
+      "from": "12:4927",
+      "to": "12:3809"
+    },
+    {
+      "from": "12:4933",
+      "to": "12:4943"
+    },
+    {
+      "from": "12:4936",
+      "to": "12:5510"
+    },
+    {
+      "from": "12:4940",
+      "to": "16:5204"
+    },
+    {
+      "from": "12:5494",
+      "to": "12:3809"
+    },
+    {
+      "from": "12:5497",
+      "to": "12:4376"
+    },
+    {
+      "from": "12:5503",
+      "to": "12:5510"
+    },
+    {
+      "from": "12:5507",
+      "to": "16:5748"
+    },
+    {
+      "from": "12:6061",
+      "to": "12:3809"
+    },
+    {
+      "from": "12:6064",
+      "to": "12:4376"
+    },
+    {
+      "from": "12:6067",
+      "to": "12:4943"
+    },
+    {
+      "from": "12:6074",
+      "to": "16:6292"
+    },
+    {
+      "from": "12:3506",
+      "to": "12:3427"
+    },
+    {
+      "from": "12:3511",
+      "to": "12:3402"
+    },
+    {
+      "from": "12:3517",
+      "to": "12:3427"
+    },
+    {
+      "from": "12:3522",
+      "to": "12:3427"
+    },
+    {
+      "from": "12:3721",
+      "to": "12:3787"
+    },
+    {
+      "from": "12:3803",
+      "to": "12:3427"
+    },
+    {
+      "from": "16:6903",
+      "to": "12:3402"
+    },
+    {
+      "from": "16:6889",
+      "to": "16:4660"
+    },
+    {
+      "from": "16:5154",
+      "to": "16:6887"
+    },
+    {
+      "from": "16:5698",
+      "to": "16:6887"
+    },
+    {
+      "from": "16:6242",
+      "to": "16:6887"
+    },
+    {
+      "from": "16:6786",
+      "to": "16:6887"
+    }
+  ]
+}

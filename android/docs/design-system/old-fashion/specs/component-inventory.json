@@ -1,0 +1,1077 @@
+{
+  "components": [
+    {
+      "id": "6:2",
+      "name": "Icon / gallery",
+      "type": "COMPONENT",
+      "width": 24,
+      "height": 24,
+      "parent": "3:4",
+      "description": "Original InstantRoom SVG master. 24 logical units; override ink through an instance."
+    },
+    {
+      "id": "6:7",
+      "name": "Icon / booth",
+      "type": "COMPONENT",
+      "width": 24,
+      "height": 24,
+      "parent": "3:4",
+      "description": "Original InstantRoom SVG master. 24 logical units; override ink through an instance."
+    },
+    {
+      "id": "6:14",
+      "name": "Icon / settings",
+      "type": "COMPONENT",
+      "width": 24,
+      "height": 24,
+      "parent": "3:4",
+      "description": "Original InstantRoom SVG master. 24 logical units; override ink through an instance."
+    },
+    {
+      "id": "6:18",
+      "name": "Icon / timer",
+      "type": "COMPONENT",
+      "width": 24,
+      "height": 24,
+      "parent": "3:4",
+      "description": "Original InstantRoom SVG master. 24 logical units; override ink through an instance."
+    },
+    {
+      "id": "6:22",
+      "name": "Icon / switch",
+      "type": "COMPONENT",
+      "width": 24,
+      "height": 24,
+      "parent": "3:4",
+      "description": "Original InstantRoom SVG master. 24 logical units; override ink through an instance."
+    },
+    {
+      "id": "6:26",
+      "name": "Icon / flash",
+      "type": "COMPONENT",
+      "width": 24,
+      "height": 24,
+      "parent": "3:4",
+      "description": "Original InstantRoom SVG master. 24 logical units; override ink through an instance."
+    },
+    {
+      "id": "6:29",
+      "name": "Check2GOBranding",
+      "type": "COMPONENT",
+      "width": 190,
+      "height": 34,
+      "parent": "3:4",
+      "description": "Authentic user-supplied logo; original colors and 1200:209 ratio. Do not redraw or recolor."
+    },
+    {
+      "id": "6:69",
+      "name": "FlashHousing",
+      "type": "COMPONENT",
+      "width": 369,
+      "height": 116,
+      "parent": "3:4",
+      "description": "Raised black flash bar with real branding and separate Fresnel-lens instance. Width is responsive; controls do not shrink."
+    },
+    {
+      "id": "6:121",
+      "name": "GoldenSensorMesh",
+      "type": "COMPONENT",
+      "width": 96,
+      "height": 96,
+      "parent": "3:4",
+      "description": "Decorative perforated gold disc inspired by the reference. Not a functional autofocus, motion or distance sensor. Keep outside accessibility traversal."
+    },
+    {
+      "id": "6:465",
+      "name": "OpticalLens",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 150,
+      "parent": "3:4",
+      "description": "Secondary optical module; aesthetic camera detail, not a second live capture. Black glass, champagne trim and ribbed vent."
+    },
+    {
+      "id": "6:543",
+      "name": "FilmCompartment",
+      "type": "COMPONENT",
+      "width": 353,
+      "height": 190,
+      "parent": "3:4",
+      "description": "Physical lower cartridge compartment, product badge and original spectrum. No official model logo or autofocus claims."
+    },
+    {
+      "id": "6:593",
+      "name": "CameraShell / OldFashion",
+      "type": "COMPONENT",
+      "width": 353,
+      "height": 250,
+      "parent": "3:4",
+      "description": "Matte black mechanical front body. Public style label Old Fashion maps to persisted OLD_FASION; do not migrate saved identifiers."
+    },
+    {
+      "id": "6:598",
+      "name": "FlashHousing / StructuralSupport",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 70,
+      "parent": "3:4",
+      "description": "Structural supports and ivory rear insert preserve the reference geometry. Rear insert is physical; it never follows Light/Dark application mode."
+    },
+    {
+      "id": "9:147",
+      "name": "ShutterButton",
+      "type": "COMPONENT_SET",
+      "width": 456,
+      "height": 288,
+      "parent": "3:4",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:505",
+      "name": "State=Idle",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:66",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:77",
+      "name": "State=Released",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:88",
+      "name": "State=Capturing",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:100",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:111",
+      "name": "State=Timer active",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:123",
+      "name": "State=Photo Booth active",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:135",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 80,
+      "parent": "9:147",
+      "description": "Comfortable 48×80 target around the red mechanical edge cap. Press inward +2 dp in70 ms; release110 ms. Capture, timer and booth state are coordinated by app state."
+    },
+    {
+      "id": "9:192",
+      "name": "FilmCounter",
+      "type": "COMPONENT_SET",
+      "width": 648,
+      "height": 228,
+      "parent": "3:4",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:501",
+      "name": "State=10",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:148",
+      "name": "State=9",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:152",
+      "name": "State=8",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:156",
+      "name": "State=7",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:160",
+      "name": "State=6",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:164",
+      "name": "State=5",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:168",
+      "name": "State=4",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:172",
+      "name": "State=3",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:176",
+      "name": "State=2",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:180",
+      "name": "State=1",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:184",
+      "name": "State=0",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:188",
+      "name": "State=Replace required",
+      "type": "COMPONENT",
+      "width": 80,
+      "height": 50,
+      "parent": "9:192",
+      "description": "Remaining exposures: 0–10 exactly. Tap opens manual loading; never refill automatically. Numeric state is authoritative, not decorative."
+    },
+    {
+      "id": "9:237",
+      "name": "TimerButton",
+      "type": "COMPONENT_SET",
+      "width": 504,
+      "height": 224,
+      "parent": "3:4",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:516",
+      "name": "State=Off",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:193",
+      "name": "State=5 seconds",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:202",
+      "name": "State=15 seconds",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:211",
+      "name": "State=30 seconds",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:220",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:224",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:228",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:232",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:237",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:265",
+      "name": "CameraSwitchButton",
+      "type": "COMPONENT_SET",
+      "width": 504,
+      "height": 224,
+      "parent": "3:4",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:523",
+      "name": "State=Rear",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:265",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:238",
+      "name": "State=Front",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:265",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:243",
+      "name": "State=Switching",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:265",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:248",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:265",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:252",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:265",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:256",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:265",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:260",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:265",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:345",
+      "name": "FlashToggleButton",
+      "type": "COMPONENT_SET",
+      "width": 504,
+      "height": 224,
+      "parent": "3:4",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:530",
+      "name": "State=Off",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:268",
+      "name": "State=On",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:278",
+      "name": "State=Charging",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:288",
+      "name": "State=Ready",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:298",
+      "name": "State=Firing",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:308",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:317",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:326",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:335",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 56,
+      "height": 48,
+      "parent": "9:345",
+      "description": "Integrated camera control; 56×48 touch area, selected / pressed / disabled / unavailable / focused states."
+    },
+    {
+      "id": "9:500",
+      "name": "FlashLens",
+      "type": "COMPONENT_SET",
+      "width": 714,
+      "height": 164,
+      "parent": "3:4",
+      "description": "Fresnel glass and reflector. Off / Charging / Ready / Firing / Unavailable state family. Illumination is decorative unless backed by capture callbacks. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:31",
+      "name": "State=Off",
+      "type": "COMPONENT",
+      "width": 114,
+      "height": 76,
+      "parent": "9:500",
+      "description": "Fresnel glass and reflector. Off / Charging / Ready / Firing / Unavailable state family. Illumination is decorative unless backed by capture callbacks."
+    },
+    {
+      "id": "9:346",
+      "name": "State=Charging",
+      "type": "COMPONENT",
+      "width": 114,
+      "height": 76,
+      "parent": "9:500",
+      "description": "Fresnel glass and reflector. Off / Charging / Ready / Firing / Unavailable state family. Illumination is decorative unless backed by capture callbacks."
+    },
+    {
+      "id": "9:385",
+      "name": "State=Ready",
+      "type": "COMPONENT",
+      "width": 114,
+      "height": 76,
+      "parent": "9:500",
+      "description": "Fresnel glass and reflector. Off / Charging / Ready / Firing / Unavailable state family. Illumination is decorative unless backed by capture callbacks."
+    },
+    {
+      "id": "9:423",
+      "name": "State=Firing",
+      "type": "COMPONENT",
+      "width": 114,
+      "height": 76,
+      "parent": "9:500",
+      "description": "Fresnel glass and reflector. Off / Charging / Ready / Firing / Unavailable state family. Illumination is decorative unless backed by capture callbacks."
+    },
+    {
+      "id": "9:462",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 114,
+      "height": 76,
+      "parent": "9:500",
+      "description": "Fresnel glass and reflector. Off / Charging / Ready / Firing / Unavailable state family. Illumination is decorative unless backed by capture callbacks."
+    },
+    {
+      "id": "9:527",
+      "name": "NavigationButton",
+      "type": "COMPONENT_SET",
+      "width": 664,
+      "height": 168,
+      "parent": "3:4",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:562",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:527",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:501",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:527",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:507",
+      "name": "State=Selected",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:527",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:514",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:527",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:520",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:527",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:554",
+      "name": "PhotoBoothButton",
+      "type": "COMPONENT_SET",
+      "width": 664,
+      "height": 168,
+      "parent": "3:4",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:572",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:554",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:528",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:554",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:534",
+      "name": "State=Selected",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:554",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:541",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:554",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:547",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:554",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:581",
+      "name": "SettingsButton",
+      "type": "COMPONENT_SET",
+      "width": 664,
+      "height": 168,
+      "parent": "3:4",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:584",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:581",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:555",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:581",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:561",
+      "name": "State=Selected",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:581",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:568",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:581",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:574",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 80,
+      "parent": "9:581",
+      "description": "Mechanical navigation. Minimum target48; normal / pressed / selected / disabled / keyboard focus."
+    },
+    {
+      "id": "9:614",
+      "name": "CameraViewfinder",
+      "type": "COMPONENT_SET",
+      "width": 700,
+      "height": 246,
+      "parent": "3:4",
+      "description": "Live content slot uses uniform aspect-fill / center crop, 10-unit corner radius, no stretching. White brackets are a centering aid, not confirmed autofocus lock. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:492",
+      "name": "State=Active",
+      "type": "COMPONENT",
+      "width": 145,
+      "height": 158,
+      "parent": "9:614",
+      "description": "Live content slot uses uniform aspect-fill / center crop, 10-unit corner radius, no stretching. White brackets are a centering aid, not confirmed autofocus lock."
+    },
+    {
+      "id": "9:582",
+      "name": "State=Capturing",
+      "type": "COMPONENT",
+      "width": 145,
+      "height": 158,
+      "parent": "9:614",
+      "description": "Live content slot uses uniform aspect-fill / center crop, 10-unit corner radius, no stretching. White brackets are a centering aid, not confirmed autofocus lock."
+    },
+    {
+      "id": "9:592",
+      "name": "State=Camera access",
+      "type": "COMPONENT",
+      "width": 145,
+      "height": 158,
+      "parent": "9:614",
+      "description": "Live content slot uses uniform aspect-fill / center crop, 10-unit corner radius, no stretching. White brackets are a centering aid, not confirmed autofocus lock."
+    },
+    {
+      "id": "9:603",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 145,
+      "height": 158,
+      "parent": "9:614",
+      "description": "Live content slot uses uniform aspect-fill / center crop, 10-unit corner radius, no stretching. White brackets are a centering aid, not confirmed autofocus lock."
+    },
+    {
+      "id": "9:636",
+      "name": "FilmEjectionSlot",
+      "type": "COMPONENT_SET",
+      "width": 1428,
+      "height": 152,
+      "parent": "3:4",
+      "description": "Empty / Motor / Partial / Fully ejected. Paper travels down on a separate clipped layer, behind foreground roller lip. Follows existing 1800 ms clock. Each variant is editable and uses shared material/color/type tokens. State transitions never mutate film or photo data."
+    },
+    {
+      "id": "6:537",
+      "name": "State=Empty",
+      "type": "COMPONENT",
+      "width": 327,
+      "height": 64,
+      "parent": "9:636",
+      "description": "Empty / Motor / Partial / Fully ejected. Paper travels down on a separate clipped layer, behind foreground roller lip. Follows existing 1800 ms clock."
+    },
+    {
+      "id": "9:615",
+      "name": "State=Motor start",
+      "type": "COMPONENT",
+      "width": 327,
+      "height": 64,
+      "parent": "9:636",
+      "description": "Empty / Motor / Partial / Fully ejected. Paper travels down on a separate clipped layer, behind foreground roller lip. Follows existing 1800 ms clock."
+    },
+    {
+      "id": "9:622",
+      "name": "State=Partially ejected",
+      "type": "COMPONENT",
+      "width": 327,
+      "height": 64,
+      "parent": "9:636",
+      "description": "Empty / Motor / Partial / Fully ejected. Paper travels down on a separate clipped layer, behind foreground roller lip. Follows existing 1800 ms clock."
+    },
+    {
+      "id": "9:629",
+      "name": "State=Fully ejected",
+      "type": "COMPONENT",
+      "width": 327,
+      "height": 64,
+      "parent": "9:636",
+      "description": "Empty / Motor / Partial / Fully ejected. Paper travels down on a separate clipped layer, behind foreground roller lip. Follows existing 1800 ms clock."
+    },
+    {
+      "id": "9:637",
+      "name": "FilmCartridge",
+      "type": "COMPONENT",
+      "width": 220,
+      "height": 148,
+      "parent": "3:4",
+      "description": "Ten exposures per cartridge. Film format and treatment are independent from physical finish. Manual removal/insertion/closure controls the load."
+    },
+    {
+      "id": "9:653",
+      "name": "DevelopmentFeedback",
+      "type": "COMPONENT",
+      "width": 320,
+      "height": 108,
+      "parent": "3:4",
+      "description": "Progress is an input-derived value. Paused when valid shake input stops. No auto-development or timeout transition."
+    },
+    {
+      "id": "9:659",
+      "name": "CaptionEditorEntry",
+      "type": "COMPONENT",
+      "width": 320,
+      "height": 60,
+      "parent": "3:4",
+      "description": "Launch caption editor. Existing Sol Kol / Denistina / Historic identifiers remain unchanged."
+    },
+    {
+      "id": "9:663",
+      "name": "CorkboardAccess",
+      "type": "COMPONENT",
+      "width": 320,
+      "height": 60,
+      "parent": "3:4",
+      "description": "Open saved photo arrangement; finished photographs only."
+    },
+    {
+      "id": "10:206",
+      "name": "InstantPhoto",
+      "type": "COMPONENT_SET",
+      "width": 1174,
+      "height": 360,
+      "parent": "3:4",
+      "description": "Source-authoritative print geometry, millimetres → uniform logical units. CLASSIC / GO / SPECTRA / ROUND / GRID / STRIP. Actual source photos remain independent from camera finish and theme."
+    },
+    {
+      "id": "6:604",
+      "name": "Format=CLASSIC",
+      "type": "COMPONENT",
+      "width": 168,
+      "height": 204.1749725341797,
+      "parent": "10:206",
+      "description": "Film border dimensions follow PrintGeometry. Presentation independent of camera finish and app theme. Illustration only; production uses saved photograph."
+    },
+    {
+      "id": "10:175",
+      "name": "Format=GO",
+      "type": "COMPONENT",
+      "width": 144,
+      "height": 177.92950439453125,
+      "parent": "10:206",
+      "description": "Film border dimensions follow PrintGeometry. Presentation independent of camera finish and app theme. Illustration only; production uses saved photograph."
+    },
+    {
+      "id": "10:180",
+      "name": "Format=SPECTRA",
+      "type": "COMPONENT",
+      "width": 192,
+      "height": 189.16256713867188,
+      "parent": "10:206",
+      "description": "Film border dimensions follow PrintGeometry. Presentation independent of camera finish and app theme. Illustration only; production uses saved photograph."
+    },
+    {
+      "id": "10:185",
+      "name": "Format=ROUND",
+      "type": "COMPONENT",
+      "width": 168,
+      "height": 204.1749725341797,
+      "parent": "10:206",
+      "description": "Film border dimensions follow PrintGeometry. Presentation independent of camera finish and app theme. Illustration only; production uses saved photograph."
+    },
+    {
+      "id": "10:190",
+      "name": "Format=GRID",
+      "type": "COMPONENT",
+      "width": 192,
+      "height": 219.8709716796875,
+      "parent": "10:206",
+      "description": "Film border dimensions follow PrintGeometry. Presentation independent of camera finish and app theme. Illustration only; production uses saved photograph."
+    },
+    {
+      "id": "10:198",
+      "name": "Format=STRIP",
+      "type": "COMPONENT",
+      "width": 70,
+      "height": 286.5625,
+      "parent": "10:206",
+      "description": "Film border dimensions follow PrintGeometry. Presentation independent of camera finish and app theme. Illustration only; production uses saved photograph."
+    },
+    {
+      "id": "10:207",
+      "name": "App / ActionButton",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 52,
+      "parent": "3:4",
+      "description": "Shared primary action, minimum48 dp/pt. Reuse in sheets, settings and recovery. Label is an editable text property."
+    },
+    {
+      "id": "10:210",
+      "name": "App / SettingsRow",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 64,
+      "parent": "3:4",
+      "description": "Shared settings/list row; semantic app colors, independently editable Label and Value."
+    },
+    {
+      "id": "10:215",
+      "name": "App / ChoiceChip",
+      "type": "COMPONENT",
+      "width": 104,
+      "height": 48,
+      "parent": "3:4",
+      "description": "Shared selectable option. Label text and selected state are separate from physical finish."
+    },
+    {
+      "id": "10:218",
+      "name": "App / BackButton",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 48,
+      "parent": "3:4",
+      "description": "Back affordance. Native navigation semantics and platform back gesture; minimum48 logical units."
+    },
+    {
+      "id": "10:222",
+      "name": "Pushpin",
+      "type": "COMPONENT",
+      "width": 48,
+      "height": 48,
+      "parent": "3:4",
+      "description": "48×48 interaction area around a decorative14-unit head. Insert160 ms / remove120 ms. Provide an accessible action menu for move, rotate and unpin."
+    },
+    {
+      "id": "20:197",
+      "name": "App / StatusPanel",
+      "type": "COMPONENT_SET",
+      "width": 1530,
+      "height": 280,
+      "parent": "3:4",
+      "description": ""
+    },
+    {
+      "id": "20:173",
+      "name": "State=Empty",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 250,
+      "parent": "20:197",
+      "description": "Application recovery panel. Use readable semantic appearance roles, not physical camera colors."
+    },
+    {
+      "id": "20:179",
+      "name": "State=Loading",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 250,
+      "parent": "20:197",
+      "description": "Application recovery panel. Use readable semantic appearance roles, not physical camera colors."
+    },
+    {
+      "id": "20:185",
+      "name": "State=Error",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 250,
+      "parent": "20:197",
+      "description": "Application recovery panel. Use readable semantic appearance roles, not physical camera colors."
+    },
+    {
+      "id": "20:191",
+      "name": "State=Permission",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 250,
+      "parent": "20:197",
+      "description": "Application recovery panel. Use readable semantic appearance roles, not physical camera colors."
+    },
+    {
+      "id": "20:198",
+      "name": "App / ConfirmationDialog",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 290,
+      "parent": "3:4",
+      "description": "Destructive replacement requires explicit confirmation; existing photographs remain saved."
+    },
+    {
+      "id": "20:207",
+      "name": "App / TimerSheet",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 330,
+      "parent": "3:4",
+      "description": "TimerOff/5/15/30s. System back/dismiss preserves current selection until explicit choice."
+    }
+  ],
+  "componentCount": 106,
+  "setCount": 13
+}

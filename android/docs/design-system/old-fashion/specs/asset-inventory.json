@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "file": "assets/booth.svg",
+      "bytes": 1066,
+      "sha256": "570073691d2ead42d4bcaa8e1c61a3a83a39d609d85b89f1fbe37583f798890d"
+    },
+    {
+      "file": "assets/check2go-logo.png",
+      "bytes": 142619,
+      "sha256": "69ac4fe350f7c4b44ae2f8af2beb402df0f6f9f29a2e2623e495a600ccf69f04"
+    },
+    {
+      "file": "assets/timer.svg",
+      "bytes": 440,
+      "sha256": "c1288fb2d40b151e01fc189e659bb2fb0e4e0f3a394e1166f44d0e3562657fcf"
+    },
+    {
+      "file": "assets/caption-sol-kol.svg",
+      "bytes": 34092,
+      "sha256": "2eb8228cc25cecf28ab1c1f36734d727945e01f492a7cf5aa21e2fdc04b2a986"
+    },
+    {
+      "file": "assets/flash.svg",
+      "bytes": 233,
+      "sha256": "67a1393f010ef70fa445fd38705d150238a1ae657546fac9f05ce05b564c8d52"
+    },
+    {
+      "file": "assets/matte-tile-128.png",
+      "bytes": 31857,
+      "sha256": "9d86d467c41bc367c62e29d2ccfc389f63430f1f766f744dca95a1fd19928830"
+    },
+    {
+      "file": "assets/Sol-Kol-OFL.txt",
+      "bytes": 4300,
+      "sha256": "d13c47302fbb16a4963614427d923224ed381e32fe65b92f3fb9222cbf19613b"
+    },
+    {
+      "file": "assets/switch.svg",
+      "bytes": 804,
+      "sha256": "a9810d345d99076f734a0fe5a23972522f4ca0a4272ec59761d9dd3cff578707"
+    },
+    {
+      "file": "assets/gallery.svg",
+      "bytes": 668,
+      "sha256": "e11d64bf511b90bf7cc1899a545f36fb405edfa58f3ce05dd553b22db8e86c4d"
+    },
+    {
+      "file": "assets/settings.svg",
+      "bytes": 529,
+      "sha256": "a9ae40c0238d1cbdbfc750cdbf06eabccef1e38a611b24c11d08584127808a66"
+    }
+  ],
+  "sourceLogo": "Unchanged1200×209 transparent PNG from supplied app drawable. Do not recolor, trace or distort.",
+  "icons": "Six original24×24 SVG assets with warm role tint at runtime; no official model marks.",
+  "material": "Generated fine matte ABS; render128px repeat, SoftLight42%. Edge seamlessness remains a device rendering check.",
+  "park": "Illustrative user-owned photo reused in Figma, not a production preview placeholder. Not bundled as production asset.",
+  "cameraVectors": "Native editable Figma components; export SVG selectively for optical/glass/mesh. Keep functional controls and text native.",
+  "fonts": "No font binaries bundled. SolKol outlined proof only; companion license retained. Denistina/Historic rights unresolved."
+}

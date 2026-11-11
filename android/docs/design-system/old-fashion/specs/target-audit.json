@@ -1,0 +1,644 @@
+{
+  "screens": [
+    {
+      "id": "7:4",
+      "name": "Old Fashion / 393 × 852 / main proposal",
+      "controls": [
+        {
+          "name": "Take photograph / mechanical edge shutter",
+          "w": 48,
+          "h": 80,
+          "x": 2,
+          "y": 448,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Timer",
+          "w": 56,
+          "h": 48,
+          "x": 80.5,
+          "y": 426,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Camera switch",
+          "w": 56,
+          "h": 48,
+          "x": 168.5,
+          "y": 426,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Flash",
+          "w": 56,
+          "h": 48,
+          "x": 256.5,
+          "y": 426,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Gallery",
+          "w": 107,
+          "h": 80,
+          "x": 28,
+          "y": 714,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Photo Booth",
+          "w": 107,
+          "h": 80,
+          "x": 143,
+          "y": 714,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Settings",
+          "w": 107,
+          "h": 80,
+          "x": 258,
+          "y": 714,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Film counter / replace cartridge",
+          "w": 80,
+          "h": 50,
+          "x": 28,
+          "y": 236,
+          "min48": true,
+          "within": true
+        }
+      ],
+      "imageNodes": [
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 369,
+          "h": 584,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 369,
+          "h": 116,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Authentic Check2GO / original PNG",
+          "w": 160,
+          "h": 27.866695404052734,
+          "imageModes": [
+            "FIT"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 353,
+          "h": 250,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Live camera content / illustrative park only",
+          "w": 119,
+          "h": 132,
+          "imageModes": [
+            "FILL"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 353,
+          "h": 190,
+          "imageModes": [
+            "TILE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11:1059",
+      "name": "Compact Android · 360 × 800",
+      "controls": [
+        {
+          "name": "Take photograph / mechanical edge shutter",
+          "w": 48,
+          "h": 80,
+          "x": 2,
+          "y": 396.5853271484375,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Timer",
+          "w": 56,
+          "h": 48,
+          "x": 64,
+          "y": 376.5528564453125,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Camera switch",
+          "w": 56,
+          "h": 48,
+          "x": 152,
+          "y": 376.5528564453125,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Flash",
+          "w": 56,
+          "h": 48,
+          "x": 240,
+          "y": 376.5528564453125,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Gallery",
+          "w": 96,
+          "h": 80,
+          "x": 28,
+          "y": 672,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Photo Booth",
+          "w": 96,
+          "h": 80,
+          "x": 132,
+          "y": 672,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Settings",
+          "w": 96,
+          "h": 80,
+          "x": 236,
+          "y": 672,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Film counter / replace cartridge",
+          "w": 80,
+          "h": 50,
+          "x": 26.569107055664062,
+          "y": 203.54470825195312,
+          "min48": true,
+          "within": true
+        }
+      ],
+      "imageNodes": [
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 336,
+          "h": 573.7398071289062,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 336,
+          "h": 105.62601470947266,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Authentic Check2GO / original PNG",
+          "w": 145.69105529785156,
+          "h": 25.37455177307129,
+          "imageModes": [
+            "FIT"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 321.4308776855469,
+          "h": 227.64227294921875,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Live camera content / illustrative park only",
+          "w": 108.35771942138672,
+          "h": 120.19511413574219,
+          "imageModes": [
+            "FILL"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 321.4308776855469,
+          "h": 173.00811767578125,
+          "imageModes": [
+            "TILE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11:1643",
+      "name": "Standard Android · 393 × 852",
+      "controls": [
+        {
+          "name": "Take photograph / mechanical edge shutter",
+          "w": 48,
+          "h": 80,
+          "x": 2,
+          "y": 448,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Timer",
+          "w": 56,
+          "h": 48,
+          "x": 80.5,
+          "y": 426,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Camera switch",
+          "w": 56,
+          "h": 48,
+          "x": 168.5,
+          "y": 426,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Flash",
+          "w": 56,
+          "h": 48,
+          "x": 256.5,
+          "y": 426,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Gallery",
+          "w": 107,
+          "h": 80,
+          "x": 28,
+          "y": 714,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Photo Booth",
+          "w": 107,
+          "h": 80,
+          "x": 143,
+          "y": 714,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Settings",
+          "w": 107,
+          "h": 80,
+          "x": 258,
+          "y": 714,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Film counter / replace cartridge",
+          "w": 80,
+          "h": 50,
+          "x": 28,
+          "y": 236,
+          "min48": true,
+          "within": true
+        }
+      ],
+      "imageNodes": [
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 369,
+          "h": 584,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 369,
+          "h": 116,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Authentic Check2GO / original PNG",
+          "w": 160,
+          "h": 27.866695404052734,
+          "imageModes": [
+            "FIT"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 353,
+          "h": 250,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Live camera content / illustrative park only",
+          "w": 119,
+          "h": 132,
+          "imageModes": [
+            "FILL"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 353,
+          "h": 190,
+          "imageModes": [
+            "TILE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11:2184",
+      "name": "Large Android · 412 × 915",
+      "controls": [
+        {
+          "name": "Take photograph / mechanical edge shutter",
+          "w": 48,
+          "h": 80,
+          "x": 2,
+          "y": 460.3902587890625,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Timer",
+          "w": 56,
+          "h": 48,
+          "x": 90,
+          "y": 437.2574462890625,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Camera switch",
+          "w": 56,
+          "h": 48,
+          "x": 178,
+          "y": 437.2574462890625,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Flash",
+          "w": 56,
+          "h": 48,
+          "x": 266,
+          "y": 437.2574462890625,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Gallery",
+          "w": 113.33333587646484,
+          "h": 80,
+          "x": 28,
+          "y": 783,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Photo Booth",
+          "w": 113.33333587646484,
+          "h": 80,
+          "x": 149.3333740234375,
+          "y": 783,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Settings",
+          "w": 113.33333587646484,
+          "h": 80,
+          "x": 270.6666259765625,
+          "y": 783,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Film counter / replace cartridge",
+          "w": 80,
+          "h": 50,
+          "x": 28.8238525390625,
+          "y": 237.4742431640625,
+          "min48": true,
+          "within": true
+        }
+      ],
+      "imageNodes": [
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 388,
+          "h": 651.9376831054688,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 388,
+          "h": 121.972900390625,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Authentic Check2GO / original PNG",
+          "w": 168.23849487304688,
+          "h": 29.30156707763672,
+          "imageModes": [
+            "FIT"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 371.1761474609375,
+          "h": 262.8726501464844,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Live camera content / illustrative park only",
+          "w": 125.12737274169922,
+          "h": 138.7967529296875,
+          "imageModes": [
+            "FILL"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 371.1761474609375,
+          "h": 199.783203125,
+          "imageModes": [
+            "TILE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "11:2725",
+      "name": "iPhone · 402 × 874",
+      "controls": [
+        {
+          "name": "Take photograph / mechanical edge shutter",
+          "w": 48,
+          "h": 80,
+          "x": 2,
+          "y": 475.6585693359375,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Timer",
+          "w": 56,
+          "h": 48,
+          "x": 85,
+          "y": 453.1219482421875,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Camera switch",
+          "w": 56,
+          "h": 48,
+          "x": 173,
+          "y": 453.1219482421875,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Flash",
+          "w": 56,
+          "h": 48,
+          "x": 261,
+          "y": 453.1219482421875,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Gallery",
+          "w": 110,
+          "h": 80,
+          "x": 28,
+          "y": 736,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Photo Booth",
+          "w": 110,
+          "h": 80,
+          "x": 146,
+          "y": 736,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Settings",
+          "w": 110,
+          "h": 80,
+          "x": 264,
+          "y": 736,
+          "min48": true,
+          "within": true
+        },
+        {
+          "name": "Film counter / replace cartridge",
+          "w": 80,
+          "h": 50,
+          "x": 28.3902587890625,
+          "y": 258.48779296875,
+          "min48": true,
+          "within": true
+        }
+      ],
+      "imageNodes": [
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 378,
+          "h": 583.7073364257812,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 378,
+          "h": 118.82926940917969,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Authentic Check2GO / original PNG",
+          "w": 163.90243530273438,
+          "h": 28.546369552612305,
+          "imageModes": [
+            "FIT"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 361.6097412109375,
+          "h": 256.0975646972656,
+          "imageModes": [
+            "TILE"
+          ]
+        },
+        {
+          "name": "Live camera content / illustrative park only",
+          "w": 121.90243530273438,
+          "h": 135.21951293945312,
+          "imageModes": [
+            "FILL"
+          ]
+        },
+        {
+          "name": "Fine matte ABS / shared tile",
+          "w": 361.6097412109375,
+          "h": 194.63414001464844,
+          "imageModes": [
+            "TILE"
+          ]
+        }
+      ]
+    }
+  ]
+}

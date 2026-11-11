@@ -1,0 +1,79 @@
+[
+  {
+    "name": "Matte textured ABS",
+    "baseRole": "finish/body",
+    "rendering": "0.42 Soft Light fine grain; fixed top-left light. 1px edge, 3dp/5dp raised shadow. Render a 128px repeated material tile, never bake the UI.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Mechanical plastic",
+    "baseRole": "camera/panel",
+    "rendering": "Low-sheen edge gradient, white 14% → transparent → black 34%; 3dp/5dp shadow; restrained highlights, no mirror gloss.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Dark ribbed plastic",
+    "baseRole": "camera/optical",
+    "rendering": "Native 1dp ridges on 3dp pitch; recessed 2dp/3dp shadow. Align to device pixels; decorative and non-interactive.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Gold perforated metal",
+    "baseRole": "camera/gold",
+    "rendering": "Native repeated 1.7dp holes, 4dp stagger pitch, clipped circle; 3–7dp concentric rings. Warm directional gradient, fixed highlight. Decorative sensor only.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Champagne metallic trim",
+    "baseRole": "finish/trim",
+    "rendering": "1dp highlight + 3dp rolled edge, low-amplitude warm ramp. Use native shape strokes; finish mode owns the trim base.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Optical glass",
+    "baseRole": "camera/optical",
+    "rendering": "Deep black recess, translucent 8–20% curved reflections. Static glass highlights must not obscure focus or live preview.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Fresnel flash lens",
+    "baseRole": "camera/metal",
+    "rendering": "Native horizontal and vertical lines at 6dp pitch with warm reflective segments. Charging bloom bounded to lens. Status LED plus text semantics.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Film compartment",
+    "baseRole": "finish/body",
+    "rendering": "2dp mounting seam, 8dp shell radius, recessed product plate; clip photo at roller mouth and place front lip above paper.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Photo paper",
+    "baseRole": "primitive/paper",
+    "rendering": "1dp corner, optional 3dp/5dp shadow. Exact physical format ratios; chemical veil affects image regions only, never captions or border.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Rubberized controls",
+    "baseRole": "camera/surface",
+    "rendering": "13dp navigation radius, 8dp small-control radius, bevel ≤14% white. Press reduces elevation 3→1dp; edge shutter translates inward2dp.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  },
+  {
+    "name": "Natural cork",
+    "baseRole": "primitive/brass",
+    "rendering": "Cork #B89461, pores #6D512D / #E0C18E at28%, fixed non-animated microgeometry; pin shadows above paper.",
+    "lightDirection": "upper left",
+    "implementation": "Native shape/path/gradient where practical; cache decorative meshes."
+  }
+]

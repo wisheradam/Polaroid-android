@@ -1,0 +1,67 @@
+{
+  "publicStyle": "Old Fashion",
+  "legacyLabel": "Old Fasion",
+  "storedStyleId": "OLD_FASION",
+  "preferenceKeys": [
+    "cameraStyle",
+    "cameraColor"
+  ],
+  "default": "BLACK",
+  "finishes": [
+    {
+      "id": "BLACK",
+      "name": "Black",
+      "body": "#252925",
+      "trim": "#C6A56C",
+      "sourceShutter": "#B34D36",
+      "proposedShutter": "#E63725"
+    },
+    {
+      "id": "IVORY",
+      "name": "Ivory",
+      "body": "#E9DFCA",
+      "trim": "#735628",
+      "sourceShutter": "#953F30",
+      "proposedShutter": "#E63725"
+    },
+    {
+      "id": "OLIVE",
+      "name": "Dark Olive",
+      "body": "#3B4638",
+      "trim": "#D7B97B",
+      "sourceShutter": "#BF5E43",
+      "proposedShutter": "#E63725"
+    },
+    {
+      "id": "BRASS",
+      "name": "Brown / Brass",
+      "body": "#6A4936",
+      "trim": "#E3BF7D",
+      "sourceShutter": "#A64335",
+      "proposedShutter": "#E63725"
+    }
+  ],
+  "allStyleColorMappings": {
+    "OLD_FASION": [
+      "BLACK",
+      "IVORY",
+      "OLIVE",
+      "BRASS"
+    ],
+    "INSTA_STYLE": [
+      "WHITE",
+      "PINK",
+      "BLUE",
+      "MINT",
+      "LAVENDER"
+    ],
+    "ONE_AND_ONLY": [
+      "WHITE",
+      "BLACK",
+      "RED",
+      "SPECTRUM"
+    ]
+  },
+  "countExplanation": "13 valid style/color pairs;11 unique CameraColor enum values. Only4 are Old Fashion finishes. No colors renamed or remapped.",
+  "source": "android/core/src/main/kotlin/com/instantroom/core/CameraStyle.kt; android/app/src/main/java/com/instantroom/ui/CameraStyling.kt"
+}
