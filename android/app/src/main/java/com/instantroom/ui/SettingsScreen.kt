@@ -7,12 +7,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
 import androidx.compose.ui.unit.*
 import com.instantroom.data.Settings
+import com.instantroom.BuildConfig
 import com.instantroom.core.*
 import androidx.compose.ui.semantics.*
 
-@Composable fun SettingsScreen(s: Settings, set: (Settings)->Unit) {
+@Composable fun SettingsScreen(s: Settings, openCameraStyle: (() -> Unit)?=null, set: (Settings)->Unit) {
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),verticalArrangement=Arrangement.spacedBy(20.dp)) {
-  SmallLabel("MAKE IT YOURS");Text("The quiet details.",style=MaterialTheme.typography.headlineLarge)
+  SmallLabel("INSTANTROOM");Text("Settings",style=MaterialTheme.typography.headlineLarge)
   Panel {
    SmallLabel("APPEARANCE")
    ThemeMode.entries.forEach {mode->
@@ -20,6 +21,12 @@ import androidx.compose.ui.semantics.*
      RadioButton(selected=s.theme==mode,onClick={set(s.copy(theme=mode))});Text(mode.label)
     }
    }
+  }
+  if(openCameraStyle==null)CameraStyleSettings(s,set) else Panel { TextButton(onClick=openCameraStyle,modifier=Modifier.fillMaxWidth()){Text("Camera design · ${s.cameraStyle.label}")};Text("Choose the camera style and physical finish.",style=MaterialTheme.typography.bodySmall) }
+  Panel {
+   SmallLabel("DEFAULT HANDWRITING")
+   FlowRow(horizontalArrangement=Arrangement.spacedBy(8.dp)) {CaptionFont.entries.forEach {font->FilterChip(selected=s.captionFont==font,onClick={set(s.copy(captionFont=font))},label={Text(font.label)})}}
+   Text("Used for new notes. Existing captions keep their selected font.",style=MaterialTheme.typography.bodySmall)
   }
   Panel {
    SmallLabel("SELFIE LIGHTING")
@@ -55,7 +62,7 @@ import androidx.compose.ui.semantics.*
    SettingToggle("Chemical imperfections",s.imperfections,{set(s.copy(imperfections=it))})
    Text("These preferences apply to newly processed photographs.",style=MaterialTheme.typography.bodySmall)
   }
-  Text("Instant Room · 0.2.0\nOriginal camera design. Private by default. All photographs stay on this device until you save or share them.",style=MaterialTheme.typography.bodySmall)
+  Text("Instant Room · ${BuildConfig.VERSION_NAME}\nOriginal camera design. Private by default. All photographs stay on this device until you save or share them.",style=MaterialTheme.typography.bodySmall)
  }
 }
 @Composable private fun SettingToggle(label: String, checked: Boolean, change: (Boolean)->Unit) {Row(Modifier.fillMaxWidth(),verticalAlignment=Alignment.CenterVertically,horizontalArrangement=Arrangement.SpaceBetween){Text(label,Modifier.weight(1f));Switch(checked=checked,onCheckedChange=change)}}

@@ -1,0 +1,14 @@
+package com.instantroom.core
+
+import org.junit.Test
+import org.junit.Assert.*
+
+class OldFashionLayoutTest {
+ @Test fun canonicalCoordinatesMatchHandoffAfterRealInsets(){val g=OldFashionLayout.fit(393f,852f-44-34);assertEquals(52f,g.flashTop+44,.001f);assertEquals(228f,g.bodyY+44,.001f);assertEquals(478f,g.compartmentY+44,.001f);assertEquals(124f,g.viewfinderX,.001f);assertEquals(256f,g.viewfinderY+44,.001f);assertEquals(448f,g.shutterY+44,.001f);assertEquals(714f,g.navigationY+44,.001f);assertEquals(615f,g.mouthY+44,.001f)}
+ @Test fun compactAndLargeExamplesMatchTheirActualSafeAreas(){for((w,h,top,bottom,nav) in listOf(listOf(360f,800f,28f,24f,672f),listOf(412f,915f,36f,28f,783f))){val g=OldFashionLayout.fit(w,h-top-bottom);assertEquals(nav,g.navigationY+top,.001f);assertEquals(119f/132f,g.apertureWidth/g.apertureHeight,.0001f);assertTrue(g.viewfinderX>0);assertTrue(g.height>=h-top-bottom)}}
+ @Test fun largeTextAndNarrowWidthsRequestAnEssentialControlsTray(){assertFalse(OldFashionLayout.fit(360f,748f).essentialControls);assertTrue(OldFashionLayout.fit(359f,748f).essentialControls);assertTrue(OldFashionLayout.fit(393f,774f,2f).essentialControls);assertEquals(OldFashionLayout.fit(393f,774f).apertureWidth,OldFashionLayout.fit(393f,774f,2f).apertureWidth,0f)}
+ @Test fun invalidSizesAndTextScaleAreRejected(){for((w,h,f) in listOf(Triple(0f,800f,1f),Triple(393f,0f,1f),Triple(393f,800f,0f),Triple(Float.NaN,800f,1f))){assertThrows(IllegalArgumentException::class.java){OldFashionLayout.fit(w,h,f)}}}
+ @Test fun paperUsesDomainProgressAndReducedMotionNeverChangesItsClock(){assertEquals(70,OldFashionMotion.pressMs);assertEquals(110,OldFashionMotion.releaseMs);assertEquals(1800L,EjectionTimeline.durationMs);assertEquals(0f,OldFashionMotion.paperPosition(-1f,true),0f);assertEquals(.6f,OldFashionMotion.paperPosition(.6f,true),0f);assertEquals(.5f,OldFashionMotion.paperPosition(.2f,false),0f);assertEquals(1f,OldFashionMotion.paperPosition(1f,false),0f)}
+ @Test fun allBusyPhasesAndOpenLoadingPhasesBlockAppearance(){assertTrue(AppearanceSwitchPolicy.canApply(CapturePhase.IDLE,LoadingPhase.CLOSED,false));for(p in CapturePhase.entries.filter{it!=CapturePhase.IDLE})assertFalse(AppearanceSwitchPolicy.canApply(p,LoadingPhase.CLOSED,false));for(p in LoadingPhase.entries.filter{it!=LoadingPhase.CLOSED})assertFalse(AppearanceSwitchPolicy.canApply(CapturePhase.IDLE,p,false));assertFalse(AppearanceSwitchPolicy.canApply(CapturePhase.IDLE,LoadingPhase.CLOSED,true))}
+ @Test fun legacyStorageAndThirteenPairsRemainStable(){assertEquals("Old Fashion",CameraStyle.valueOf("OLD_FASION").label);assertEquals(13,CameraStyle.entries.sumOf{it.colors.size});assertEquals(CameraColor.BLACK,CameraAppearance(CameraStyle.OLD_FASION,CameraColor.PINK).normalized().color);assertEquals(CameraColor.BLACK,CameraAppearance(CameraStyle.OLD_FASION,CameraColor.BLACK).normalized().color)}
+}

@@ -13,6 +13,6 @@ class MainActivity : ComponentActivity() {
  override fun onCreate(savedInstanceState: Bundle?) {
   super.onCreate(savedInstanceState)
   enableEdgeToEdge()
-  setContent { val vm: RoomViewModel=viewModel(); val settings by vm.settings.collectAsStateWithLifecycle(); InstantTheme(settings.theme) { InstantRoom(vm) } }
+  setContent { val vm: RoomViewModel=viewModel(); val settings by vm.settings.collectAsStateWithLifecycle(); InstantTheme(settings.theme,settings.cameraStyle,settings.cameraColor) { InstantRoom(vm) } }
  }
 }

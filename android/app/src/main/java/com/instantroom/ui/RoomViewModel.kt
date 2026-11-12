@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.util.UUID
 
-data class CaptureUi(val phase: CapturePhase = CapturePhase.IDLE, val photoId: String? = null, val ejection: Float = 0f, val countdown: Int=0, val shot: Int=1, val booth: Boolean=false, val sourceIds: List<String> = emptyList())
+data class CaptureUi(val phase: CapturePhase = CapturePhase.IDLE, val photoId: String? = null, val ejection: Float = 0f, val countdown: Int=0, val shot: Int=1, val booth: Boolean=false, val sourceIds: List<String> = emptyList(),val shutterFired: Boolean=false)
 object AndroidCaptureClock: CaptureClock {override fun nowMs()=SystemClock.elapsedRealtime();override suspend fun sleep(ms: Long){delay(ms)}}
 class RoomViewModel @JvmOverloads constructor(application: Application,
  val repo: PhotoRepository=(application as InstantRoomApp).repository,
@@ -34,11 +34,13 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
  private val developmentHaptics=DevelopmentHaptics()
  private var recoveryJob: Job?=null
  private var captureJob: Job?=null
- init { recover() }
+ val pendingAppearance=MutableStateFlow<CameraAppearance?>(null)
+ private var filmLoadingPhase=LoadingPhase.CLOSED
+ init { recover();viewModelScope.launch {capture.collect{if(it.phase==CapturePhase.IDLE)applyPendingAppearanceIfSafe()}} }
  fun recover() {
   if(recoveryJob?.isActive==true || repo.captureLock.isLocked)return
   recoveryJob=viewModelScope.launch {
-   try { repo.recover(); initialized.value=true } catch(e: Exception) { message.value="Recovery needs retry: ${e.message}" }
+   try { repo.recover(); initialized.value=true } catch(e: Exception) { message.value="Recovery needs retry: ${e.message}" } finally {applyPendingAppearanceIfSafe()}
   }
  }
  fun clearMessage() { message.value=null }
@@ -46,7 +48,7 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
  fun startBooth(flash: Boolean) = beginCapture(flash,true)
  fun cancelCapture() {captureJob?.cancel()}
  private fun beginCapture(flash: Boolean, booth: Boolean) {
-  if(!initialized.value || !repo.captureLock.tryLock())return
+  if(filmLoadingPhase!=LoadingPhase.CLOSED || !initialized.value || !repo.captureLock.tryLock())return
   val config=settings.value
   capture.value=CaptureUi(CapturePhase.COUNTDOWN,booth=booth)
   captureJob=viewModelScope.launch {
@@ -65,12 +67,12 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
      },charge={capture.value=capture.value.copy(phase=CapturePhase.CHARGING);if(foreground)feedbackPort.charge(config.chargeMs)}
     ) { index->
      currentCoroutineContext().ensureActive()
-     capture.value=capture.value.copy(phase=CapturePhase.CAPTURING,countdown=0)
+     capture.value=capture.value.copy(phase=CapturePhase.CAPTURING,countdown=0,shutterFired=false)
      // Never discard a successful camera result because Cancel/Pause arrived mid-capture.
      withContext(NonCancellable) {
       val id=session?.let{"${it.id}-$index"} ?: UUID.randomUUID().toString()
       repo.prepareCapture(id,cart,session?.id.orEmpty(),if(booth)index else -1)
-      try {cameraPort.captureWithLighting(repo.originalFile(id),flash,config.front && config.selfieLight.screenFlash){if(foreground)feedbackPort.shutter()}}
+      try {cameraPort.captureWithLighting(repo.originalFile(id),flash,config.front && config.selfieLight.screenFlash){capture.value=capture.value.copy(shutterFired=true);if(foreground)feedbackPort.shutter()}}
       catch(e:Exception){repo.abandonCapture(id);throw e}
       saved=repo.commitCapture(id,cart)
       if(booth) {
@@ -118,6 +120,7 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
     if(cancelled && session==null)message.value=if(saved!=null)"Photograph kept in Archive." else "Timer cancelled."
     capture.value=CaptureUi(photoId=if(cancelled)null else saved?.takeIf{!it.processing}?.id,ejection=1f)
     repo.captureLock.unlock()
+    applyPendingAppearanceIfSafe()
    }
   }
  }
@@ -125,7 +128,7 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
   if(!repo.captureLock.tryLock())return
   viewModelScope.launch {
    try {val p=repo.recompose(photo.boothSessionId,layout);capture.value=CaptureUi(photoId=p.id)}
-   catch(e:Exception){message.value=e.message}finally{repo.captureLock.unlock()}
+   catch(e:Exception){message.value=e.message}finally{repo.captureLock.unlock();applyPendingAppearanceIfSafe()}
   }
  }
  fun switchCamera(frontAvailable: Boolean, rearAvailable: Boolean): Boolean {
@@ -133,7 +136,36 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
   if(target==null){if(capture.value.phase==CapturePhase.IDLE)message.value="The other camera is unavailable";return false}
   updateSettings(settings.value.copy(front=target));return true
  }
- fun updateSettings(s: Settings) { graph.preferences.set(s);graph.detector.threshold=s.threshold;if(!s.sound || !s.haptics)feedbackPort.stop() }
+ /** Appearance alone is queued. Other preferences remain current and are never replayed later. */
+ fun updateSettings(s: Settings) {
+  val current=settings.value
+  val appearanceChanged=s.cameraStyle!=current.cameraStyle || s.cameraColor!=current.cameraColor
+  val independent=s.copy(cameraStyle=current.cameraStyle,cameraColor=current.cameraColor)
+  if(independent!=current)applySettings(independent)
+  if(appearanceChanged)requestCameraAppearance(s.cameraStyle,s.cameraColor) else applyPendingAppearanceIfSafe()
+ }
+ private fun applySettings(s: Settings) {graph.preferences.set(s);graph.detector.threshold=s.threshold;if(!s.sound || !s.haptics)feedbackPort.stop()}
+ fun setFilmLoadingPhase(phase: LoadingPhase) {filmLoadingPhase=phase;applyPendingAppearanceIfSafe()}
+ fun requestCameraAppearance(style: CameraStyle,color: CameraColor) {
+  val requested=CameraAppearance(style,color).normalized()
+  if(requested==CameraAppearance(settings.value.cameraStyle,settings.value.cameraColor)){pendingAppearance.value=null;return}
+  pendingAppearance.value=requested
+  if(!applyPendingAppearanceIfSafe())message.value="Appearance queued until capture finishes or the film compartment is closed."
+ }
+ fun cancelPendingAppearance() {pendingAppearance.value=null}
+ private fun applyPendingAppearanceIfSafe(): Boolean {
+  val requested=pendingAppearance.value ?: return true
+  if(!AppearanceSwitchPolicy.canApply(capture.value.phase,filmLoadingPhase,repo.captureLock.isLocked))return false
+  applySettings(settings.value.copy(cameraStyle=requested.style,cameraColor=requested.color))
+  pendingAppearance.value=null
+  return true
+ }
+ fun setRearFlash(on: Boolean,available: Boolean): Boolean {
+  if(!FlashMotion.toggleAllowed(available,capture.value.phase!=CapturePhase.IDLE || repo.captureLock.isLocked) || settings.value.rearFlash==on)return false
+  updateSettings(settings.value.copy(rearFlash=on))
+  if(settings.value.haptics)feedbackPort.controlClick()
+  return true
+ }
  fun startDevelopment(id: String) { stopDevelopment();developmentPhoto=id }
  fun stopDevelopment() {developmentPhoto=null;developmentGeneration++;developmentHaptics.reset();feedbackPort.stopDevelopment()}
  fun develop(id: String, strength: Float) {

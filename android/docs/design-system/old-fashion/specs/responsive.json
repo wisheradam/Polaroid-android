@@ -1,0 +1,158 @@
+{
+  "canonical": {
+    "s": 1,
+    "top": 52,
+    "bodyY": 228,
+    "compY": 478,
+    "viewfinder": {
+      "x": 124,
+      "y": 256,
+      "w": 145,
+      "h": 158
+    },
+    "shutter": {
+      "x": 2,
+      "y": 448,
+      "w": 48,
+      "h": 80
+    },
+    "navigationY": 714,
+    "slotY": 564,
+    "paperExitY": 615,
+    "safeTop": 44,
+    "safeBottom": 34
+  },
+  "examples": [
+    {
+      "id": "11:1059",
+      "name": "Compact Android · 360 × 800",
+      "width": 360,
+      "height": 800,
+      "metrics": {
+        "s": 0.9105691056910569,
+        "top": 36,
+        "bodyY": 196.260162601626,
+        "compY": 423.9024390243902,
+        "viewfinder": {
+          "x": 113.98373983739837,
+          "y": 221.7560975609756,
+          "w": 132.03252032520325,
+          "h": 143.869918699187
+        },
+        "shutter": {
+          "x": 2,
+          "y": 396.5853658536585,
+          "w": 48,
+          "h": 80
+        },
+        "navigationY": 672,
+        "slotY": 502.2113821138211,
+        "paperExitY": 548.650406504065,
+        "safeTop": 28,
+        "safeBottom": 24
+      }
+    },
+    {
+      "id": "11:1643",
+      "name": "Standard Android · 393 × 852",
+      "width": 393,
+      "height": 852,
+      "metrics": {
+        "s": 1,
+        "top": 52,
+        "bodyY": 228,
+        "compY": 478,
+        "viewfinder": {
+          "x": 124,
+          "y": 256,
+          "w": 145,
+          "h": 158
+        },
+        "shutter": {
+          "x": 2,
+          "y": 448,
+          "w": 48,
+          "h": 80
+        },
+        "navigationY": 714,
+        "slotY": 564,
+        "paperExitY": 615,
+        "safeTop": 44,
+        "safeBottom": 34
+      }
+    },
+    {
+      "id": "11:2184",
+      "name": "Large Android · 412 × 915",
+      "width": 412,
+      "height": 915,
+      "metrics": {
+        "s": 1.051490514905149,
+        "top": 44,
+        "bodyY": 229.0623306233062,
+        "compY": 491.93495934959344,
+        "viewfinder": {
+          "x": 129.76693766937672,
+          "y": 258.50406504065035,
+          "w": 152.4661246612466,
+          "h": 166.13550135501353
+        },
+        "shutter": {
+          "x": 2,
+          "y": 460.390243902439,
+          "w": 48,
+          "h": 80
+        },
+        "navigationY": 783,
+        "slotY": 582.3631436314363,
+        "paperExitY": 635.9891598915989,
+        "safeTop": 36,
+        "safeBottom": 28
+      }
+    },
+    {
+      "id": "11:2725",
+      "name": "iPhone · 402 × 874",
+      "width": 402,
+      "height": 874,
+      "metrics": {
+        "s": 1.024390243902439,
+        "top": 70,
+        "bodyY": 250.29268292682923,
+        "compY": 506.390243902439,
+        "viewfinder": {
+          "x": 126.73170731707317,
+          "y": 278.9756097560975,
+          "w": 148.53658536585365,
+          "h": 161.85365853658536
+        },
+        "shutter": {
+          "x": 2,
+          "y": 475.6585365853658,
+          "w": 48,
+          "h": 80
+        },
+        "navigationY": 736,
+        "slotY": 594.4878048780488,
+        "paperExitY": 646.7317073170732,
+        "safeTop": 62,
+        "safeBottom": 34
+      }
+    }
+  ],
+  "equations": {
+    "s": "(width−24)/369",
+    "flashTop": "actualSafeTop+8",
+    "bodyY": "flashTop+176*s",
+    "compartmentY": "bodyY+250*s",
+    "navigationY": "height−actualSafeBottom−104"
+  },
+  "minimumTouchDp": 48,
+  "rules": [
+    "Scale decorative geometry and optical framing, never the whole interface.",
+    "Controls stay56×48, shutter48×80, counter80×50, nav80high.",
+    "Use actual WindowInsets/safeAreaInsets; illustrated system bars are not runtime assets.",
+    "Below360dp or textScale>1.4 use vertical scrolling and full-width readable essential controls; keep capture/cancel reachable.",
+    "IME lifts the caption field and Save; content scrolls above native keyboard."
+  ]
+}

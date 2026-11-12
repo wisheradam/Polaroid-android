@@ -75,3 +75,9 @@ Recovery first replays journals and processes pending prints. Incomplete session
 ## Known implementation limits
 
 The design is an original stylized camera rather than a 3D replica. Film-room steps include accessible buttons and drag gestures rather than a full rigid-body simulation. The release is a first native implementation and needs device UX tuning of shake thresholds, flash latency, viewfinder crop, vibration amplitude, frame timing and audio synchronization. No hardware results should be inferred from unit or emulator checks. Single board only. No account or cloud photo synchronization. AWS is used for build infrastructure, not the photo workflow.
+
+## Camera identity and flash motion (0.5.0)
+
+`CameraStyle` defines three styles and their valid `CameraColor` choices. `Preferences` normalizes invalid/older values, preserving all other settings. `CameraStyling` maps those values to physical materials, readable ink, shell/housing/shutter geometry and miniature settings previews. `InstantTheme` adapts surrounding app accents/shapes while leaving image rendering and physical print/cork materials independent of app appearance. `MainActivity` observes settings and recomposes on changes; the film-loading screen also observes lifecycle-aware state.
+
+`FlashToggle` keeps a single Canvas bolt mounted. A 300 ms reversible tween animates its color, green halo, border and strike-through; the bolt never fades out. Capture availability gates both UI and view-model commands. `setRearFlash` persists selection and emits one settings-aware control haptic per accepted change, with no capture or film mutation. Default caption font initializes empty caption editors; existing caption metadata takes precedence. No Room schema change is introduced.

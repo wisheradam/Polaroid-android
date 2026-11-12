@@ -1,4 +1,4 @@
-# Instant Room 0.4.0 for Android
+# Instant Room 0.5.0 for Android
 
 Native Kotlin/Jetpack Compose instant-film camera. The Android project is self-contained in this directory; no iOS files are involved. Android 8.0 (API 26) or later. All camera, film, development, archive, and corkboard features work locally without an account or internet permission.
 
@@ -22,6 +22,10 @@ For connected emulator/device tests:
 The debug APK is locally signed for development. It is not a production/Play Store release. Build an unsigned release with `./gradlew :app:assembleRelease` and supply your own secure signing setup for distribution.
 
 ## Update notes
+
+Version **0.5.0 (code 5)** adds **Camera Style** in Settings: **Old Fasion** (Black, Ivory / Cream, Dark Olive, Brown / Brass), **Insta Style** (White, Pink, Baby Blue, Mint, Lavender), and **One and Only** (White, Black, Red accent, Cream / Spectrum). The picker includes a live miniature preview. Shell, shutter, flash housing, film bay and app accents adapt immediately; style and color persist. Physical materials retain their selected colors independently from Light/Dark/Follow System appearance. Printed photographs, paper, cork and image colors remain unchanged.
+
+The rear flash has one persistent lightning bolt, a fading off-strike and smooth green illumination animated over 300 ms in both directions, plus a restrained click respecting global haptics. Flash selection now persists. **Default handwriting** selects the initial font for new captions without changing notes already written. Room remains schema **3**, with existing migrations and archive data retained. See [0.5.0 validation](docs/UPDATE_0_5_VALIDATION.md).
 
 Version **0.4.0 (code 4)** adds the camera self-timer and Photo Booth:
 
@@ -72,3 +76,16 @@ The repository root's `infra/aws/` contains a deployed on-demand CodeBuild/S3/Cl
 All sounds are originally synthesized and dedicated to the public domain under CC0; see `ASSETS.md`. The cork texture, pushpins, film frames, camera body, and chemical masks are drawn procedurally. No Polaroid logos, third-party recordings, or borrowed product photographs are bundled. Product names identify format references only.
 
 Room metadata and JPEG files are private internal app data. Gallery saves and shares require a fully developed photo. Uninstalling the app deletes its private archive; export keeps a separate gallery copy. Android backup is disabled to avoid silently sending photographs to device backup services. There are no analytics, subscriptions, ads, or cloud SDK credentials in the APK.
+
+## Design System 1.0 integration
+
+The One and Only camera and shared semantic typography/palette are documented in
+[the Android design-system handoff](docs/design-system/README.md). This integration
+is awaiting native-device visual review and does not change the release version.
+
+## Insta Style native review build
+
+The new pastel Insta Style surface shares the existing camera/film workflow
+with native Old Fashion and One and Only. See the [implementation and review
+limitations](docs/insta-style-implementation/README.md). Design approval and
+physical-device acceptance remain pending; version stays 0.5.0 (5).

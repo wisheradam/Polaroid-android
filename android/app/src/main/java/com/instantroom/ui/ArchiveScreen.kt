@@ -15,11 +15,11 @@ import com.instantroom.core.*
 import com.instantroom.data.PhotoEntity
 import com.instantroom.data.geometry
 
-@Composable fun ArchiveScreen(photos: List<PhotoEntity>, open: (String)->Unit, retry: ()->Unit, share: (PhotoEntity,ShareTarget)->Unit = {_,_->}) {
+@Composable fun ArchiveScreen(photos: List<PhotoEntity>, open: (String)->Unit, retry: ()->Unit, board: ()->Unit = {}, share: (PhotoEntity,ShareTarget)->Unit = {_,_->}) {
  val locale=LocalConfiguration.current.locales[0]
  Column(Modifier.fillMaxSize().padding(horizontal=20.dp)) {
-  Spacer(Modifier.height(20.dp));SmallLabel("YOUR PERMANENT COLLECTION")
-  Text("Little pieces of time.",style=MaterialTheme.typography.headlineMedium,modifier=Modifier.padding(vertical=12.dp))
+  Spacer(Modifier.height(20.dp));Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween,verticalAlignment=androidx.compose.ui.Alignment.CenterVertically){SmallLabel("YOUR PHOTOGRAPHS");TextButton(onClick=board){Text("Corkboard")}}
+  Text("Archive",style=MaterialTheme.typography.headlineMedium,modifier=Modifier.padding(vertical=12.dp))
   if(photos.isEmpty())Text("Your first photograph is waiting to happen.",Modifier.padding(vertical=40.dp))
   LazyVerticalGrid(columns=GridCells.Adaptive(140.dp),horizontalArrangement=Arrangement.spacedBy(18.dp),verticalArrangement=Arrangement.spacedBy(22.dp),contentPadding=PaddingValues(vertical=12.dp)) {
    items(photos,key={it.id}) { p->

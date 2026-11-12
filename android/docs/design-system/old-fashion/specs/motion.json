@@ -1,0 +1,345 @@
+[
+  {
+    "name": "Shutter depression",
+    "trigger": "pointer down while capture allowed",
+    "states": [
+      "Idle",
+      "Pressed"
+    ],
+    "durationMs": 70,
+    "easing": "ease-out cubic(0,0,0.2,1)",
+    "properties": "cap translateX0→2dp; shadow y3→1 blur5→2",
+    "layers": "cap within fixed48×80 target",
+    "audio": "None until accepted capture",
+    "haptic": "existing enabled press cue",
+    "reducedMotion": "Immediate shadow; no translation",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Shutter release",
+    "trigger": "pointer up/cancel",
+    "states": [
+      "Pressed",
+      "Released",
+      "Idle"
+    ],
+    "durationMs": 110,
+    "easing": "ease-out cubic(0,0,0.2,1)",
+    "properties": "cap translateX2→0dp; restore shadow",
+    "layers": "target never moves",
+    "audio": "Accepted capture dispatches existing shutter/charge sound once",
+    "haptic": "Existing capture feedback once",
+    "reducedMotion": "Immediate release; same capture semantics",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Flash toggle",
+    "trigger": "flash control selection",
+    "states": [
+      "Off",
+      "On"
+    ],
+    "durationMs": 300,
+    "easing": "ease-in-out cubic(0.4,0,0.2,1)",
+    "properties": "LED/glow opacity; keep icon visible24dp",
+    "layers": "glow bounded to module",
+    "audio": "Silent",
+    "haptic": "light selection if enabled",
+    "reducedMotion": "Instant state",
+    "authority": "Existing FlashMotion300ms"
+  },
+  {
+    "name": "Flash charging",
+    "trigger": "capture CHARGING event",
+    "states": [
+      "Off/On",
+      "Charging",
+      "Ready"
+    ],
+    "durationMs": {
+      "default": 650,
+      "settingsRange": [
+        400,
+        1200
+      ]
+    },
+    "easing": "linear visual indicator",
+    "properties": "warm illumination opacity0→0.3; no preview distortion",
+    "layers": "flash lens plus persistent status",
+    "audio": "Existing flash-charge audio",
+    "haptic": "Existing charge haptic via feedback port",
+    "reducedMotion": "Static Charging/Ready labels",
+    "authority": "Existing capture settings and callbacks"
+  },
+  {
+    "name": "Flash firing",
+    "trigger": "hardware exposure callback / screen flash callback",
+    "states": [
+      "Ready",
+      "Firing",
+      "Idle"
+    ],
+    "durationMs": "hardware callback bound",
+    "easing": "step/callback",
+    "properties": "bounded flash illumination; selfie screen and edge light restore original colors after exposure",
+    "layers": "exposure overlay above preview; preserve required visual flash",
+    "audio": "Existing capture sound only; avoid duplicate cue",
+    "haptic": "Existing capture haptic",
+    "reducedMotion": "Disable decorative bloom; actual requested light follows flash preference",
+    "authority": "Functional callback, no invented fixed exposure time"
+  },
+  {
+    "name": "Film ejection",
+    "trigger": "EJECTING domain event",
+    "states": [
+      "Empty",
+      "Motor starting",
+      "Partially ejected",
+      "Fully ejected"
+    ],
+    "durationMs": 1800,
+    "easing": "linear",
+    "properties": "paper position(-height→0) proportional to ejection progress; no stretch/no bounce",
+    "layers": "paper above recess, clipped at mouth, foreground roller lip above paper",
+    "audio": "Existing motor cue starts0, ends with domain event",
+    "haptic": "Existing pulses0/300/620/960/1300/1600/1800ms",
+    "reducedMotion": "Static emerging and result states; domain1800ms unchanged",
+    "authority": "Existing1800ms capture contract"
+  },
+  {
+    "name": "Shake development",
+    "trigger": "accepted shake input only",
+    "states": [
+      "Undeveloped",
+      "Developing",
+      "Paused",
+      "Complete"
+    ],
+    "durationMs": "input driven; no elapsed-time progress",
+    "easing": "direct input mapping",
+    "properties": "p←clamp(p+strength×0.018); strength0.35…1.4. Chemical veil opacity=(1−p)^1.35. No animation interpolates progress after input.",
+    "layers": "veil affects image regions only; paper/caption unchanged",
+    "audio": "Existing shake cue if supported/enabled; no autonomous loop",
+    "haptic": "Existing shake feedback per accepted event",
+    "reducedMotion": "Numeric progress + immediate image update; optional explicit manual-assist input only",
+    "authority": "Existing accepted-shake rule"
+  },
+  {
+    "name": "Development completion",
+    "trigger": "p reaches1",
+    "states": [
+      "Developing",
+      "Complete"
+    ],
+    "durationMs": 120,
+    "easing": "ease-out",
+    "properties": "brief border emphasis only; reveal is already complete",
+    "layers": "paper border",
+    "audio": "Optional existing completion cue",
+    "haptic": "light success if enabled",
+    "reducedMotion": "Static Complete label",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Open cartridge door",
+    "trigger": "confirmed replacement after warning",
+    "states": [
+      "CLOSED",
+      "OPEN"
+    ],
+    "durationMs": 260,
+    "easing": "ease-out",
+    "properties": "door/front panel translateY8dp; recessed shadow increases",
+    "layers": "door beneath controls; suspend capture",
+    "audio": "Mechanical click when confirmed",
+    "haptic": "light click if enabled",
+    "reducedMotion": "Instant OPEN; preserve cartridge",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Remove cartridge",
+    "trigger": "user Remove action",
+    "states": [
+      "OPEN",
+      "REMOVED"
+    ],
+    "durationMs": 240,
+    "easing": "linear",
+    "properties": "cartridge translateY−24dp/opacity1→0",
+    "layers": "cartridge above cradle, clipped by compartment",
+    "audio": "Mechanical handling cue if available",
+    "haptic": "light selection",
+    "reducedMotion": "Instant REMOVED; no refill",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Insert cartridge",
+    "trigger": "user selects format/treatment and inserts",
+    "states": [
+      "REMOVED",
+      "INSERTED"
+    ],
+    "durationMs": 360,
+    "easing": "ease-out",
+    "properties": "cartridge translateY−24→0dp/opacity0→1",
+    "layers": "cartridge into cradle",
+    "audio": "Mechanical seat click",
+    "haptic": "light impact",
+    "reducedMotion": "Instant INSERTED; counter not reset yet",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Close cartridge door",
+    "trigger": "successful close/load confirmation",
+    "states": [
+      "INSERTED",
+      "CLOSED with10"
+    ],
+    "durationMs": 260,
+    "easing": "ease-in-out",
+    "properties": "door translateY8→0dp; counter resets only successful domain close",
+    "layers": "close lip above cartridge",
+    "audio": "Mechanical latch",
+    "haptic": "light success",
+    "reducedMotion": "Instant CLOSED/10 after same domain success",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Timer selection",
+    "trigger": "select Off/5/15/30",
+    "states": [
+      "Previous preset",
+      "Selected preset"
+    ],
+    "durationMs": 150,
+    "easing": "ease-out",
+    "properties": "selection border/label opacity; no auto capture before countdown",
+    "layers": "bottom sheet above camera",
+    "audio": "Silent",
+    "haptic": "selection if enabled",
+    "reducedMotion": "Instant choice",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Countdown",
+    "trigger": "monotonic timer start",
+    "states": [
+      "Preset",
+      "Remaining seconds",
+      "Capture or Cancel"
+    ],
+    "durationMs": "5/15/30s;1s integer ticks",
+    "easing": "discrete monotonic",
+    "properties": "replace central numeral each second; Cancel≥48 target; optional0.96→1 scale120ms",
+    "layers": "overlay above preview",
+    "audio": "tick if enabled",
+    "haptic": "light tick if enabled",
+    "reducedMotion": "Static digits; identical timing",
+    "authority": "Existing timer presets"
+  },
+  {
+    "name": "Photo Booth sequence",
+    "trigger": "accepted session with≥4 exposures",
+    "states": [
+      "Ready",
+      "1/4",
+      "2/4",
+      "3/4",
+      "4/4",
+      "Output"
+    ],
+    "durationMs": "four accepted captures;5s intervals",
+    "easing": "monotonic schedule",
+    "properties": "session badge/current count; capture/develop output once sequence ready",
+    "layers": "countdown overlay and fixed shutter badge",
+    "audio": "existing capture/charge/eject events; no duplicates",
+    "haptic": "existing per-event patterns",
+    "reducedMotion": "Static count; identical capture scheduling",
+    "authority": "Existing CaptureSequence; no overlapping slow captures"
+  },
+  {
+    "name": "Camera switching",
+    "trigger": "switch tap",
+    "states": [
+      "Rear/Front",
+      "Switching",
+      "Front/Rear"
+    ],
+    "durationMs": "180ms cover; readiness callback gates preview",
+    "easing": "ease-out",
+    "properties": "cover opacity0→1→0 after camera ready; no optical zoom",
+    "layers": "cover over preview only",
+    "audio": "Silent",
+    "haptic": "selection if enabled",
+    "reducedMotion": "Loading label until ready",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Theme and finish",
+    "trigger": "selected setting",
+    "states": [
+      "Current",
+      "Preview",
+      "Confirmed"
+    ],
+    "durationMs": 220,
+    "easing": "ease-in-out",
+    "properties": "color crossfade; only selected category changes",
+    "layers": "camera finishes independent from app surfaces/film",
+    "audio": "Silent",
+    "haptic": "selection if enabled",
+    "reducedMotion": "Instant colors",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Screen navigation",
+    "trigger": "destination tap/back",
+    "states": [
+      "Current screen",
+      "Destination"
+    ],
+    "durationMs": 200,
+    "easing": "ease-out",
+    "properties": "opacity0→1; optional8dp y",
+    "layers": "screen content below native system areas",
+    "audio": "Silent",
+    "haptic": "native selection only where expected",
+    "reducedMotion": "Instant or100ms opacity",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Bottom sheet",
+    "trigger": "open timer/film action",
+    "states": [
+      "Closed",
+      "Open"
+    ],
+    "durationMs": 240,
+    "easing": "ease-out",
+    "properties": "translate from safe bottom; focus transfer; dismiss restores prior focus",
+    "layers": "above camera, below system UI",
+    "audio": "Silent",
+    "haptic": "None",
+    "reducedMotion": "Instant sheet",
+    "authority": "Proposed visual timing"
+  },
+  {
+    "name": "Pushpin insert/remove",
+    "trigger": "explicit Pin/Unpin action",
+    "states": [
+      "Unpinned",
+      "Pinned"
+    ],
+    "durationMs": {
+      "insert": 160,
+      "remove": 120
+    },
+    "easing": "ease-out insert/ease-in remove",
+    "properties": "insert scale1.08→1, shadow3→1; remove opacity1→0; arrange through menu or drag",
+    "layers": "pin above photo above cork",
+    "audio": "subtle click if enabled",
+    "haptic": "light impact",
+    "reducedMotion": "Instant pinned badge",
+    "authority": "Proposed visual timing"
+  }
+]

@@ -61,5 +61,5 @@ object Development {
  fun acceptedShake(progress: Float, strength: Float): Float = if (!strength.isFinite() || strength <= 0f) progress else (progress + strength.coerceAtMost(1.4f)*.018f).coerceIn(0f, 1f)
  fun accessiblePress(progress: Float, enabled: Boolean) = if (enabled) acceptedShake(progress, .6f) else progress
 }
-interface FeedbackPort { fun charge(durationMs: Long); fun shutter(); fun eject(); fun pin(); fun stop(); fun develop() = Unit; fun stopDevelopment() = Unit; fun countdown(finalSeconds: Boolean) = Unit; fun exposed() = Unit }
+interface FeedbackPort { fun charge(durationMs: Long); fun shutter(); fun eject(); fun pin(); fun stop(); fun develop() = Unit; fun stopDevelopment() = Unit; fun countdown(finalSeconds: Boolean) = Unit; fun exposed() = Unit; fun controlClick() = Unit }
 interface MotionPort { val available: Boolean; fun start(onShake: (Float) -> Unit); fun stop() }

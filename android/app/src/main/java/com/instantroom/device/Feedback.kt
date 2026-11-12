@@ -31,6 +31,7 @@ class Feedback(context: Context, private val prefs: Preferences) : FeedbackPort 
  override fun shutter() { exclusive(shutter); pulse(24,50) }
  override fun countdown(finalSeconds: Boolean) {exclusive(tick,if(finalSeconds)1.4f else 1f)}
  override fun exposed() {pulse(14,28)}
+ override fun controlClick() {pulse(if(vibrator.hasAmplitudeControl())10 else 8,24)}
  override fun eject() {
   play(motor)
   if(prefs.state.value.haptics && vibrator.hasVibrator()) {

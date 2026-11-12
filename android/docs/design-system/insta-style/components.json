@@ -1,0 +1,615 @@
+{
+  "count": 75,
+  "sets": 12,
+  "components": [
+    {
+      "id": "2:22",
+      "name": "FilmCounter",
+      "type": "COMPONENT_SET",
+      "width": 440,
+      "height": 64
+    },
+    {
+      "id": "2:2",
+      "name": "State=10",
+      "type": "COMPONENT",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "2:6",
+      "name": "State=7",
+      "type": "COMPONENT",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "2:10",
+      "name": "State=1",
+      "type": "COMPONENT",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "2:14",
+      "name": "State=0",
+      "type": "COMPONENT",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "2:18",
+      "name": "State=Replace",
+      "type": "COMPONENT",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "2:145",
+      "name": "FlashWindow",
+      "type": "COMPONENT_SET",
+      "width": 414,
+      "height": 76
+    },
+    {
+      "id": "2:23",
+      "name": "State=Off",
+      "type": "COMPONENT",
+      "width": 44,
+      "height": 76
+    },
+    {
+      "id": "2:43",
+      "name": "State=On",
+      "type": "COMPONENT",
+      "width": 44,
+      "height": 76
+    },
+    {
+      "id": "2:63",
+      "name": "State=Charging",
+      "type": "COMPONENT",
+      "width": 44,
+      "height": 76
+    },
+    {
+      "id": "2:84",
+      "name": "State=Ready",
+      "type": "COMPONENT",
+      "width": 44,
+      "height": 76
+    },
+    {
+      "id": "2:105",
+      "name": "State=Firing",
+      "type": "COMPONENT",
+      "width": 44,
+      "height": 76
+    },
+    {
+      "id": "2:125",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 44,
+      "height": 76
+    },
+    {
+      "id": "2:177",
+      "name": "TimerButton",
+      "type": "COMPONENT_SET",
+      "width": 558,
+      "height": 58
+    },
+    {
+      "id": "2:146",
+      "name": "State=Off",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:150",
+      "name": "State=5s",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:155",
+      "name": "State=15s",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:160",
+      "name": "State=30s",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:165",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:169",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:173",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:208",
+      "name": "FlashToggle",
+      "type": "COMPONENT_SET",
+      "width": 558,
+      "height": 58
+    },
+    {
+      "id": "2:178",
+      "name": "State=Off",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:182",
+      "name": "State=On",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:186",
+      "name": "State=Charging",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:191",
+      "name": "State=Ready",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:196",
+      "name": "State=Firing",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:200",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:204",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:234",
+      "name": "CameraSwitchButton",
+      "type": "COMPONENT_SET",
+      "width": 474,
+      "height": 58
+    },
+    {
+      "id": "2:209",
+      "name": "State=Rear",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:213",
+      "name": "State=Front",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:218",
+      "name": "State=Switching",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:222",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:226",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:230",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:258",
+      "name": "SelfieLightControl",
+      "type": "COMPONENT_SET",
+      "width": 390,
+      "height": 58
+    },
+    {
+      "id": "2:235",
+      "name": "State=Off",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:239",
+      "name": "State=Screen Flash",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:244",
+      "name": "State=Edge Light",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:249",
+      "name": "State=Both",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:254",
+      "name": "State=Unavailable",
+      "type": "COMPONENT",
+      "width": 54,
+      "height": 58
+    },
+    {
+      "id": "2:279",
+      "name": "GalleryButton",
+      "type": "COMPONENT_SET",
+      "width": 670,
+      "height": 58
+    },
+    {
+      "id": "2:259",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:263",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:267",
+      "name": "State=Selected",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:271",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:275",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:300",
+      "name": "PhotoBoothButton",
+      "type": "COMPONENT_SET",
+      "width": 670,
+      "height": 58
+    },
+    {
+      "id": "2:280",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:284",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:288",
+      "name": "State=Selected",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:292",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:296",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:321",
+      "name": "SettingsButton",
+      "type": "COMPONENT_SET",
+      "width": 670,
+      "height": 58
+    },
+    {
+      "id": "2:301",
+      "name": "State=Default",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:305",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:309",
+      "name": "State=Selected",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:313",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:317",
+      "name": "State=Focused",
+      "type": "COMPONENT",
+      "width": 110,
+      "height": 58
+    },
+    {
+      "id": "2:346",
+      "name": "ShutterButton",
+      "type": "COMPONENT_SET",
+      "width": 750,
+      "height": 100
+    },
+    {
+      "id": "2:322",
+      "name": "State=Idle",
+      "type": "COMPONENT",
+      "width": 100,
+      "height": 100
+    },
+    {
+      "id": "2:326",
+      "name": "State=Pressed",
+      "type": "COMPONENT",
+      "width": 100,
+      "height": 100
+    },
+    {
+      "id": "2:330",
+      "name": "State=Capturing",
+      "type": "COMPONENT",
+      "width": 100,
+      "height": 100
+    },
+    {
+      "id": "2:334",
+      "name": "State=Disabled",
+      "type": "COMPONENT",
+      "width": 100,
+      "height": 100
+    },
+    {
+      "id": "2:338",
+      "name": "State=Timer active",
+      "type": "COMPONENT",
+      "width": 100,
+      "height": 100
+    },
+    {
+      "id": "2:342",
+      "name": "State=Photo Booth active",
+      "type": "COMPONENT",
+      "width": 100,
+      "height": 100
+    },
+    {
+      "id": "2:368",
+      "name": "FilmEjectionSlot",
+      "type": "COMPONENT_SET",
+      "width": 1438,
+      "height": 70
+    },
+    {
+      "id": "2:347",
+      "name": "State=Empty",
+      "type": "COMPONENT",
+      "width": 337,
+      "height": 70
+    },
+    {
+      "id": "2:352",
+      "name": "State=Motor",
+      "type": "COMPONENT",
+      "width": 337,
+      "height": 70
+    },
+    {
+      "id": "2:358",
+      "name": "State=Partial",
+      "type": "COMPONENT",
+      "width": 337,
+      "height": 264
+    },
+    {
+      "id": "2:363",
+      "name": "State=Ejected",
+      "type": "COMPONENT",
+      "width": 337,
+      "height": 264
+    },
+    {
+      "id": "2:369",
+      "name": "MainCircularLens",
+      "type": "COMPONENT",
+      "width": 310,
+      "height": 310
+    },
+    {
+      "id": "2:382",
+      "name": "InstaStyleCameraShell",
+      "type": "COMPONENT",
+      "width": 393,
+      "height": 852
+    },
+    {
+      "id": "8:26",
+      "name": "PhotoFrame / FilmOutputPaper",
+      "type": "COMPONENT_SET",
+      "width": 1252.4000244140625,
+      "height": 419.20001220703125
+    },
+    {
+      "id": "8:2",
+      "name": "Format=CLASSIC",
+      "type": "COMPONENT",
+      "width": 141.552001953125,
+      "height": 172.03199768066406
+    },
+    {
+      "id": "8:5",
+      "name": "Format=GO",
+      "type": "COMPONENT",
+      "width": 86.23999786376953,
+      "height": 106.55999755859375
+    },
+    {
+      "id": "8:8",
+      "name": "Format=SPECTRA",
+      "type": "COMPONENT",
+      "width": 164.99839782714844,
+      "height": 162.55999755859375
+    },
+    {
+      "id": "8:11",
+      "name": "Format=ROUND",
+      "type": "COMPONENT",
+      "width": 141.552001953125,
+      "height": 172.03199768066406
+    },
+    {
+      "id": "8:14",
+      "name": "Format=GRID",
+      "type": "COMPONENT",
+      "width": 198.39999389648438,
+      "height": 227.1999969482422
+    },
+    {
+      "id": "8:20",
+      "name": "Format=STRIP",
+      "type": "COMPONENT",
+      "width": 102.4000015258789,
+      "height": 419.20001220703125
+    },
+    {
+      "id": "8:27",
+      "name": "CameraPreviewAperture",
+      "type": "COMPONENT",
+      "width": 262,
+      "height": 262
+    },
+    {
+      "id": "8:29",
+      "name": "FocusIndicator",
+      "type": "COMPONENT",
+      "width": 64,
+      "height": 64
+    },
+    {
+      "id": "8:32",
+      "name": "FilmCartridgeSelector",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 190
+    },
+    {
+      "id": "8:35",
+      "name": "CameraStyleSelector",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 192
+    },
+    {
+      "id": "8:38",
+      "name": "CameraFinishSelector",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 110
+    },
+    {
+      "id": "8:41",
+      "name": "CaptionEditorControl",
+      "type": "COMPONENT",
+      "width": 345,
+      "height": 80
+    }
+  ]
+}

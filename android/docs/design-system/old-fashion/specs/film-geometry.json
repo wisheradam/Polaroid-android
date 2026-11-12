@@ -1,0 +1,128 @@
+{
+  "units": "mm",
+  "source": "PrintGeometry / Film.kt",
+  "formats": {
+    "CLASSIC": {
+      "label": "Classic",
+      "width": 88.47,
+      "height": 107.52,
+      "regions": [
+        {
+          "left": 5.8344999999999985,
+          "top": 5.8,
+          "width": 76.801,
+          "height": 78.94
+        }
+      ],
+      "display": 168
+    },
+    "GO": {
+      "label": "Go · Mini",
+      "width": 53.9,
+      "height": 66.6,
+      "regions": [
+        {
+          "left": 3.9499999999999993,
+          "top": 3.8,
+          "width": 46,
+          "height": 47
+        }
+      ],
+      "display": 144
+    },
+    "SPECTRA": {
+      "label": "Spectra · Wide",
+      "width": 103.124,
+      "height": 101.6,
+      "regions": [
+        {
+          "left": 5.841999999999999,
+          "top": 5.5,
+          "width": 91.44,
+          "height": 73.66
+        }
+      ],
+      "display": 192
+    },
+    "ROUND": {
+      "label": "Round Frame",
+      "width": 88.47,
+      "height": 107.52,
+      "round": true,
+      "regions": [
+        {
+          "left": 5.829999999999998,
+          "top": 6,
+          "width": 76.81,
+          "height": 76.81
+        }
+      ],
+      "display": 168
+    },
+    "GRID": {
+      "label": "Collage 2×2",
+      "width": 124,
+      "height": 142,
+      "regions": [
+        {
+          "left": 7,
+          "top": 6,
+          "width": 53,
+          "height": 53
+        },
+        {
+          "left": 64,
+          "top": 6,
+          "width": 53,
+          "height": 53
+        },
+        {
+          "left": 7,
+          "top": 63,
+          "width": 53,
+          "height": 53
+        },
+        {
+          "left": 64,
+          "top": 63,
+          "width": 53,
+          "height": 53
+        }
+      ],
+      "display": 192
+    },
+    "STRIP": {
+      "label": "Vertical Strip 1×4",
+      "width": 64,
+      "height": 262,
+      "regions": [
+        {
+          "left": 5,
+          "top": 5,
+          "width": 54,
+          "height": 54
+        },
+        {
+          "left": 5,
+          "top": 63,
+          "width": 54,
+          "height": 54
+        },
+        {
+          "left": 5,
+          "top": 121,
+          "width": 54,
+          "height": 54
+        },
+        {
+          "left": 5,
+          "top": 179,
+          "width": 54,
+          "height": 54
+        }
+      ],
+      "display": 70
+    }
+  },
+  "crop": "Uniform fill and center crop per image region. Do not stretch photograph; maintain native output orientation."
+}
