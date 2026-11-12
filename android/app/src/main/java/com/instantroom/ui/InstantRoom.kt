@@ -56,12 +56,12 @@ import com.instantroom.core.SelfieLightMode
  BackHandler(cap.phase!=CapturePhase.IDLE){vm.cancelCapture()}
  BackHandler(screen!="Camera" && cap.phase==CapturePhase.IDLE) {screen=if(screen=="Camera Design")"Settings" else "Camera"}
  val lightingActive=screen=="Camera" && resumed && settings.front && cameraState.selectedFront && cameraState.ready
- val analogCamera=screen=="Camera" && settings.cameraStyle in listOf(CameraStyle.ONE_AND_ONLY,CameraStyle.OLD_FASION)
- val cameraChrome=if(settings.cameraStyle==CameraStyle.OLD_FASION)OldFashionTokens.Chrome else AnalogTokens.Chrome
+ val analogCamera=screen=="Camera" && settings.cameraStyle in CameraStyle.entries
+ val cameraChrome=when(settings.cameraStyle){CameraStyle.OLD_FASION->OldFashionTokens.Chrome;CameraStyle.INSTA_STYLE->cameraFinish(settings.cameraStyle,settings.cameraColor).body;else->AnalogTokens.Chrome}
  val pendingAppearance by vm.pendingAppearance.collectAsStateWithLifecycle()
  val view=LocalView.current
  val dark=LocalInstantDark.current
- SideEffect { if(!view.isInEditMode)runCatching { WindowCompat.getInsetsController(context.activity().window,view).apply { isAppearanceLightStatusBars=if(analogCamera)false else !dark;isAppearanceLightNavigationBars=if(analogCamera)false else !dark } } }
+ SideEffect { if(!view.isInEditMode)runCatching { WindowCompat.getInsetsController(context.activity().window,view).apply { isAppearanceLightStatusBars=if(analogCamera)settings.cameraStyle==CameraStyle.INSTA_STYLE else !dark;isAppearanceLightNavigationBars=if(analogCamera)settings.cameraStyle==CameraStyle.INSTA_STYLE else !dark } } }
  Box(Modifier.fillMaxSize()) {
  Scaffold(containerColor=if(analogCamera)cameraChrome else MaterialTheme.colorScheme.background,modifier=Modifier.padding(if(lightingActive && settings.selfieLight.edge)settings.edgeWidth.dp else 0.dp),snackbarHost={SnackbarHost(host)},bottomBar={
   if(!analogCamera && screen in listOf("Camera","Archive","Corkboard","Settings"))NavigationBar(containerColor=Ink) {

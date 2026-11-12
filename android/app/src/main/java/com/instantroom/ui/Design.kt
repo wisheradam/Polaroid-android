@@ -61,7 +61,8 @@ val LocalInstantDark=staticCompositionLocalOf{true}
   }
  }
  CompositionLocalProvider(LocalInstantDark provides dark) {
-  val base=if(dark)DarkPalette else LightPalette
+  val standard=if(dark)DarkPalette else LightPalette
+  val base=if(cameraStyle!=CameraStyle.INSTA_STYLE)standard else if(dark)standard.copy(background=Color(0xFF242526),surface=Color(0xFF242526),onSurface=InstaStyleTokens.Paper,onBackground=InstaStyleTokens.Paper) else standard.copy(background=InstaStyleTokens.Paper,surface=InstaStyleTokens.Raised,onSurface=InstaStyleTokens.Ink,onBackground=InstaStyleTokens.Ink,onSurfaceVariant=InstaStyleTokens.Ink)
   val finish=cameraFinish(cameraStyle,cameraColor)
   val primary=if(cameraStyle==CameraStyle.ONE_AND_ONLY)base.primary else readableAccent(finish.accent,base.surface)
   MaterialTheme(colorScheme=base.copy(primary=primary,onPrimary=inkOn(primary),secondary=if(cameraStyle==CameraStyle.ONE_AND_ONLY)base.secondary else finish.shutter,onSecondary=if(cameraStyle==CameraStyle.ONE_AND_ONLY)base.onSecondary else inkOn(finish.shutter)),

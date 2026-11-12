@@ -52,13 +52,14 @@ import kotlinx.coroutines.launch
   Box(Modifier.fillMaxWidth().height(210.dp).background(androidx.compose.ui.graphics.Color.Black,RoundedCornerShape(20.dp)).clipToBounds(),contentAlignment=Alignment.Center) {
    val cardModifier=Modifier.width(220.dp).offset{IntOffset(0,cartOffset.roundToPx())}.pointerInput(phase){var drag=0f;detectDragGestures(onDragStart={drag=0f},onDragEnd={if(kotlin.math.abs(drag)>50 && phase in listOf(LoadingPhase.OPEN,LoadingPhase.REMOVED))advance()},onDrag={change,amount->change.consume();drag+=amount.y})}
    if(settings.cameraStyle==CameraStyle.OLD_FASION)OldFashionLoadingCard(settings.cameraColor,FilmFormat.valueOf(formatName),Appearance.valueOf(appearanceName),phase==LoadingPhase.REMOVED,cardModifier)
+   else if(settings.cameraStyle==CameraStyle.INSTA_STYLE)InstaLoadingCard(FilmFormat.valueOf(formatName),Appearance.valueOf(appearanceName),phase==LoadingPhase.REMOVED,cardModifier)
    else CameraShell(settings.cameraStyle,settings.cameraColor,cardModifier) {
     SmallLabel(if(phase==LoadingPhase.REMOVED)"EMPTY BAY" else "INSTANT ROOM / FILM")
     Text(FilmFormat.valueOf(formatName).label,style=MaterialTheme.typography.titleLarge)
     Text("10 EXPOSURES",color=Amber)
     Text(Appearance.valueOf(appearanceName).label)
    }
-   Box(Modifier.fillMaxWidth().height(60.dp).align(Alignment.BottomCenter).graphicsLayer{rotationX=door;transformOrigin=androidx.compose.ui.graphics.TransformOrigin(.5f,1f)}.background(if(settings.cameraStyle==CameraStyle.OLD_FASION)OldFashionTokens.Optical else Rust,RoundedCornerShape(10.dp)),contentAlignment=Alignment.Center){Text("FILM COMPARTMENT",style=MaterialTheme.typography.labelSmall,color=if(settings.cameraStyle==CameraStyle.OLD_FASION)OldFashionTokens.Ivory else MaterialTheme.colorScheme.onSecondary)}
+   Box(Modifier.fillMaxWidth().height(60.dp).align(Alignment.BottomCenter).graphicsLayer{rotationX=door;transformOrigin=androidx.compose.ui.graphics.TransformOrigin(.5f,1f)}.background(if(settings.cameraStyle==CameraStyle.OLD_FASION)OldFashionTokens.Optical else if(settings.cameraStyle==CameraStyle.INSTA_STYLE)cameraFinish(settings.cameraStyle,settings.cameraColor).body else Rust,RoundedCornerShape(10.dp)),contentAlignment=Alignment.Center){Text("FILM COMPARTMENT",style=MaterialTheme.typography.labelSmall,color=if(settings.cameraStyle==CameraStyle.OLD_FASION)OldFashionTokens.Ivory else if(settings.cameraStyle==CameraStyle.INSTA_STYLE)InstaStyleTokens.Ink else MaterialTheme.colorScheme.onSecondary)}
   }
   Text(when(phase){LoadingPhase.CLOSED->"${cartridge?.remaining ?: 0} shots remaining. Open the compartment to replace the cartridge.";LoadingPhase.OPEN->"Pull the old cartridge out of the bay.";LoadingPhase.REMOVED->"Choose your film, then slide the new cartridge into the bay.";LoadingPhase.INSERTED->"The new cartridge is seated. Close the door to load it."})
   if(phase==LoadingPhase.REMOVED) {

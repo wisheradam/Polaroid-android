@@ -125,22 +125,7 @@ fun cameraCorner(style: CameraStyle)=when(style){CameraStyle.OLD_FASION->10.dp;C
 @Composable fun CameraStylePreview(style: CameraStyle,color: CameraColor,modifier: Modifier=Modifier) {
  if(style==CameraStyle.OLD_FASION){OldFashionStylePreview(color,modifier);return}
  if(style==CameraStyle.ONE_AND_ONLY){OneAndOnlyStylePreview(color,modifier);return}
- val f=cameraFinish(style,color)
- Canvas(modifier.fillMaxWidth().height(138.dp).semantics{contentDescription="${style.label}, ${color.label} camera preview"}) {
-  val w=size.width*.82f;val h=size.height*.83f;val x=(size.width-w)/2;val y=(size.height-h)/2
-  val corner=when(style){CameraStyle.OLD_FASION->6.dp.toPx();CameraStyle.INSTA_STYLE->27.dp.toPx();CameraStyle.ONE_AND_ONLY->10.dp.toPx()}
-  drawRoundRect(f.ink.copy(alpha=.15f),Offset(x+3.dp.toPx(),y+5.dp.toPx()),Size(w,h),CornerRadius(corner))
-  drawRoundRect(f.body,Offset(x,y),Size(w,h),CornerRadius(corner))
-  val lens=Offset(size.width*.5f,size.height*.46f);val r=h*.29f
-  if(style==CameraStyle.OLD_FASION)repeat(24){i->val xx=x+i*w/24;drawLine(f.ink.copy(alpha=.09f),Offset(xx,y+6.dp.toPx()),Offset(xx,y+h-6.dp.toPx()),1f)}
-  drawCircle(f.accent,r+4.dp.toPx(),lens);drawCircle(Color(0xFF202B29),r,lens)
-  drawCircle(Color(0xFF536D68),r*.69f,lens);drawCircle(Color(0xFF132120),r*.48f,lens)
-  drawCircle(Color.White.copy(alpha=.45f),r*.17f,lens-Offset(r*.22f,r*.23f))
-  drawRoundRect(Color(0xFF323B37),Offset(x+w*.73f,y+h*.16f),Size(w*.16f,h*.17f),CornerRadius(if(style==CameraStyle.INSTA_STYLE)6.dp.toPx()else 1.dp.toPx()))
-  drawCircle(f.shutter,h*.105f,Offset(x+w*.18f,y+h*.67f))
-  drawRoundRect(f.ink,Offset(x+w*.13f,y+h*.85f),Size(w*.74f,h*.045f),CornerRadius(2.dp.toPx()))
-  if(style==CameraStyle.ONE_AND_ONLY && color==CameraColor.SPECTRUM)listOf(Color(0xFF357C76),Color(0xFFD09D45),Color(0xFFC26349),Color(0xFF855A7A)).forEachIndexed{i,c->drawRect(c,Offset(x+w*.7f+i*5.dp.toPx(),y+h*.57f),Size(3.dp.toPx(),h*.18f))}
- }
+ InstaStylePreview(color,modifier)
 }
 
 @Composable fun CameraStyleSettings(s: Settings,set: (Settings)->Unit) {

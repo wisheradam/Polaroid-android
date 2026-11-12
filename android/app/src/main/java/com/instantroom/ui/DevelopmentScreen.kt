@@ -25,6 +25,7 @@ import com.instantroom.data.*
  }
  Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp),horizontalAlignment=Alignment.CenterHorizontally,verticalArrangement=Arrangement.spacedBy(20.dp)) {
   Row(Modifier.fillMaxWidth(),horizontalArrangement=Arrangement.SpaceBetween){TextButton(onClick=back){Text("Archive")};SmallLabel(if(photo.progress>=1f)"A MOMENT, KEPT." else "LET IT COME TO LIFE")}
+  if(settings.cameraStyle==CameraStyle.INSTA_STYLE)Text("Develop your photograph",style=MaterialTheme.typography.headlineSmall)
   Spacer(Modifier.height(4.dp))
   BoxWithConstraints(Modifier.fillMaxWidth(),contentAlignment=Alignment.Center) {
    FilmPrint(photo,Modifier.width(minOf(maxWidth*.88f,420.dp*photo.geometry.aspect)).shadow(18.dp).rotate(-2f))
@@ -39,7 +40,7 @@ import com.instantroom.data.*
    Text("Physical shaking is a playful simulation. Real instant film should not be shaken.",style=MaterialTheme.typography.labelSmall,color=Cream.copy(alpha=.45f))
   } else {
    PhotoCaptionAction(photo,settings.captionFont) {text,font,done->vm.caption(photo.id,text,font,done)}
-   Row(horizontalArrangement=Arrangement.spacedBy(12.dp)){Button(onClick=save){Text("Save to gallery")};ShareActions{vm.share(photo,it)}}
+   FlowRow(horizontalArrangement=Arrangement.spacedBy(12.dp)){Button(onClick=save){Text("Save to gallery")};ShareActions{vm.share(photo,it)}}
    TextButton(onClick=attach){Text("Place on corkboard →")}
    if(photo.boothLayout.isNotEmpty()) {
     Text("Make another undeveloped print from the same four sources. No film is used.",style=MaterialTheme.typography.bodySmall)
