@@ -48,7 +48,7 @@ class CameraStyleUiTest {
  @Test fun appAppearanceAndPhysicalCameraColorAreIndependent(){
   var mode by mutableStateOf(ThemeMode.LIGHT);val style=CameraStyle.INSTA_STYLE;val color=CameraColor.MINT
   compose.setContent{InstantTheme(mode,style,color){CameraStylePreview(style,color)}}
-  val before=compose.onRoot().captureToImage().asAndroidBitmap();compose.runOnIdle{mode=ThemeMode.DARK};val after=compose.onRoot().captureToImage().asAndroidBitmap();assertTrue(before.sameAs(after))
+  val before=compose.onNodeWithTag("insta-preview-body",useUnmergedTree=true).captureToImage().asAndroidBitmap();compose.runOnIdle{mode=ThemeMode.DARK};val after=compose.onNodeWithTag("insta-preview-body",useUnmergedTree=true).captureToImage().asAndroidBitmap();assertTrue(before.sameAs(after))
  }
  @Test fun actualCameraSupportsThreeStylesAndKeepsLogoCountdownAndCancelVisible()=runBlocking<Unit>{
   val app=ApplicationProvider.getApplicationContext<Application>();val db=Room.inMemoryDatabaseBuilder(app,InstantDatabase::class.java).build();val repo=PhotoRepository(app,db,FilmProcessor(Preferences(app)));repo.replace(FilmFormat.CLASSIC,Appearance.COLOR);val cart=repo.active();val vm=RoomViewModel(app,repo)

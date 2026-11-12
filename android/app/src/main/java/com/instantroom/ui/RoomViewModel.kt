@@ -12,7 +12,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import java.util.UUID
 
-data class CaptureUi(val phase: CapturePhase = CapturePhase.IDLE, val photoId: String? = null, val ejection: Float = 0f, val countdown: Int=0, val shot: Int=1, val booth: Boolean=false, val sourceIds: List<String> = emptyList())
+data class CaptureUi(val phase: CapturePhase = CapturePhase.IDLE, val photoId: String? = null, val ejection: Float = 0f, val countdown: Int=0, val shot: Int=1, val booth: Boolean=false, val sourceIds: List<String> = emptyList(),val shutterFired: Boolean=false)
 object AndroidCaptureClock: CaptureClock {override fun nowMs()=SystemClock.elapsedRealtime();override suspend fun sleep(ms: Long){delay(ms)}}
 class RoomViewModel @JvmOverloads constructor(application: Application,
  val repo: PhotoRepository=(application as InstantRoomApp).repository,
@@ -67,12 +67,12 @@ class RoomViewModel @JvmOverloads constructor(application: Application,
      },charge={capture.value=capture.value.copy(phase=CapturePhase.CHARGING);if(foreground)feedbackPort.charge(config.chargeMs)}
     ) { index->
      currentCoroutineContext().ensureActive()
-     capture.value=capture.value.copy(phase=CapturePhase.CAPTURING,countdown=0)
+     capture.value=capture.value.copy(phase=CapturePhase.CAPTURING,countdown=0,shutterFired=false)
      // Never discard a successful camera result because Cancel/Pause arrived mid-capture.
      withContext(NonCancellable) {
       val id=session?.let{"${it.id}-$index"} ?: UUID.randomUUID().toString()
       repo.prepareCapture(id,cart,session?.id.orEmpty(),if(booth)index else -1)
-      try {cameraPort.captureWithLighting(repo.originalFile(id),flash,config.front && config.selfieLight.screenFlash){if(foreground)feedbackPort.shutter()}}
+      try {cameraPort.captureWithLighting(repo.originalFile(id),flash,config.front && config.selfieLight.screenFlash){capture.value=capture.value.copy(shutterFired=true);if(foreground)feedbackPort.shutter()}}
       catch(e:Exception){repo.abandonCapture(id);throw e}
       saved=repo.commitCapture(id,cart)
       if(booth) {

@@ -82,3 +82,10 @@ Room metadata and JPEG files are private internal app data. Gallery saves and sh
 The One and Only camera and shared semantic typography/palette are documented in
 [the Android design-system handoff](docs/design-system/README.md). This integration
 is awaiting native-device visual review and does not change the release version.
+
+## Insta Style native review build
+
+The new pastel Insta Style surface shares the existing camera/film workflow
+with native Old Fashion and One and Only. See the [implementation and review
+limitations](docs/insta-style-implementation/README.md). Design approval and
+physical-device acceptance remain pending; version stays 0.5.0 (5).

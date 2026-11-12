@@ -53,3 +53,17 @@ Camera surfaces, flash Fresnel lines, gold mesh, optical recesses, shutter, roll
 and ejection lip are native Compose drawings. No camera/product photograph or
 preview test double is bundled as a production preview. Physical finish colors
 are separate from the app's Light/Dark/System appearance.
+
+## Insta Style native review implementation
+
+The seven `is_*` vectors preserve the original supplied SVG icon geometry,
+including the 36 dp shutter glyph. Its ivory circle is an even-odd cutout
+against the ivory shutter face, allowing the original outline to take each
+finish's accent. `scripts/generate_insta_style_assets.py --check` checks the
+handoff asset hashes, all native vector reproductions and the unchanged logo.
+
+Shell, satin bevels, circular lens, Fresnel glass, shutter and output roller are
+native Compose drawing/layout. No reference photograph, generated selfie,
+manufacturer branding or flattened review screen is a runtime camera asset.
+No new font is added. Existing Inter and Sol Kol licenses are preserved;
+Denistina/Historic redistribution rights remain unresolved for public release.
