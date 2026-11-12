@@ -1,5 +1,5 @@
 {
-  "status": "Insta Style Design System 1.0 \u2014 Pending Product Design Approval",
+  "status": "Insta Style Design System 1.0 — Pending Product Design Approval",
   "nativeComponents": 75,
   "variantSets": 12,
   "mainLayouts": 4,
@@ -48,5 +48,59 @@
     "no real camera/sensors/persistence/sharing",
     "countdown frames are review states",
     "explicit accepted-input simulation only"
-  ]
+  ],
+  "followupReview": {
+    "date": "2026-11-12",
+    "scope": "Figma Settings and immediate appearance selection",
+    "routing": [
+      {
+        "color": "WHITE",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "PINK",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "BLUE",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "MINT",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "LAVENDER",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      }
+    ],
+    "fixes": [
+      "Retain selected finish through Camera → Settings → Appearance and both Back routes",
+      "One visible camera preview per appearance state",
+      "One correct finish caption per appearance state",
+      "One intended prototype starting point"
+    ],
+    "visualCheck": "Baby Blue appearance inspected after removing inherited overlapping captions",
+    "nativeRuntimeTests": false
+  }
 }
