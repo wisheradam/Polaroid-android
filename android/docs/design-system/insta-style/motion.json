@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Shutter",
+    "contract": "Pointer down allowed: inward2dp/70ms ease-out; release110ms ease-out, shadow3→1→3. Existing accepted-capture audio/haptic only once. Disabled rejects tap. Reduced motion: instant shadow state."
+  },
+  {
+    "name": "Flash",
+    "contract": "Selection toggles300ms cubic(.4,0,.2,1), icon stays visible. Capture charging follows settings default650ms,400–1200 range. Ready/firing follow hardware callbacks, not a second UI timer. Existing sound/haptics only; reduce motion removes bloom, preserves requested flash."
+  },
+  {
+    "name": "Ejection",
+    "contract": "Existing1800ms linear position, motor starts0; existing haptic pulses0/300/620/960/1300/1600/1800ms. Paper translates downward behind front lip and clips at mouth. Scale all film geometry uniformly. Reduced motion: static emerging/result, same domain duration."
+  },
+  {
+    "name": "Shake development",
+    "contract": "Only accepted input advances p: clamp(p+strength×.018), strength.35–1.4. Veil opacity=(1−p)^1.35; no future-value interpolation after input. Pause immediately. Completion120ms border emphasis only. Existing shake haptic; reduced motion immediate image plus numeric progress."
+  },
+  {
+    "name": "Timer / Booth",
+    "contract": "Off/5/15/30 presets. Discrete monotonic1s digits; cancel spends nothing. Booth4accepted captures,5s deadlines; slow hardware delays, never overlaps. GRID124×142mm; STRIP64×262mm. Cues from existing coordinator only; reduced motion static digits/count."
+  },
+  {
+    "name": "Cartridge",
+    "contract": "User advances closed→open→removed→inserted→successful close. Door260ms ease-out, removal240ms linear, insertion360ms ease-out, close260ms ease-in-out are proposed visual values; runtime domain owns completion. Counter resets10 only after success. Click/light haptic when enabled; reduced motion state swap."
+  },
+  {
+    "name": "Other interactions",
+    "contract": "Camera switch180ms cover until camera-ready callback; no fake live frame. Style/finish immediate persistence;220ms optional color crossfade, one enabled selection haptic. Navigation200ms/8dp ease-out; pins insert160ms remove120ms. Reduced motion instantaneous states; sound silent except enabled pin click."
+  }
+]

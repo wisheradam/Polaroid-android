@@ -1,0 +1,92 @@
+[
+  {
+    "finish": "WHITE",
+    "role": "ink on shell",
+    "contrast": 9.78,
+    "pass45": true
+  },
+  {
+    "finish": "WHITE",
+    "role": "ink on button",
+    "contrast": 9.99,
+    "pass45": true
+  },
+  {
+    "finish": "WHITE",
+    "role": "selected text",
+    "contrast": 7.29,
+    "pass45": true
+  },
+  {
+    "finish": "PINK",
+    "role": "ink on shell",
+    "contrast": 7.94,
+    "pass45": true
+  },
+  {
+    "finish": "PINK",
+    "role": "ink on button",
+    "contrast": 9.99,
+    "pass45": true
+  },
+  {
+    "finish": "PINK",
+    "role": "selected text",
+    "contrast": 7.3,
+    "pass45": true
+  },
+  {
+    "finish": "BLUE",
+    "role": "ink on shell",
+    "contrast": 8.24,
+    "pass45": true
+  },
+  {
+    "finish": "BLUE",
+    "role": "ink on button",
+    "contrast": 9.99,
+    "pass45": true
+  },
+  {
+    "finish": "BLUE",
+    "role": "selected text",
+    "contrast": 6.43,
+    "pass45": true
+  },
+  {
+    "finish": "MINT",
+    "role": "ink on shell",
+    "contrast": 8.46,
+    "pass45": true
+  },
+  {
+    "finish": "MINT",
+    "role": "ink on button",
+    "contrast": 9.99,
+    "pass45": true
+  },
+  {
+    "finish": "MINT",
+    "role": "selected text",
+    "contrast": 6.02,
+    "pass45": true
+  },
+  {
+    "finish": "LAVENDER",
+    "role": "ink on shell",
+    "contrast": 7.86,
+    "pass45": true
+  },
+  {
+    "finish": "LAVENDER",
+    "role": "ink on button",
+    "contrast": 9.99,
+    "pass45": true
+  },
+  {
+    "finish": "LAVENDER",
+    "role": "selected text",
+    "contrast": 6.68,
+    "pass45": true
+  }
+]

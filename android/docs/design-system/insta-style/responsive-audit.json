@@ -1,0 +1,320 @@
+{
+  "screens": [
+    {
+      "id": "5:74",
+      "width": 360,
+      "height": 800,
+      "targets": [
+        {
+          "name": "ShutterButton",
+          "width": 88,
+          "height": 88,
+          "x": 136,
+          "y": 503,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "TimerButton",
+          "width": 54,
+          "height": 58,
+          "x": 16,
+          "y": 525,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FlashToggle",
+          "width": 54,
+          "height": 58,
+          "x": 76,
+          "y": 525,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "CameraSwitchButton",
+          "width": 54,
+          "height": 58,
+          "x": 282,
+          "y": 525,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FilmCounter",
+          "width": 64,
+          "height": 64,
+          "x": 24,
+          "y": 105,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "GalleryButton",
+          "width": 101.33333587646484,
+          "height": 58,
+          "x": 24,
+          "y": 710,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "PhotoBoothButton",
+          "width": 101.33333587646484,
+          "height": 58,
+          "x": 129.33334350585938,
+          "y": 710,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "SettingsButton",
+          "width": 101.33333587646484,
+          "height": 58,
+          "x": 234.66668701171875,
+          "y": 710,
+          "min48": true,
+          "inside": true
+        }
+      ]
+    },
+    {
+      "id": "5:155",
+      "width": 393,
+      "height": 852,
+      "targets": [
+        {
+          "name": "ShutterButton",
+          "width": 100,
+          "height": 100,
+          "x": 146.5,
+          "y": 541,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "TimerButton",
+          "width": 54,
+          "height": 58,
+          "x": 24,
+          "y": 563,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FlashToggle",
+          "width": 54,
+          "height": 58,
+          "x": 87,
+          "y": 563,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "CameraSwitchButton",
+          "width": 54,
+          "height": 58,
+          "x": 315,
+          "y": 563,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FilmCounter",
+          "width": 64,
+          "height": 64,
+          "x": 24,
+          "y": 121,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "GalleryButton",
+          "width": 112.33333587646484,
+          "height": 58,
+          "x": 24,
+          "y": 752,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "PhotoBoothButton",
+          "width": 112.33333587646484,
+          "height": 58,
+          "x": 140.33331298828125,
+          "y": 752,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "SettingsButton",
+          "width": 112.33333587646484,
+          "height": 58,
+          "x": 256.66668701171875,
+          "y": 752,
+          "min48": true,
+          "inside": true
+        }
+      ]
+    },
+    {
+      "id": "5:236",
+      "width": 412,
+      "height": 915,
+      "targets": [
+        {
+          "name": "ShutterButton",
+          "width": 100,
+          "height": 100,
+          "x": 156,
+          "y": 533,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "TimerButton",
+          "width": 54,
+          "height": 58,
+          "x": 24,
+          "y": 555,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FlashToggle",
+          "width": 54,
+          "height": 58,
+          "x": 87,
+          "y": 555,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "CameraSwitchButton",
+          "width": 54,
+          "height": 58,
+          "x": 334,
+          "y": 555,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FilmCounter",
+          "width": 64,
+          "height": 64,
+          "x": 24,
+          "y": 113,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "GalleryButton",
+          "width": 118.66666412353516,
+          "height": 58,
+          "x": 24,
+          "y": 821,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "PhotoBoothButton",
+          "width": 118.66666412353516,
+          "height": 58,
+          "x": 146.6666259765625,
+          "y": 821,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "SettingsButton",
+          "width": 118.66666412353516,
+          "height": 58,
+          "x": 269.3333740234375,
+          "y": 821,
+          "min48": true,
+          "inside": true
+        }
+      ]
+    },
+    {
+      "id": "5:317",
+      "width": 402,
+      "height": 874,
+      "targets": [
+        {
+          "name": "ShutterButton",
+          "width": 100,
+          "height": 100,
+          "x": 151,
+          "y": 559,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "TimerButton",
+          "width": 54,
+          "height": 58,
+          "x": 24,
+          "y": 581,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FlashToggle",
+          "width": 54,
+          "height": 58,
+          "x": 87,
+          "y": 581,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "CameraSwitchButton",
+          "width": 54,
+          "height": 58,
+          "x": 324,
+          "y": 581,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "FilmCounter",
+          "width": 64,
+          "height": 64,
+          "x": 24,
+          "y": 139,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "GalleryButton",
+          "width": 115.33333587646484,
+          "height": 58,
+          "x": 24,
+          "y": 774,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "PhotoBoothButton",
+          "width": 115.33333587646484,
+          "height": 58,
+          "x": 143.3333740234375,
+          "y": 774,
+          "min48": true,
+          "inside": true
+        },
+        {
+          "name": "SettingsButton",
+          "width": 115.33333587646484,
+          "height": 58,
+          "x": 262.6666259765625,
+          "y": 774,
+          "min48": true,
+          "inside": true
+        }
+      ]
+    }
+  ]
+}
