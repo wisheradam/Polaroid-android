@@ -51,5 +51,62 @@
     "MINT": "21:817",
     "LAVENDER": "21:887"
   },
-  "confirmation": "28:1606"
+  "confirmation": "28:1606",
+  "settingsStates": {
+    "WHITE": "44:1606",
+    "PINK": "6:198",
+    "BLUE": "44:1635",
+    "MINT": "44:1661",
+    "LAVENDER": "44:1687"
+  },
+  "appearanceRetentionAudit": {
+    "results": [
+      {
+        "color": "WHITE",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "PINK",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "BLUE",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "MINT",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      },
+      {
+        "color": "LAVENDER",
+        "cameraToSettings": true,
+        "settingsToAppearance": true,
+        "settingsBack": true,
+        "appearanceBack": true,
+        "visibleCameraPreviews": 1
+      }
+    ],
+    "startingPoints": [
+      {
+        "nodeId": "11:85",
+        "name": "Insta Style / review"
+      }
+    ]
+  }
 }
