@@ -5,9 +5,9 @@ Date: 2026-11-15. Review release; significant native validation remains pending.
 ## Use
 
 - Android runtime: 13 family/finish combinations in CameraStyle.kt. OLD_FASION: BLACK, IVORY, OLIVE, BRASS; INSTA_STYLE: WHITE, PINK, BLUE, MINT, LAVENDER; ONE_AND_ONLY: WHITE, BLACK, RED, SPECTRUM.
-- Figma One and Only 17:605: White→WHITE; Black→BLACK; Finish4→RED is an identifier correspondence only, visual Blush/Red conflict OPEN; Cream / Spectrum→SPECTRUM.
+- Figma One and Only 17:605: White→WHITE; Black→BLACK; Finish4→RED; Cream / Spectrum→SPECTRUM. Product owner approved Blush exterior on 2026-11-15. Keep RED as storage identifier; no enum migration. Colour choice is resolved.
 - Unboxing 1.2: page137:79, inner137:568, retail137:569, storyboard137:2855, handoff137:3145. Six configurations, not twelve: Classic/Go × COLOR/MONO/WARM. Twelve originals are artwork alternatives.
-- Replacement1.0: page128:955; legacy front projection remains incompatible/unverified against new planar pack. Do not deploy it as approved fit.
+- Replacement1.0: page128:955 now uses matching Unboxing1.2 artwork projections in 40 preparation/insertion/seated/closing frames. Geometry study159:79 documents lateral fit. Native depth and closure clearance remain unverified.
 - Flash: page66:309, component66:581. Rear300ms, front400ms, front hold80–200ms and independent charge800ms documented. Other family origins remain configuration requirements, never inferred.
 - Film Collection2.0 page87:79: proposed 13 formats /30 finishes /24 filters /2 digital layouts; do not expand runtime catalog.
 - Existing Android design-system documentation in android/docs/design-system remains applicable; the new audit does not supersede approved runtime masters.
