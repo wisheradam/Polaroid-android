@@ -1,0 +1,308 @@
+{
+  "product": "InstantRoom",
+  "release": "IR-DS-2026-11-15-review",
+  "date": "2026-11-15",
+  "fileKey": "gONY1ZYQbqtWYaf7S5X5HR",
+  "approvalStatus": "review-incomplete",
+  "nativeImplementationStatus": "existing app unchanged; new mechanical/unboxing pending",
+  "baseCommit": "2a117aab9f547726d456325d0064795437d3ac7c",
+  "pages": [
+    {
+      "id": "13:2",
+      "name": "00 — References & Product Principles"
+    },
+    {
+      "id": "13:3",
+      "name": "01 — Foundations & Design Tokens"
+    },
+    {
+      "id": "13:4",
+      "name": "02 — Materials & Camera Anatomy"
+    },
+    {
+      "id": "0:1",
+      "name": "03 — Component Library"
+    },
+    {
+      "id": "2:4",
+      "name": "04 — One and Only Main Screen"
+    },
+    {
+      "id": "2:5",
+      "name": "05 — Application Screens"
+    },
+    {
+      "id": "13:5",
+      "name": "06 — Interaction & Motion"
+    },
+    {
+      "id": "13:6",
+      "name": "07 — Responsive Layouts"
+    },
+    {
+      "id": "13:7",
+      "name": "08 — Developer Handoff"
+    },
+    {
+      "id": "13:8",
+      "name": "09 — Future Style Families"
+    },
+    {
+      "id": "18:311",
+      "name": "10 — Review Prototype"
+    },
+    {
+      "id": "24:2",
+      "name": "11 — Visual Review"
+    },
+    {
+      "id": "66:309",
+      "name": "12 - Motion & Effects / Camera Flash"
+    },
+    {
+      "id": "109:79",
+      "name": "Film & Cartridges / Cartridge Loading Experience 1.0"
+    },
+    {
+      "id": "87:79",
+      "name": "Film & Cartridges / Film Collection 2.0"
+    },
+    {
+      "id": "128:955",
+      "name": "Motion & Physical Interactions / Cartridge Replacement 1.0"
+    },
+    {
+      "id": "137:79",
+      "name": "Motion & Physical Interactions / Cartridge Unboxing 1.2"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/130-125.png",
+      "nodeId": "130:125",
+      "sha256": "5ac1eb41dd840f0ee2f7604b0dc5c345d58bb3f9fe3eef85a6a61fad215ba3d7",
+      "bytes": 1195,
+      "width": 333,
+      "height": 155,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/130-132.png",
+      "nodeId": "130:132",
+      "sha256": "75cbf03b854f594a7f41214a5513ec27f7d7dc758dc6d51f430c1182217990f8",
+      "bytes": 5589,
+      "width": 333,
+      "height": 38,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/130-83.png",
+      "nodeId": "130:83",
+      "sha256": "68856e74ed1e9593bc485ce6d9cc3cb2995a3d32225ca5bd2ba6732504d1b51e",
+      "bytes": 734,
+      "width": 270,
+      "height": 134,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-100.png",
+      "nodeId": "137:100",
+      "sha256": "9adb073f9c9fddfcafaa08fdce88640acd30d4b7e6115feb3616dd6c5bc808e1",
+      "bytes": 128601,
+      "width": 281,
+      "height": 315,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-121.png",
+      "nodeId": "137:121",
+      "sha256": "5038b232d18c31951c0b69d38ffa2d4406fada0b534ada58a2e1a8a27f24cfcf",
+      "bytes": 186858,
+      "width": 340,
+      "height": 412,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-180.png",
+      "nodeId": "137:180",
+      "sha256": "1640416406208df353d57bbddba501235ddb45dc6d62c399071fa3c78b4c1027",
+      "bytes": 144881,
+      "width": 281,
+      "height": 315,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-201.png",
+      "nodeId": "137:201",
+      "sha256": "5d04d05454d139ebd4ebb852cb59635c64b508de456441e857bcaca3f72f9a35",
+      "bytes": 212159,
+      "width": 340,
+      "height": 412,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-260.png",
+      "nodeId": "137:260",
+      "sha256": "5f0bc5eaef33b68f1b4a820035a429c682e20c1f5d69da41be6e2f42d8fcad1e",
+      "bytes": 141489,
+      "width": 281,
+      "height": 315,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-281.png",
+      "nodeId": "137:281",
+      "sha256": "b92c3686ed262b4e99fbe4a31372e153deafa90e8cc9a75fb5b765d033b9f3b5",
+      "bytes": 204880,
+      "width": 340,
+      "height": 412,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-340.png",
+      "nodeId": "137:340",
+      "sha256": "04d324ec3a08bfe78fa2babc76f0bdeb81ba94f75349c4d7cedfee41113ac7f0",
+      "bytes": 143885,
+      "width": 281,
+      "height": 315,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-361.png",
+      "nodeId": "137:361",
+      "sha256": "b2683acd5367ea16655401ad3027d18daa8583bc373daa9250df7aca3fd98176",
+      "bytes": 212475,
+      "width": 340,
+      "height": 412,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-420.png",
+      "nodeId": "137:420",
+      "sha256": "ebdf98683105f23a09c37d97183a6210f79f0b8ee7b76f7b0e01e87b2058e070",
+      "bytes": 138268,
+      "width": 281,
+      "height": 315,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-441.png",
+      "nodeId": "137:441",
+      "sha256": "560b24c1e87b998439ef120092f9ba68081d7b06babc8b5b9dc8d083a83ebcef",
+      "bytes": 202076,
+      "width": 340,
+      "height": 412,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-500.png",
+      "nodeId": "137:500",
+      "sha256": "1c6fef1445465414a6c4273bcd9e6c253ca21214712af527b791c8e2ae151523",
+      "bytes": 134217,
+      "width": 281,
+      "height": 315,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/137-521.png",
+      "nodeId": "137:521",
+      "sha256": "c63d303d9e60c1a7c8c1b80eefca78321c1ce3896490418a0585e1271b4eb41e",
+      "bytes": 193926,
+      "width": 340,
+      "height": 412,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/17-207.png",
+      "nodeId": "17:207",
+      "sha256": "ecfd7e37f84be55e7da8e097ac040aa5a1281059ad52a0e7c52806a9cb965a32",
+      "bytes": 235623,
+      "width": 393,
+      "height": 852,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/17-365.png",
+      "nodeId": "17:365",
+      "sha256": "d3440b2f70af4f11eb31f736d1456a24d8dd7c637a26298dd23229c271f624c9",
+      "bytes": 194600,
+      "width": 393,
+      "height": 852,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/17-485.png",
+      "nodeId": "17:485",
+      "sha256": "435c4635b1e4d2a09ffb26fd494769ff1ebf2cbf228e26817dcefdbebe464e34",
+      "bytes": 197768,
+      "width": 393,
+      "height": 852,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/17-87.png",
+      "nodeId": "17:87",
+      "sha256": "3420d722b8534257c46ea76d67320a40b1401d914c4aed13d0991afec7b92aeb",
+      "bytes": 183744,
+      "width": 393,
+      "height": 852,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    },
+    {
+      "path": "assets/89-360.png",
+      "nodeId": "89:360",
+      "sha256": "b1d9cd3dc9afcee3b9b39b0c643d8a9463608d4f1b373a06ba177c7748b49455",
+      "bytes": 3114,
+      "width": 96,
+      "height": 48,
+      "format": "png",
+      "approvalStatus": "review-only",
+      "exportStatus": "downloaded"
+    }
+  ],
+  "limitations": [
+    "Blush vs RED conflict",
+    "planar pack projection unvalidated",
+    "all-family new exports incomplete; existing android/docs/design-system family assets retained",
+    "no interactive playback or device QA",
+    "Java21 toolchain missing"
+  ]
+}

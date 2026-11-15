@@ -1,0 +1,2 @@
+Command: ./gradlew :core:test --no-daemon
+Result: BLOCKED before compile; Java languageVersion21 required, installed Java25 only. No tests executed. No passing build claimed. Existing SDK/device checks not run.
