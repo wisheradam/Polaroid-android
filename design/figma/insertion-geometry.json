@@ -1,0 +1,13 @@
+{
+  "version": "photo-informed-study-1.0",
+  "figmaPageId": "159:79",
+  "approval": "proposal; native fit pending",
+  "finishDecision": {"visual": "Blush", "figmaIdentifier": "Finish4", "androidStorageIdentifier": "RED", "approvedByUser": "2026-11-15"},
+  "planarPack": {"width": 280.8, "length": 315},
+  "projection": {"model": "orthographic rotation around X axis", "tiltDegreesFromFaceOn": 65, "projectedHeight": 133.12475244832032, "width": 280.8, "angleProvenance": "design estimate from supplied uncalibrated photographs"},
+  "guides": {"clearLeft": 21, "clearRight": 311, "clearWidth": 290, "packLeft": 25.6, "packRight": 306.4, "clearanceEachSide": 4.6},
+  "positions": {"alignedY": 105, "partialY": 52, "seatedY": 5},
+  "identity": "six projected pack sources derived from corresponding137:568 variants; original source proportions unchanged",
+  "updatedPrototypeFrames": 40,
+  "limitations": ["No depth calibration available", "No physical or native-device clearance test", "Door motion remains discrete Figma demonstration", "Artwork plate uses raster source inside otherwise editable projected geometry"]
+}
